@@ -369,6 +369,7 @@
       }
 
       .custom-cursor.is-visible { opacity: 1; }
+      .custom-cursor.is-dialog-cursor-hidden { opacity: 0 !important; }
 
       .custom-cursor.is-hovering {
         width: 36px;
@@ -504,6 +505,8 @@
     }
 
     #english-script-dialog {
+      cursor: none;
+      z-index: 1000;
       width: min(920px, calc(100% - 32px));
       height: min(80vh, 760px);
       padding: 0;
@@ -525,6 +528,7 @@
     .script-dialog-header h2 { font-size: 1.1rem; letter-spacing: 0; }
 
     .script-dialog-close {
+      cursor: none;
       border: 1.5px solid var(--ink);
       padding: 5px 10px;
       color: var(--ink);
@@ -535,7 +539,7 @@
     }
 
     .script-dialog-body { height: calc(100% - 66px); padding: 22px; }
-    .script-dialog-body iframe { width: 100%; height: 100%; border: 1px solid var(--blue); background: #fff; }
+    .script-dialog-body iframe { width: 100%; height: 100%; border: 1px solid var(--blue); background: #fff; cursor: none; }
 
     #portfolio .wechat-card[data-card-link]:focus-visible {
       outline: 2px solid var(--red);
@@ -848,16 +852,22 @@
 
     const scriptDialog = document.querySelector("#english-script-dialog");
     const scriptCloseButton = scriptDialog.querySelector(".script-dialog-close");
+    const closeScriptDialog = () => {
+      if (scriptDialog.open) scriptDialog.close();
+      if (typeof window.restoreCustomCursor === "function") window.restoreCustomCursor();
+    };
     const openScriptDialog = (event) => {
       if (event) event.preventDefault();
       scriptDialog.showModal();
+      if (typeof window.mountCustomCursorInDialog === "function") window.mountCustomCursorInDialog();
     };
 
     document.querySelector("[data-open-script]").addEventListener("click", openScriptDialog);
-    scriptCloseButton.addEventListener("click", () => scriptDialog.close());
+    scriptCloseButton.addEventListener("click", closeScriptDialog);
     scriptDialog.addEventListener("click", (event) => {
-      if (event.target === scriptDialog) scriptDialog.close();
+      if (event.target === scriptDialog) closeScriptDialog();
     });
+    scriptDialog.addEventListener("cancel", closeScriptDialog);
 
     (() => {
       const canUsePointer = window.matchMedia("(pointer: fine)").matches;
@@ -873,6 +883,13 @@
       const cursorPosition = { x: pointer.x, y: pointer.y };
       let animationFrame = 0;
       let magneticTarget = null;
+      const frame = document.querySelector("#english-script-dialog iframe");
+
+      const updatePointer = (x, y) => {
+        pointer.x = x;
+        pointer.y = y;
+        cursor.classList.add("is-visible");
+      };
 
       const lerp = (start, end, amount) => start + (end - start) * amount;
 
@@ -890,12 +907,33 @@
       };
 
       window.addEventListener("pointermove", (event) => {
-        pointer.x = event.clientX;
-        pointer.y = event.clientY;
-        cursor.classList.add("is-visible");
+        updatePointer(event.clientX, event.clientY);
       }, { passive: true });
 
       window.addEventListener("pointerleave", () => cursor.classList.remove("is-visible"));
+
+      scriptDialog.addEventListener("pointermove", (event) => {
+        updatePointer(event.clientX, event.clientY);
+      }, { passive: true });
+
+      window.addEventListener("message", (event) => {
+        if (event.source !== frame.contentWindow || event.data?.type !== "english-news-cursor-move") return;
+        const bounds = frame.getBoundingClientRect();
+        updatePointer(bounds.left + event.data.x, bounds.top + event.data.y);
+      });
+
+      window.mountCustomCursorInDialog = () => {
+        scriptDialog.appendChild(cursor);
+        magneticTarget = null;
+        cursor.classList.remove("is-hovering", "is-button-hover");
+        cursor.classList.add("is-visible");
+      };
+
+      window.restoreCustomCursor = () => {
+        document.body.appendChild(cursor);
+        magneticTarget = null;
+        cursor.classList.remove("is-hovering", "is-button-hover", "is-dialog-cursor-hidden");
+      };
 
       const hoverTargets = document.querySelectorAll(
         ".project-card, .wechat-card, .contact-details > *, .portfolio-tab"
@@ -920,7 +958,7 @@
         if (card.dataset.cardLink) {
           const openCardLink = () => {
             if (card.dataset.cardLink.endsWith(".txt")) {
-              scriptDialog.showModal();
+              openScriptDialog();
               return;
             }
             window.open(card.dataset.cardLink, "_blank", "noopener,noreferrer");

@@ -7,8 +7,9 @@
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
-  html { background: #fff; }
-  body { max-width: 900px; margin: 0 auto; padding: 56px 64px 72px; color: #111; background: #fff; font-family: "Times New Roman", Times, serif; font-size: 16px; line-height: 1.72; }
+  html { background: #fff; cursor: none; }
+  body { max-width: 900px; margin: 0 auto; padding: 56px 64px 72px; color: #111; background: #fff; font-family: "Times New Roman", Times, serif; font-size: 16px; line-height: 1.72; cursor: none; }
+  #embedded-cursor { display: none; }
   p { margin: 0 0 0.82em; }
   p.center { text-align: center; }
   p.justify { text-align: justify; }
@@ -18,6 +19,7 @@
 </style>
 </head>
 <body>
+    <div id="embedded-cursor" aria-hidden="true"></div>
     <p class="center title"><strong>Video News Script: '</strong><strong>&nbsp;</strong><strong>Scotland Wants to Extend International Student Visas—But Can They Really Stay?</strong><strong>’</strong>&nbsp;</p>
     <p class="justify"><strong>Opening Scene: Introducing the topic</strong>&nbsp;</p>
     <p class="justify"><strong>Voiceover:</strong><strong>&nbsp;</strong>Introduction to the&nbsp;PSW&nbsp;policy–&nbsp;PSW visa, known as post study work visa.,&nbsp;is a UK government policy that allows eligible international students to stay in the UK after graduation to work or seek employment.&nbsp;&nbsp;</p>
@@ -58,7 +60,16 @@
     <p class="justify"><strong>Voiceover:</strong><strong>&nbsp;</strong>The proposed new PSW visa policy for Scotland lacked appeal to her.<strong>&nbsp;</strong>This is limited by a number of factors such as the living environment, the academic environment and the working atmosphere.&nbsp;</p>
     <p class="justify"><strong>Contributor speaking:</strong>&nbsp;“I am used to living&nbsp;in London and the opportunity in the lifestyle in London. In comparison, Scotland has taken the art school, and related job opportunities will be greatly reduced. So, unfortunately, I think I don’t want to go to Scotland for all that.” </p>
     <p class="justify"><strong>Voiceover:</strong><strong>&nbsp;</strong>"While the PSW visa remains a crucial pathway for international graduates to gain work experience in the UK, its effectiveness remains debatable. Students face challenges beyond visa policies—high living costs, employer preferences, and limited job opportunities in certain fields. Meanwhile, Scotland’s renewed push for an independent PSW visa highlights the ongoing debate over immigration policies and regional workforce needs. But with the UK government firmly opposed to regional visa variations, the question remains: will Scotland ever get its own Graduate Route, and more importantly, will it truly address the employment challenges that international students face?"&nbsp;</p>
+<script>
+  (() => {
+    window.addEventListener("pointermove", (event) => {
+      window.parent.postMessage({
+        type: "english-news-cursor-move",
+        x: event.clientX,
+        y: event.clientY
+      }, "*");
+    }, { passive: true });
+  })();
+</script>
 </body>
 </html>
-
-
