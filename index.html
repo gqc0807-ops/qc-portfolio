@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="谷秋池的个人简历与作品集。">
+  <title>谷秋池 — 内容创作者 & 国际新闻人</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+    :root {
+      --paper: #f4f3ef;
+      --ink: #111111;
+      --red: #dd3a35;
+      --blue: #2b5494;
+      --yellow: #fef9e7;
+      --gold: #eaa824;
+      --max-width: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; cursor: none; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    a, button, .project-card, .wechat-card { cursor: none; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1.5px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+    }
+
+    .brand {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    nav { display: flex; align-items: center; }
+
+    nav ul {
+      display: flex;
+      gap: 26px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    nav a {
+      display: block;
+      border-bottom: 1.5px solid transparent;
+      padding: 5px 0 4px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: border-color 0.18s ease, color 0.18s ease;
+    }
+
+    nav a:hover, nav a:focus { border-color: var(--red); color: var(--red); }
+
+    main section { padding: 108px 0; }
+
+    .section-code {
+      margin: 0 0 18px;
+      color: var(--red);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.13; }
+
+    h1 {
+      max-width: 790px;
+      font-size: clamp(3.4rem, 8.5vw, 7.6rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -1px;
+    }
+
+    #hero h1 { font-weight: 800 !important; line-height: 1.25 !important; letter-spacing: -1px !important; }
+
+    h2 {
+      font-size: clamp(2.25rem, 4.5vw, 4.1rem);
+      font-weight: 900;
+      letter-spacing: -0.07em;
+    }
+
+    h3 { font-size: 1.15rem; font-weight: 850; letter-spacing: -0.035em; }
+
+    .bauhaus-btn:hover, .bauhaus-btn:focus {
+      color: var(--ink) !important;
+      background: var(--yellow) !important;
+      transform: translate(4px, -4px);
+    }
+
+    .about { border-bottom: 2px solid var(--ink); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(230px, 0.7fr) minmax(0, 1.3fr);
+    }
+
+    .about-title { border-right: 2px solid var(--blue); padding-right: 50px; }
+
+    .about-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .detail-column { padding: 0 44px; }
+    .detail-column + .detail-column { border-left: 1.5px solid var(--blue); }
+
+    .detail-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 22px;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .detail-heading::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      flex: 0 0 10px;
+      background: var(--red);
+    }
+
+    .education-list { display: grid; gap: 18px; }
+
+    .education-item {
+      padding-left: 14px;
+      border-left: 5px solid var(--red);
+      font-size: 0.93rem;
+      font-weight: 650;
+    }
+
+    .core-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .core-tag {
+      border: 1.5px solid var(--ink);
+      border-radius: 0;
+      padding: 6px 9px;
+      background: #f0effb;
+      font-size: 0.78rem;
+      font-weight: 800;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .work { border-bottom: 2px solid var(--ink); }
+
+    .work-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 42px;
+    }
+
+    .work-heading-note {
+      margin: 0;
+      color: var(--blue);
+      font-size: 0.85rem;
+      font-weight: 750;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      display: flex;
+      min-height: 300px;
+      flex-direction: column;
+      border: 1.5px solid var(--ink);
+      border-radius: 0;
+      padding: 26px;
+      background: transparent;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .project-card:hover {
+      background: var(--yellow);
+      transform: translate(4px, -4px);
+    }
+
+    .project-marker {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 38px;
+      color: var(--red);
+      font-size: 0.73rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+    }
+
+    .project-card p {
+      margin: 16px 0 26px;
+      font-size: 0.9rem;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; }
+
+    .tag {
+      border: 1.5px solid var(--blue);
+      padding: 4px 8px;
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .portfolio { border-bottom: 2px solid var(--ink); }
+
+    .portfolio-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 42px;
+    }
+
+    .portfolio-heading p { margin: 0; color: var(--blue); font-size: 0.85rem; font-weight: 750; }
+
+    .portfolio-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 28px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .portfolio-tab {
+      border: 0;
+      border-top: 1.5px solid var(--blue);
+      border-right: 1.5px solid var(--blue);
+      border-radius: 0;
+      padding: 11px 16px;
+      color: var(--ink);
+      background: transparent;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .portfolio-tab:first-child { border-left: 1.5px solid var(--blue); }
+    .portfolio-tab:hover, .portfolio-tab:focus { color: var(--red); }
+    .portfolio-tab.is-active { color: #fff; background: var(--ink); }
+
+    .portfolio-panel[hidden] { display: none; }
+
+    .wechat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .wechat-card {
+      display: flex;
+      min-height: 310px;
+      flex-direction: column;
+      border: 1.5px solid var(--ink);
+      background: transparent;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .wechat-card:hover { background: var(--yellow); transform: translate(4px, -4px); }
+
+    .wechat-cover {
+      display: flex;
+      height: 180px;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1.5px solid var(--ink);
+      overflow: hidden;
+      background: #fff;
+      color: #078f4b;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .wechat-cover img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .wechat-card-content { display: flex; min-height: 128px; flex-direction: column; padding: 22px; }
+    .wechat-card h3 { font-size: 1.05rem; }
+
+    .english-news-card {
+      width: min(100%, 560px);
+      min-height: 0;
+      background: #fff;
+    }
+
+    .english-news-card .english-cover {
+      height: 190px;
+      border-bottom: 1.5px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .english-news-card .wechat-card-content {
+      min-height: 170px;
+      padding: 26px;
+    }
+
+    /* Interaction layer: lightweight magnetic cursor and card tilt */
+    @media (pointer: fine) {
+      body.has-custom-cursor,
+      body.has-custom-cursor a,
+      body.has-custom-cursor button {
+        cursor: none;
+      }
+
+      .custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        width: 8px;
+        height: 8px;
+        border: 0;
+        border-radius: 50%;
+        background: #111111;
+        mix-blend-mode: normal;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0) scale(1);
+        transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+        will-change: transform, width, height;
+      }
+
+      .custom-cursor.is-visible { opacity: 1; }
+
+      .custom-cursor.is-hovering {
+        width: 36px;
+        height: 36px;
+        background-color: rgb(158 197 232 / 78%);
+        mix-blend-mode: normal;
+      }
+
+      .custom-cursor.is-button-hover {
+        width: 36px;
+        height: 36px;
+        background-color: rgb(158 197 232 / 78%);
+        mix-blend-mode: normal;
+      }
+
+      .tilt-card {
+        transform: perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0);
+        transform-style: preserve-3d;
+        will-change: transform, box-shadow;
+      }
+
+      .tilt-card.is-tilting {
+        transition: background 0.2s ease, box-shadow 120ms ease;
+      }
+
+      .tilt-card.is-resetting {
+        transition: transform 520ms cubic-bezier(.22, 1, .36, 1),
+          box-shadow 520ms cubic-bezier(.22, 1, .36, 1), background 0.2s ease;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .custom-cursor { display: none; }
+      .tilt-card { transition: none !important; transform: none !important; }
+    }
+
+    .wechat-footer { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-top: auto; }
+
+    .wechat-tag {
+      border: 1.5px solid #07c160;
+      padding: 4px 8px;
+      color: #078f4b;
+      font-size: 0.72rem;
+      font-weight: 850;
+    }
+
+    .article-link {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      font-size: 1.2rem;
+      font-weight: 850;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .article-link:hover, .article-link:focus { color: #fff; background: var(--red); }
+
+    .coming-soon { max-width: 480px; margin: 0; color: var(--blue); font-size: 1.05rem; font-weight: 750; }
+
+    .contact { text-align: center; }
+
+    .contact .section-code { margin-bottom: 12px; }
+    .contact h2 { margin-bottom: 20px; }
+
+    .contact-text { margin: 0 0 35px; font-size: 1.08rem; }
+
+    .contact-details {
+      display: inline-flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-top: 2px solid var(--blue);
+      border-bottom: 2px solid var(--blue);
+      padding: 13px 0;
+      font-size: 0.88rem;
+      font-weight: 750;
+    }
+
+    .contact-details > * { padding: 0 19px; }
+    .contact-details > * + * { border-left: 1.5px solid var(--blue); }
+    .contact-details a:hover { color: var(--red); }
+
+    footer {
+      border-top: 2px solid var(--blue);
+      padding: 22px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .container { width: min(calc(100% - 32px), var(--max-width)); }
+      main section { padding: 80px 0; }
+      #hero { flex-direction: column; align-items: flex-start !important; min-height: auto !important; padding-top: 96px !important; padding-bottom: 80px !important; }
+      .hero-image-container { align-self: center; }
+      .about-grid, .about-detail { grid-template-columns: 1fr; }
+      .about-title { border-right: 0; border-bottom: 2px solid var(--blue); margin-bottom: 40px; padding: 0 0 35px; }
+      .detail-column { padding: 0; }
+      .detail-column + .detail-column { border-left: 0; border-top: 1.5px solid var(--blue); margin-top: 38px; padding-top: 36px; }
+      .wechat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      .nav { align-items: flex-start; flex-direction: column; gap: 10px; padding: 15px 0; }
+      nav ul { gap: 18px; flex-wrap: wrap; }
+      nav a { padding: 3px 0; }
+      #hero { gap: 44px !important; padding-right: 8% !important; padding-left: 8% !important; }
+      #hero h1 { font-size: clamp(2.7rem, 13vw, 3.5rem) !important; }
+      .hero-image-container > div { width: min(280px, calc(100vw - 80px)) !important; height: min(280px, calc(100vw - 80px)) !important; }
+      h1 { font-size: 3.2rem; }
+      .work-heading { align-items: start; flex-direction: column; }
+      .project-grid { grid-template-columns: 1fr; }
+      .portfolio-heading { align-items: start; flex-direction: column; }
+      .portfolio-tabs { display: grid; grid-template-columns: 1fr; }
+      .portfolio-tab, .portfolio-tab:first-child { border: 1.5px solid var(--blue); border-bottom: 0; text-align: left; }
+      .portfolio-tab:last-child { border-bottom: 1.5px solid var(--blue); }
+      .wechat-grid { grid-template-columns: 1fr; }
+      .contact-details { display: flex; flex-direction: column; }
+      .contact-details > * + * { border-top: 1.5px solid var(--blue); border-left: 0; margin-top: 8px; padding-top: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="custom-cursor" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Back to top">QIUCHI GU</a>
+      <nav aria-label="主导航">
+        <ul>
+          <li><a href="#about">关于我</a></li>
+          <li><a href="#experiences">经历</a></li>
+          <li><a href="#portfolio">作品集</a></li>
+          <li><a href="#contact">联系我</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section id="hero" style="display: flex; align-items: center; justify-content: space-between; padding: 120px 8% 80px 8%; gap: 60px; min-height: 80vh; border-bottom: 2px solid #111111;">
+      <div class="hero-text-container" style="flex: 1.2; display: flex; flex-direction: column; align-items: flex-start;">
+        <span class="category-tag" style="font-size: 0.85rem; font-weight: 700; color: #DD3A35; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">00 / PERSONAL PROFILE</span>
+        <h1 id="hero-title" style="font-size: 3.5rem; line-height: 1.25; font-weight: 800; color: #111111; margin: 15px 0 35px 0;">你好，<br>我是谷秋池。<br><span style="color: #DD3A35; font-size: 0.6em; letter-spacing: -0.04em;">跨媒介叙事与内容运营</span></h1>
+        <a href="#portfolio" class="bauhaus-btn" style="display: inline-block; padding: 14px 28px; background-color: #DD3A35; color: #FFFFFF; font-weight: 700; text-decoration: none; border: 2px solid #111111; font-size: 1rem; transition: all 0.2s ease; cursor: pointer;">探索我的作品 →</a>
+      </div>
+      <div class="hero-image-container" style="flex: 0.8; display: flex; justify-content: center; position: relative;">
+        <div style="position: relative; width: 300px; height: 300px; border: 2px solid #111111; background-color: #F4F3EF; overflow: hidden; z-index: 2;">
+          <img src="avatar.png" alt="谷秋池" style="width: 100%; height: 100%; object-fit: cover; object-position: 45% center;">
+        </div>
+        <div aria-hidden="true" style="position: absolute; width: 300px; height: 300px; border: 2px solid #111111; background-color: #EAA824; top: 12px; left: calc(50% - 138px); z-index: 1;"></div>
+      </div>
+    </section>
+
+    <section id="about" class="about" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="about-title">
+          <p class="section-code">01 / ABOUT</p>
+          <h2 id="about-title">关于我</h2>
+        </div>
+        <div class="about-detail">
+          <div class="detail-column">
+            <p class="detail-heading">教育背景</p>
+            <div class="education-list">
+              <div class="education-item">格拉斯哥大学 · 媒体传播与国际新闻硕士</div>
+              <div class="education-item">北京印刷学院 · 编辑出版学学士</div>
+            </div>
+          </div>
+          <div class="detail-column">
+            <p class="detail-heading">核心标签</p>
+            <div class="core-tags">
+              <span class="core-tag"># 跨文化新闻视野</span>
+              <span class="core-tag"># 创意多媒体策划</span>
+              <span class="core-tag"># 前沿AI工具探索</span>
+              <span class="core-tag"># 数字化运营</span>
+              <span class="core-tag"># 数据理性与分析</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiences" class="work" aria-labelledby="work-title">
+      <div class="container">
+        <div class="work-heading">
+          <div>
+            <p class="section-code">02 / SELECTED WORK</p>
+            <h2 id="work-title">精选经历</h2>
+          </div>
+          <p class="work-heading-note">内容 · 新闻 · 研究 · 领导力</p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-marker"><span>01</span><span>CONTENT</span></div>
+            <h3>搜狐新闻 | 内容运营</h3>
+            <p>负责国内外热点新闻内容编辑与发布，日均处理20+篇稿件。独立策划并制作新闻音频内容2000+条，优化多场景用户消费体验。</p>
+            <div class="tags"><span class="tag">热点运营</span><span class="tag">多媒体策划</span></div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-marker"><span>02</span><span>JOURNALISM</span></div>
+            <h3>苏格兰国际学生签证 | 视频新闻采写</h3>
+            <p>深入研究苏格兰签证政策提案，完成多位受访者采访提纲及中英双语新闻稿撰写，参与视频拍摄与后期制作。</p>
+            <div class="tags"><span class="tag">双语采访</span><span class="tag">视频拍摄</span></div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-marker"><span>03</span><span>RESEARCH</span></div>
+            <h3>近十年畅销书出版研究 | 市场数据调研</h3>
+            <p>利用 Excel 收集并分析近十年畅销书市场数据，从题材内容定位等维度进行多变量分析，总结影响传播效果的关键因子。</p>
+            <div class="tags"><span class="tag">数据分析</span><span class="tag">市场洞察</span></div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-marker"><span>04</span><span>LEADERSHIP</span></div>
+            <h3>北印大学生记者团 | 副团长</h3>
+            <p>统筹学校官方公众号与微博内容运营，管理20+人团队。围绕重要节点策划专题内容，累计原创推文25篇，总阅读量达10w+。</p>
+            <div class="tags"><span class="tag">团队统筹</span><span class="tag">10w+阅读</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="portfolio" aria-labelledby="portfolio-title">
+      <div class="container">
+        <div class="portfolio-heading">
+          <div>
+            <p class="section-code">03 / PORTFOLIO</p>
+            <h2 id="portfolio-title">作品集</h2>
+          </div>
+          <p>公众号创作 · 英语新闻稿</p>
+        </div>
+
+        <div class="portfolio-tabs" role="tablist" aria-label="作品分类">
+          <button class="portfolio-tab is-active" id="tab-layout" role="tab" type="button" aria-selected="true" aria-controls="panel-layout" data-target="panel-layout">公众号排版作品</button>
+          <button class="portfolio-tab" id="tab-copy" role="tab" type="button" aria-selected="false" aria-controls="panel-copy" data-target="panel-copy">公众号文案作品</button>
+          <button class="portfolio-tab" id="tab-english" role="tab" type="button" aria-selected="false" aria-controls="panel-english" data-target="panel-english">英语新闻稿</button>
+        </div>
+
+        <div id="panel-layout" class="portfolio-panel" role="tabpanel" aria-labelledby="tab-layout">
+          <div class="wechat-grid">
+            <article class="wechat-card">
+              <div class="wechat-cover"><img src="portfolio-cover-01.png" alt="《一呼一吸，一起体验印苑气味之旅》封面"></div>
+              <div class="wechat-card-content">
+                <h3>一呼一吸，一起体验印苑气味之旅</h3>
+                <div class="wechat-footer">
+                  <span class="wechat-tag">微信 · 概念转译 / 沉浸式场景叙事</span>
+                  <a class="article-link" href="https://mp.weixin.qq.com/s/rIVnXR2iV_pAaTgQpRxgMQ" target="_blank" rel="noopener noreferrer" aria-label="打开《一呼一吸，一起体验印苑气味之旅》">↗</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="wechat-card">
+              <div class="wechat-cover"><img src="portfolio-cover-02.png" alt="《快来拆开北印专属“盲盒”收获惊喜吧！》封面"></div>
+              <div class="wechat-card-content">
+                <h3>快来拆开北印专属“盲盒”收获惊喜吧！</h3>
+                <div class="wechat-footer">
+                  <span class="wechat-tag">微信 · SVG 交互 / 游戏化叙事</span>
+                  <a class="article-link" href="https://mp.weixin.qq.com/s/bwHC9gNIjEIzw1ipyrdRUw" target="_blank" rel="noopener noreferrer" aria-label="打开《快来拆开北印专属“盲盒”收获惊喜吧！》">↗</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="wechat-card">
+              <div class="wechat-cover"><img src="portfolio-cover-03.png" alt="《送你北印专属学院风月饼 月圆人团圆》封面"></div>
+              <div class="wechat-card-content">
+                <h3>送你北印专属学院风月饼 月圆人团圆</h3>
+                <div class="wechat-footer">
+                  <span class="wechat-tag">微信 · 校园 IP 衍生 / 节日限定策划</span>
+                  <a class="article-link" href="https://mp.weixin.qq.com/s/igxQ2fm5vIqt0HdtZA-CEw" target="_blank" rel="noopener noreferrer" aria-label="打开《送你北印专属学院风月饼 月圆人团圆》">↗</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div id="panel-copy" class="portfolio-panel" role="tabpanel" aria-labelledby="tab-copy" hidden>
+          <div class="wechat-grid">
+            <article class="wechat-card">
+              <div class="wechat-cover"><img src="portfolio-cover-04.png" alt="《印苑四时时装秀重磅来袭》封面"></div>
+              <div class="wechat-card-content">
+                <h3>印苑四时时装秀重磅来袭</h3>
+                <div class="wechat-footer">
+                  <span class="wechat-tag">微信 · 概念策展文案 / 主题文字叙事</span>
+                  <a class="article-link" href="https://mp.weixin.qq.com/s/d2hCXsn8Tu13Lk8I7r4lYA" target="_blank" rel="noopener noreferrer" aria-label="打开《印苑四时时装秀重磅来袭》">↗</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div id="panel-english" class="portfolio-panel" role="tabpanel" aria-labelledby="tab-english" hidden>
+          <article class="wechat-card english-news-card">
+            <div class="bauhaus-art-container" role="img" aria-label="英语新闻稿 Bauhaus 风格封面占位" style="position: relative; width: 100%; height: 220px; background-color: #F4F3EF; border-bottom: 2px solid #111111; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+              <div aria-hidden="true" style="position: absolute; width: 100px; height: 100px; background-color: #EAA824; border: 2px solid #111111; z-index: 1;"></div>
+              <div aria-hidden="true" style="position: absolute; width: 70px; height: 70px; background-color: #DD3A35; border: 2px solid #111111; border-radius: 50%; z-index: 2; transform: translate(20px, 20px);"></div>
+              <div aria-hidden="true" style="position: absolute; top: -50%; left: 0; width: 2px; height: 200%; background-color: #111111; transform: rotate(45deg); z-index: 3;"></div>
+            </div>
+            <div class="wechat-card-content">
+              <h3>
+                <span style="display:block; font-size:1.2rem; font-weight:800; color:#111111; margin-bottom:6px;">【英语采写】苏格兰拟放宽国际学生签证——但他们真的能留下来吗？</span>
+                <span style="display:block; font-size:0.95rem; font-weight:normal; color:#555555; line-height:1.4;">Scotland Wants to Extend International Student Visas—But Can They Really Stay?</span>
+              </h3>
+              <div class="wechat-footer">
+                <span class="wechat-tag">英语采写 · 视频新闻脚本</span>
+                <a class="article-link" href="scotland-student-visa-news-script.txt" target="_blank" rel="noopener noreferrer" aria-label="打开英语新闻稿全文">↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <p class="section-code">04 / CONTACT</p>
+        <h2 id="contact-title">联系我</h2>
+        <p class="contact-text">期待与你一起创造有价值的内容。</p>
+        <div class="contact-details">
+          <a href="mailto:18810805329@163.com">邮箱：18810805329@163.com</a>
+          <span>所在地：北京</span>
+          <a href="tel:+8618810805329">手机：18810805329</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 谷秋池 · PERSONAL RESUME</footer>
+
+  <script>
+    const portfolioTabs = document.querySelectorAll(".portfolio-tab");
+    const portfolioPanels = document.querySelectorAll(".portfolio-panel");
+
+    portfolioTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        portfolioTabs.forEach((item) => {
+          const active = item === tab;
+          item.classList.toggle("is-active", active);
+          item.setAttribute("aria-selected", active);
+        });
+
+        portfolioPanels.forEach((panel) => {
+          panel.hidden = panel.id !== tab.dataset.target;
+        });
+      });
+    });
+
+    (() => {
+      const canUsePointer = window.matchMedia("(pointer: fine)").matches;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!canUsePointer || reducedMotion) return;
+
+      document.body.classList.add("has-custom-cursor");
+
+      const cursor = document.querySelector(".custom-cursor");
+      const actionButton = document.querySelector(".bauhaus-btn");
+
+      const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+      const cursorPosition = { x: pointer.x, y: pointer.y };
+      let animationFrame = 0;
+      let magneticTarget = null;
+
+      const lerp = (start, end, amount) => start + (end - start) * amount;
+
+      const renderCursor = () => {
+        const targetX = magneticTarget
+          ? magneticTarget.getBoundingClientRect().left + magneticTarget.offsetWidth / 2
+          : pointer.x;
+        const targetY = magneticTarget
+          ? magneticTarget.getBoundingClientRect().top + magneticTarget.offsetHeight / 2
+          : pointer.y;
+        cursorPosition.x = lerp(cursorPosition.x, targetX, magneticTarget ? 0.18 : 0.12);
+        cursorPosition.y = lerp(cursorPosition.y, targetY, magneticTarget ? 0.18 : 0.12);
+        cursor.style.transform = `translate3d(${cursorPosition.x}px, ${cursorPosition.y}px, 0) translate(-50%, -50%)`;
+        animationFrame = requestAnimationFrame(renderCursor);
+      };
+
+      window.addEventListener("pointermove", (event) => {
+        pointer.x = event.clientX;
+        pointer.y = event.clientY;
+        cursor.classList.add("is-visible");
+      }, { passive: true });
+
+      window.addEventListener("pointerleave", () => cursor.classList.remove("is-visible"));
+
+      const hoverTargets = document.querySelectorAll(
+        ".project-card, .wechat-card, .contact-details > *, .portfolio-tab"
+      );
+
+      [actionButton, ...hoverTargets].forEach((element) => {
+        if (!element) return;
+        element.addEventListener("pointerenter", () => {
+          magneticTarget = element;
+          cursor.classList.add("is-hovering");
+          cursor.classList.toggle("is-button-hover", element === actionButton);
+        });
+
+        element.addEventListener("pointerleave", () => {
+          magneticTarget = null;
+          cursor.classList.remove("is-hovering", "is-button-hover");
+        });
+      });
+
+      const cards = document.querySelectorAll(".project-card, .wechat-card");
+      cards.forEach((card) => {
+        card.classList.add("tilt-card");
+        let tiltFrame = 0;
+
+        card.addEventListener("pointerenter", () => {
+          card.classList.remove("is-resetting");
+          card.classList.add("is-tilting");
+        });
+
+        card.addEventListener("pointermove", (event) => {
+          const bounds = card.getBoundingClientRect();
+          const x = (event.clientX - bounds.left) / bounds.width;
+          const y = (event.clientY - bounds.top) / bounds.height;
+          const rotateY = (x - 0.5) * 16;
+          const rotateX = (0.5 - y) * 16;
+          const shadowX = Math.round((x - 0.5) * -16);
+          const shadowY = Math.round(12 + y * 10);
+
+          cancelAnimationFrame(tiltFrame);
+          tiltFrame = requestAnimationFrame(() => {
+            card.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(0)`;
+            card.style.boxShadow = `${shadowX}px ${shadowY}px 0 rgb(17 17 17 / 18%)`;
+          });
+        }, { passive: true });
+
+        card.addEventListener("pointerleave", () => {
+          cancelAnimationFrame(tiltFrame);
+          card.classList.remove("is-tilting");
+          card.classList.add("is-resetting");
+          card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0)";
+          card.style.boxShadow = "none";
+        });
+      });
+
+      renderCursor();
+      window.addEventListener("pagehide", () => cancelAnimationFrame(animationFrame), { once: true });
+    })();
+  </script>
+</body>
+</html>
