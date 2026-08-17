@@ -6,7 +6,7 @@
   <meta name="description" content="谷秋池的个人简历与作品集。">
   <title>谷秋池 — 内容创作者 & 国际新闻人</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap');
 
     :root {
       --paper: #f4f3ef;
@@ -15,6 +15,7 @@
       --blue: #2b5494;
       --yellow: #fef9e7;
       --gold: #eaa824;
+      --pixel-font: 'Silkscreen', 'Press Start 2P', monospace;
       --max-width: 1180px;
     }
 
@@ -30,7 +31,377 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       cursor: none;
+      position: relative;
     }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: linear-gradient(rgb(17 17 17 / 3%) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(17 17 17 / 3%) 1px, transparent 1px);
+      background-size: 18px 18px;
+      content: "";
+      pointer-events: none;
+    }
+
+    /* Pixel × Bauhaus opening layer */
+    #pixel-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--paper);
+      pointer-events: auto;
+      overflow: hidden;
+      transition: none;
+    }
+
+    .intro-materials {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .intro-materials::before,
+    .intro-materials::after {
+      position: absolute;
+      content: "";
+    }
+
+    .intro-materials::before {
+      top: 12%;
+      right: 9%;
+      width: min(24vw, 300px);
+      height: min(24vw, 300px);
+      border: 16px solid rgb(221 58 53 / 22%);
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 18px rgb(43 84 148 / 8%);
+    }
+
+    .intro-materials::after {
+      right: -4%;
+      bottom: 14%;
+      width: 38%;
+      height: 14px;
+      background: rgb(43 84 148 / 28%);
+      box-shadow: -44px -20px 0 rgb(234 168 36 / 28%), -88px -40px 0 rgb(221 58 53 / 28%);
+      transform: rotate(-8deg);
+    }
+
+    .material-panel {
+      position: absolute;
+      left: 7%;
+      bottom: 13%;
+      width: min(24vw, 300px);
+      height: min(13vw, 160px);
+      border: 8px solid var(--ink);
+      background: rgb(234 168 36 / 20%);
+      clip-path: polygon(0 18%, 82% 0, 100% 82%, 18% 100%);
+    }
+
+    .material-pixels {
+      position: absolute;
+      top: 24%;
+      left: 13%;
+      width: 12px;
+      height: 12px;
+      background: rgb(221 58 53 / 50%);
+      box-shadow: 20px 0 0 rgb(43 84 148 / 50%), 40px 0 0 rgb(234 168 36 / 50%), 0 20px 0 rgb(234 168 36 / 50%), 20px 20px 0 rgb(221 58 53 / 50%), 40px 20px 0 rgb(43 84 148 / 50%);
+    }
+
+    #pixel-intro::before { display: none; }
+
+    #pixel-intro::after {
+      position: absolute;
+      inset: 18px;
+      border: 3px solid var(--ink);
+      content: "";
+      pointer-events: none;
+    }
+
+    .welcome-text {
+      position: relative;
+      z-index: 1;
+      color: var(--ink);
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(2.8rem, 10vw, 8.5rem);
+      letter-spacing: 0.12em;
+      text-shadow: 4px 4px 0 var(--red);
+    }
+
+    .intro-enter {
+      position: relative;
+      z-index: 1;
+      margin-top: 42px;
+      border: 3px solid var(--ink);
+      padding: 12px 22px;
+      color: var(--ink);
+      background: var(--gold);
+      font: 700 0.9rem var(--pixel-font);
+      cursor: none;
+      visibility: hidden;
+      clip-path: inset(0 100% 0 0);
+      transition: none;
+    }
+
+    #pixel-intro.is-ready .intro-enter { visibility: visible; clip-path: inset(0 0 0 0); }
+    .intro-enter:hover,
+    .intro-enter:focus-visible { color: #fff; background: var(--red); outline: 0; }
+
+    .intro-caption {
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      color: var(--gold);
+      font-family: var(--pixel-font);
+      font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+      letter-spacing: 0.22em;
+    }
+
+    .intro-status {
+      position: relative;
+      z-index: 1;
+      width: min(360px, 70vw);
+      margin-top: 32px;
+      color: var(--blue);
+      font: 700 0.72rem var(--pixel-font);
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .intro-status::before {
+      display: block;
+      height: 13px;
+      margin-bottom: 10px;
+      border: 3px solid var(--ink);
+      background: repeating-linear-gradient(90deg, var(--red) 0 18px, var(--gold) 18px 36px, var(--blue) 36px 54px);
+      content: "";
+      animation: intro-progress 2.1s steps(7) infinite;
+    }
+
+    .intro-ready {
+      position: relative;
+      z-index: 1;
+      margin-top: 16px;
+      color: var(--red);
+      font: 700 clamp(0.95rem, 2vw, 1.25rem) var(--pixel-font);
+      letter-spacing: 0.16em;
+    }
+
+    @keyframes intro-progress {
+      from { clip-path: inset(0 80% 0 0); }
+      to { clip-path: inset(0 0 0 0); }
+    }
+
+    .site-header,
+    main section,
+    footer {
+      position: relative;
+    }
+
+    .site-header::before,
+    main section::before,
+    footer::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      background: var(--red);
+      content: "";
+      transform: translate(-1px, -1px);
+    }
+
+    .site-header::after {
+      position: absolute;
+      right: 24px;
+      bottom: -5px;
+      width: 42px;
+      height: 8px;
+      background: var(--blue);
+      content: "";
+      box-shadow: -18px 0 0 var(--gold), -36px 0 0 var(--red);
+    }
+
+    .intro-hidden {
+      display: none;
+      visibility: hidden;
+      pointer-events: none !important;
+    }
+
+    /* Pixel directory layer */
+    #directory {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      background: var(--paper);
+      display: none;
+      visibility: hidden;
+      pointer-events: none;
+      transition: none;
+    }
+
+    #directory::before {
+      position: absolute;
+      inset: 22px;
+      border: 3px solid var(--ink);
+      content: "";
+      pointer-events: none;
+    }
+
+    #directory.is-visible {
+      display: grid;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .directory-inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 980px);
+    }
+
+    .directory-stage {
+      position: relative;
+      padding-top: 112px;
+    }
+
+    .directory-character {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      z-index: 3;
+      width: 112px;
+      height: 112px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      pointer-events: none;
+      transform: translateX(-50%);
+      transition: none;
+    }
+
+    .directory-kicker {
+      margin: 0 0 18px;
+      color: var(--red);
+      font-family: var(--pixel-font);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+    }
+
+    .directory-title {
+      max-width: 780px;
+      margin-bottom: 44px;
+      font-family: var(--pixel-font);
+      font-size: clamp(1.4rem, 4vw, 3.6rem);
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+    }
+
+    .directory-title::after {
+      display: block;
+      width: 52px;
+      height: 8px;
+      margin-top: 18px;
+      background: var(--blue);
+      content: "";
+    }
+
+    .directory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 3px solid var(--ink);
+      border-left: 3px solid var(--ink);
+    }
+
+    .directory-item {
+      position: relative;
+      min-height: 168px;
+      padding: 24px 18px;
+      border-right: 3px solid var(--ink);
+      border-bottom: 3px solid var(--ink);
+      color: var(--ink);
+      background: var(--paper);
+      font: inherit;
+      text-align: left;
+      cursor: none;
+      transition: none;
+    }
+
+    .directory-item::before {
+      position: absolute;
+      top: -3px;
+      left: 18px;
+      width: 26px;
+      height: 20px;
+      border: 3px solid var(--ink);
+      visibility: hidden;
+      background: var(--gold);
+      content: "";
+      transform: none;
+      transition: none;
+    }
+
+    .directory-item:hover,
+    .directory-item:focus-visible {
+      color: #fff;
+      background: var(--red);
+      outline: 0;
+      transform: none;
+    }
+
+    .directory-item:hover::before,
+    .directory-item:focus-visible::before {
+      visibility: visible;
+      background: var(--blue);
+      transform: none;
+    }
+
+    .directory-item.is-launching::before {
+      visibility: visible;
+      background: var(--gold);
+    }
+
+    .directory-item.is-launching {
+      color: #fff;
+      background: var(--red);
+      animation: bounce-block 0.42s steps(4) both;
+    }
+
+    .directory-number {
+      display: block;
+      margin-bottom: 28px;
+      color: var(--blue);
+      font-family: var(--pixel-font);
+      font-size: 0.72rem;
+    }
+
+    .directory-item:hover .directory-number,
+    .directory-item:focus-visible .directory-number { color: var(--gold); }
+
+    .directory-label {
+      display: block;
+      font-size: 1.22rem;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .directory-hint {
+      margin: 30px 0 0;
+      color: var(--blue);
+      font-family: var(--pixel-font);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+
+    body.directory-open { overflow: hidden; }
 
     a, button, .project-card, .wechat-card { cursor: none; }
     a { color: inherit; text-decoration: none; }
@@ -89,10 +460,11 @@
     .section-code {
       margin: 0 0 18px;
       color: var(--red);
-      font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 2.5px;
       text-transform: uppercase;
+      font-family: var(--pixel-font);
+      font-size: 0.72rem;
     }
 
     h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.13; }
@@ -107,6 +479,90 @@
 
     #hero h1 { font-weight: 800 !important; line-height: 1.25 !important; letter-spacing: -1px !important; }
 
+    #hero {
+      isolation: isolate;
+      overflow: hidden;
+      background-image: linear-gradient(90deg, transparent 0 72%, rgb(43 84 148 / 7%) 72% 72.4%, transparent 72.4%);
+    }
+
+    #hero::before {
+      display: none;
+    }
+
+    #hero::after {
+      display: none;
+    }
+
+    #hero h1 span {
+      display: inline-block;
+      white-space: nowrap;
+      color: var(--blue) !important;
+      text-shadow: 5px 5px 0 rgb(221 58 53 / 13%);
+    }
+
+    #hero .hero-text-container { min-width: 0; }
+    #hero .hero-text-container { position: relative; }
+
+    #hero .hero-text-container::before {
+      position: absolute;
+      top: -28px;
+      left: 0;
+      color: var(--blue);
+      content: "PLAY / 01";
+      font: 700 0.72rem var(--pixel-font);
+      letter-spacing: 0.12em;
+    }
+
+    #hero .hero-text-container::after {
+      display: none;
+    }
+
+    #hero .hero-image-container::before {
+      position: absolute;
+      top: 4px;
+      left: calc(50% - 170px);
+      width: 18px;
+      height: 18px;
+      background: var(--red);
+      content: "";
+      animation: bounce-block 1.4s steps(5) infinite alternate;
+    }
+
+    #hero .hero-image-container > div:first-child {
+      transition: none;
+      box-shadow: 8px 8px 0 var(--blue);
+    }
+
+    #hero .hero-image-container > div:first-child::after {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent 0 8px, rgb(17 17 17 / 7%) 8px 10px);
+      content: "";
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      animation: scanline 2.2s steps(8) infinite;
+    }
+
+    #hero .hero-image-container:hover > div:first-child {
+      box-shadow: 12px 12px 0 var(--red);
+      transform: none;
+    }
+
+    @keyframes scanline {
+      from { background-position: 0 0; }
+      to { background-position: 0 16px; }
+    }
+
+    #hero h1 {
+      max-width: 720px;
+      font-size: clamp(3rem, 5.2vw, 5.4rem) !important;
+      overflow-wrap: normal;
+      word-break: keep-all;
+    }
+
+    .hero-text-container,
+    .hero-image-container { animation: none; }
+
     h2 {
       font-size: clamp(2.25rem, 4.5vw, 4.1rem);
       font-weight: 900;
@@ -118,8 +574,29 @@
     .bauhaus-btn:hover, .bauhaus-btn:focus {
       color: var(--ink) !important;
       background: var(--yellow) !important;
-      transform: translate(4px, -4px);
+      transform: none;
+      box-shadow: 5px 5px 0 var(--ink);
     }
+
+    .bauhaus-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bauhaus-btn::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8px;
+      height: 100%;
+      background: var(--gold);
+      content: "";
+      transform: translateX(100%);
+      transition: none;
+    }
+
+    .bauhaus-btn:hover::after,
+    .bauhaus-btn:focus::after { transform: translateX(0); }
 
     .about { border-bottom: 2px solid var(--ink); }
 
@@ -210,12 +687,34 @@
       border-radius: 0;
       padding: 26px;
       background: transparent;
-      transition: background 0.2s ease, transform 0.2s ease;
+      transition: none;
     }
 
     .project-card:hover {
       background: var(--yellow);
-      transform: translate(4px, -4px);
+      transform: none;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .project-card::before,
+    .wechat-card::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 4px;
+      background: var(--red);
+      content: "";
+      transition: width 0.3s steps(6);
+    }
+
+    .project-card:hover::before,
+    .wechat-card:hover::before { width: 100%; }
+
+    .project-card,
+    .wechat-card {
+      overflow: hidden;
+      box-shadow: 4px 4px 0 rgb(17 17 17 / 15%);
     }
 
     .project-marker {
@@ -223,9 +722,10 @@
       justify-content: space-between;
       margin-bottom: 38px;
       color: var(--red);
-      font-size: 0.73rem;
       font-weight: 900;
       letter-spacing: 0.1em;
+      font-family: var(--pixel-font);
+      font-size: 0.65rem;
     }
 
     .project-card p {
@@ -239,8 +739,9 @@
       border: 1.5px solid var(--blue);
       padding: 4px 8px;
       color: var(--blue);
-      font-size: 0.72rem;
       font-weight: 800;
+      font-family: var(--pixel-font);
+      font-size: 0.63rem;
     }
 
     .portfolio { border-bottom: 2px solid var(--ink); }
@@ -254,6 +755,16 @@
     }
 
     .portfolio-heading p { margin: 0; color: var(--blue); font-size: 0.85rem; font-weight: 750; }
+
+    .portfolio-heading .section-code,
+    .work-heading .section-code {
+      margin-bottom: 32px;
+    }
+
+    .portfolio-heading h2,
+    .work-heading h2 {
+      letter-spacing: -0.045em;
+    }
 
     .portfolio-tabs {
       display: flex;
@@ -294,12 +805,13 @@
       display: flex;
       min-height: 310px;
       flex-direction: column;
+      position: relative;
       border: 1.5px solid var(--ink);
       background: transparent;
-      transition: background 0.2s ease, transform 0.2s ease;
+      transition: none;
     }
 
-    .wechat-card:hover { background: var(--yellow); transform: translate(4px, -4px); }
+    .wechat-card:hover { background: var(--yellow); transform: none; box-shadow: 6px 6px 0 var(--ink); }
 
     .wechat-cover {
       display: flex;
@@ -354,7 +866,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 100;
+        z-index: 10001;
         width: 10px;
         height: 10px;
         border: 0;
@@ -362,14 +874,14 @@
         background: #111111;
         mix-blend-mode: normal;
         pointer-events: none;
-        opacity: 0;
-        transform: translate3d(-50%, -50%, 0) scale(1);
-        transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+        visibility: hidden;
+        transform: translate3d(-50%, -50%, 0);
+        transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
         will-change: transform, width, height;
       }
 
-      .custom-cursor.is-visible { opacity: 1; }
-      .custom-cursor.is-dialog-cursor-hidden { opacity: 0 !important; }
+      .custom-cursor.is-visible { visibility: visible; }
+      .custom-cursor.is-dialog-cursor-hidden { visibility: hidden !important; }
 
       .custom-cursor.is-hovering {
         width: 36px;
@@ -385,25 +897,12 @@
         mix-blend-mode: normal;
       }
 
-      .tilt-card {
-        transform: perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0);
-        transform-style: preserve-3d;
-        will-change: transform, box-shadow;
-      }
+      #pixel-intro ~ .custom-cursor { z-index: 10001; }
 
-      .tilt-card.is-tilting {
-        transition: background 0.2s ease, box-shadow 120ms ease;
-      }
-
-      .tilt-card.is-resetting {
-        transition: transform 520ms cubic-bezier(.22, 1, .36, 1),
-          box-shadow 520ms cubic-bezier(.22, 1, .36, 1), background 0.2s ease;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .custom-cursor { display: none; }
-      .tilt-card { transition: none !important; transform: none !important; }
     }
 
     .wechat-footer { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-top: auto; }
@@ -412,8 +911,9 @@
       border: 1.5px solid #07c160;
       padding: 4px 8px;
       color: #078f4b;
-      font-size: 0.72rem;
       font-weight: 850;
+      font-family: var(--pixel-font);
+      font-size: 0.64rem;
     }
 
     .article-link {
@@ -430,6 +930,21 @@
 
     .article-link:hover, .article-link:focus { color: #fff; background: var(--red); }
 
+    .portfolio-tab.is-active,
+    .portfolio-tab:hover,
+    .portfolio-tab:focus,
+    .core-tag:hover,
+    .tag:hover {
+      background-image: repeating-linear-gradient(90deg, transparent 0 5px, rgb(221 58 53 / 12%) 5px 7px);
+    }
+
+    .js-pixel-reveal {
+      clip-path: inset(0 100% 0 0);
+      animation: none;
+    }
+
+    .js-pixel-reveal.is-revealed { clip-path: inset(0 0 0 0); }
+
     /* Portfolio refinement: spacious editorial cards with image-led hierarchy */
     #portfolio .wechat-grid {
       gap: 3rem;
@@ -440,12 +955,12 @@
       border: 0;
       background: transparent;
       padding: 0;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: none;
     }
 
     #portfolio .wechat-card:hover {
       background: transparent;
-      transform: translateY(-4px);
+      transform: none;
     }
 
     #portfolio .wechat-cover,
@@ -456,11 +971,11 @@
     }
 
     #portfolio .wechat-cover img {
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: none;
     }
 
     #portfolio .wechat-card:hover .wechat-cover img {
-      transform: scale(1.02);
+      transform: none;
     }
 
     #portfolio .wechat-card-content {
@@ -497,11 +1012,11 @@
       border: 0;
       background: transparent;
       color: #1a1a1a;
-      transition: transform 0.3s ease;
+      transition: none;
     }
 
     #portfolio .wechat-card:hover .article-link {
-      transform: translate(3px, -3px);
+      transform: none;
     }
 
     #english-script-dialog {
@@ -578,6 +1093,44 @@
       text-align: center;
     }
 
+    /* Game-like HUD: restrained, persistent, and aligned to the existing grid. */
+    .game-hud {
+      position: fixed;
+      right: 22px;
+      bottom: 18px;
+      z-index: 19;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 2px solid var(--ink);
+      padding: 7px 10px;
+      color: var(--ink);
+      background: var(--paper);
+      font: 700 0.62rem var(--pixel-font);
+      letter-spacing: 0.08em;
+      pointer-events: none;
+    }
+
+    .game-hud-meter {
+      display: block;
+      width: 84px;
+      height: 10px;
+      border: 2px solid var(--ink);
+      background: linear-gradient(90deg, var(--red) 0 14px, transparent 14px 18px, transparent 18px 32px, transparent 32px 36px, transparent 36px 50px, transparent 50px 54px, transparent 54px 68px, transparent 68px 72px);
+    }
+
+    .game-hud[data-level="2"] .game-hud-meter {
+      background: linear-gradient(90deg, var(--red) 0 14px, transparent 14px 18px, var(--gold) 18px 32px, transparent 32px 36px, transparent 36px 50px, transparent 50px 54px, transparent 54px 68px, transparent 68px 72px);
+    }
+
+    .game-hud[data-level="3"] .game-hud-meter {
+      background: linear-gradient(90deg, var(--red) 0 14px, transparent 14px 18px, var(--gold) 18px 32px, transparent 32px 36px, var(--blue) 36px 50px, transparent 50px 54px, transparent 54px 68px, transparent 68px 72px);
+    }
+
+    .game-hud[data-level="4"] .game-hud-meter {
+      background: linear-gradient(90deg, var(--red) 0 14px, transparent 14px 18px, var(--gold) 18px 32px, transparent 32px 36px, var(--blue) 36px 50px, transparent 50px 54px, var(--ink) 54px 68px, transparent 68px 72px);
+    }
+
     @media (max-width: 800px) {
       .container { width: min(calc(100% - 32px), var(--max-width)); }
       main section { padding: 80px 0; }
@@ -591,6 +1144,17 @@
     }
 
     @media (max-width: 560px) {
+      #directory { padding: 22px; }
+      #directory::before { inset: 12px; }
+      .game-hud { right: 12px; bottom: 12px; padding: 6px 8px; font-size: 0.5rem; }
+      .game-hud-meter { width: 48px; }
+      .directory-title { margin-bottom: 30px; font-size: 1.5rem; }
+      .directory-stage { padding-top: 94px; }
+      .directory-character { width: 90px; height: 90px; }
+      .directory-grid { grid-template-columns: repeat(2, 1fr); }
+      .directory-item { min-height: 140px; padding: 18px 12px; }
+      .directory-label { font-size: 1rem; }
+      .directory-number { margin-bottom: 20px; font-size: 0.68rem; }
       .nav { align-items: flex-start; flex-direction: column; gap: 10px; padding: 15px 0; }
       nav ul { gap: 18px; flex-wrap: wrap; }
       nav a { padding: 3px 0; }
@@ -612,16 +1176,364 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .js-pixel-reveal { clip-path: none; }
+    }
+
+    /* Opening screen: original pixel platform-game treatment */
+    #pixel-intro {
+      justify-content: flex-start;
+      background: #62b8f5;
+      color: #fff;
+      image-rendering: pixelated;
+    }
+
+    #pixel-intro::after {
+      inset: 12px;
+      border: 4px solid #17324d;
+    }
+
+    #pixel-intro .intro-materials::before {
+      top: 14%;
+      right: 9%;
+      width: 170px;
+      height: 56px;
+      border: 0;
+      border-radius: 0;
+      background: rgb(255 255 255 / 88%);
+      box-shadow: 28px -18px 0 rgb(255 255 255 / 88%), 56px 0 0 rgb(255 255 255 / 88%), 84px 14px 0 rgb(255 255 255 / 88%), 112px 0 0 rgb(255 255 255 / 88%);
+      animation: cloud-drift 8s steps(10) infinite alternate;
+    }
+
+    #pixel-intro .intro-materials::after {
+      right: auto;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 92px;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 24px, rgb(75 45 31 / 22%) 24px 29px, transparent 29px 52px),
+        linear-gradient(#5ca94c 0 18px, #93603f 18px 100%);
+      box-shadow: inset 0 12px 0 #34783d;
+      transform: none;
+      animation: ground-scroll 2.4s steps(8) infinite;
+    }
+
+    #pixel-intro .material-panel {
+      left: 8%;
+      bottom: 20%;
+      width: 132px;
+      height: 132px;
+      border: 0;
+      background: transparent;
+      clip-path: none;
+      box-shadow: none;
+      object-fit: contain;
+      image-rendering: pixelated;
+    }
+
+    #pixel-intro .material-pixels {
+      top: 29%;
+      left: 24%;
+      width: 18px;
+      height: 18px;
+      background: #f6c84f;
+      box-shadow: 30px 0 0 #f6c84f, 60px 0 0 #f6c84f;
+    }
+
+    #pixel-intro .welcome-text {
+      margin-top: 17vh;
+      color: #fff;
+      font-size: clamp(2.6rem, 10vw, 8.5rem);
+      letter-spacing: 0.08em;
+      text-shadow: 8px 8px 0 #17324d;
+    }
+
+    #pixel-intro .intro-caption {
+      color: #17324d;
+      font-weight: 700;
+      text-shadow: 2px 2px 0 rgb(255 255 255 / 45%);
+    }
+
+    #pixel-intro .intro-status { color: #17324d; }
+
+    #pixel-intro .intro-status::before {
+      border-color: #17324d;
+      background: repeating-linear-gradient(90deg, #f6c84f 0 18px, #db4a3b 18px 36px, #fff 36px 54px);
+    }
+
+    #pixel-intro .intro-ready {
+      color: #fff;
+      text-shadow: 3px 3px 0 #17324d;
+    }
+
+    #pixel-intro .intro-enter {
+      border-color: #17324d;
+      color: #17324d;
+      background: #f6c84f;
+      box-shadow: 6px 6px 0 #17324d;
+    }
+
+    #pixel-intro .intro-enter:hover,
+    #pixel-intro .intro-enter:focus-visible { color: #fff; background: #db4a3b; }
+
+    @keyframes cloud-drift {
+      from { transform: translateX(0); }
+      to { transform: translateX(-70px); }
+    }
+
+    @keyframes ground-scroll {
+      from { background-position: 0 0; }
+      to { background-position: -112px 0; }
+    }
+
+    /* Motion system: pixel-native, non-PPT interactions */
+    #pixel-intro,
+    #directory,
+    .project-card,
+    .wechat-card,
+    .portfolio-tab,
+    .bauhaus-btn,
+    .contact-details > * { transition: none !important; }
+
+    #pixel-intro,
+    #directory,
+    .project-card,
+    .wechat-card,
+    .portfolio-tab,
+    .bauhaus-btn,
+    .contact-details > * {
+      animation-timing-function: steps(6, jump-none);
+    }
+
+    #pixel-intro::before {
+      display: block;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, #17324d 0 1px, transparent 1px 6px);
+      content: "";
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      animation: crt-scan 1.8s steps(12) infinite;
+    }
+
+    #pixel-intro.intro-hidden {
+      display: none !important;
+    }
+
+    #pixel-intro:not(.is-ready) .intro-enter {
+      visibility: hidden;
+      clip-path: inset(0 100% 0 0);
+      transform: none;
+    }
+
+    #pixel-intro.is-ready .intro-enter {
+      visibility: visible;
+      clip-path: inset(0 0 0 0);
+      transform: none;
+      animation: pixel-build 0.42s steps(6) both;
+    }
+
+    #directory { display: none; }
+    #directory.is-visible { display: grid; animation: mosaic-reveal 0.45s steps(7) both; }
+    #directory.is-destroying { animation: pixel-destroy 0.32s steps(6) both; }
+
+    .directory-item,
+    .directory-item:hover,
+    .directory-item:focus-visible,
+    .directory-item.is-launching { transform: none !important; }
+
+    .directory-item:hover,
+    .directory-item:focus-visible { box-shadow: 6px 6px 0 var(--ink); animation: block-slide 0.28s steps(4) both; }
+
+    .directory-item.is-launching { animation: bounce-block 0.42s steps(5) both !important; }
+
+    .directory-character,
+    .directory-character.is-hitting { transform: translateX(-50%) !important; }
+
+    .directory-character { animation: none !important; transition: none !important; }
+
+    .directory-character.is-hitting { animation: bounce-block 0.42s steps(5) both !important; }
+
+    .directory-item.is-launching::before { animation: bounce-block 0.42s steps(5) both !important; }
+
+    .js-pixel-reveal {
+      transform: none !important;
+      clip-path: inset(0 0 0 0);
+      animation: none;
+    }
+
+    .js-pixel-reveal.is-revealed { animation: pixel-build 0.52s steps(8) both; }
+
+    .project-card:hover,
+    .wechat-card:hover,
+    #portfolio .wechat-card:hover { transform: none !important; animation: block-slide 0.28s steps(4) both; }
+
+    .project-card,
+    .wechat-card {
+      background-image: linear-gradient(90deg, var(--yellow) 0 50%, transparent 50% 100%);
+      background-position: 100% 0;
+      background-size: 200% 100%;
+    }
+
+    #portfolio .wechat-card { background-color: transparent; }
+
+    .project-card:hover .project-marker,
+    .wechat-card:hover .wechat-footer { animation: glitch-split 0.42s steps(3) both; }
+
+    .project-card:hover img,
+    .wechat-card:hover img,
+    #portfolio .wechat-card:hover .wechat-cover img,
+    .article-link:hover,
+    .article-link:focus,
+    #portfolio .wechat-card:hover .article-link { transform: none !important; }
+
+    #hero { background-position: 0 0; animation: camera-pan 5s steps(10) infinite alternate; }
+    #hero-title { animation: glitch-split 3s steps(6) infinite; }
+    .hero-text-container { animation: pixel-build 0.55s steps(8) both !important; }
+    .hero-image-container { animation: mosaic-reveal 0.7s steps(8) both !important; }
+    #hero .hero-image-container > div:first-child,
+    #hero .hero-image-container:hover > div:first-child { transform: none !important; animation: mosaic-reveal 0.7s steps(8) both; }
+
+    .bauhaus-btn::after {
+      left: 0 !important;
+      right: auto !important;
+      width: 0 !important;
+      transform: none !important;
+      animation: none;
+    }
+
+    .bauhaus-btn:hover::after,
+    .bauhaus-btn:focus::after { width: 100% !important; animation: block-slide 0.3s steps(6) both; }
+
+    .bauhaus-btn,
+    .bauhaus-btn:hover,
+    .bauhaus-btn:focus { transform: none !important; }
+
+    #pixel-intro .material-panel { animation: bounce-block 1.4s steps(5) infinite alternate; }
+    #pixel-intro .material-pixels { animation: block-slide 1.1s steps(5) infinite alternate; }
+    #pixel-intro .welcome-text { animation: pixel-build 0.58s steps(8) both, glitch-split 3s steps(6) infinite; }
+    #pixel-intro .intro-ready { animation: crt-scan 1.1s steps(6) infinite; }
+
+    .game-hud { animation: crt-scan 3s steps(8) infinite; }
+
+    .screen-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 10002;
+      visibility: hidden;
+      background: #fff;
+      pointer-events: none;
+    }
+
+    .screen-flash.is-active { visibility: visible; animation: screen-flash 0.18s steps(2) both; }
+
+    @keyframes pixel-build {
+      0% { clip-path: inset(0 100% 75% 0); }
+      35% { clip-path: inset(0 48% 38% 0); }
+      70% { clip-path: inset(0 14% 8% 0); }
+      100% { clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes pixel-destroy {
+      0% { clip-path: inset(0 0 0 0); }
+      35% { clip-path: inset(0 0 0 34%); }
+      70% { clip-path: inset(0 42% 0 68%); }
+      100% { clip-path: inset(0 100% 100% 100%); }
+    }
+
+    @keyframes mosaic-reveal {
+      0% { clip-path: polygon(0 0, 18% 0, 18% 18%, 38% 18%, 38% 0, 58% 0, 58% 18%, 78% 18%, 78% 0, 100% 0, 100% 100%, 0 100%); }
+      45% { clip-path: polygon(0 0, 38% 0, 38% 28%, 72% 28%, 72% 0, 100% 0, 100% 100%, 0 100%); }
+      100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    }
+
+    @keyframes block-slide {
+      0% { background-position: -100% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    @keyframes bounce-block {
+      0% { margin-top: 0; }
+      35% { margin-top: 16px; }
+      65% { margin-top: -18px; }
+      100% { margin-top: 0; }
+    }
+
+    @keyframes crt-scan {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 12px; }
+    }
+
+    @keyframes camera-pan {
+      from { background-position: 0 0; }
+      to { background-position: 28px 0; }
+    }
+
+    @keyframes glitch-split {
+      0%, 100% { text-shadow: 0 0 transparent; }
+      35% { text-shadow: -3px 0 #db4a3b, 3px 0 #3a83bd; }
+      70% { text-shadow: 3px 0 #db4a3b, -3px 0 #3a83bd; }
+    }
+
+    @keyframes screen-flash {
+      0%, 65% { visibility: visible; }
+      100% { visibility: hidden; }
     }
   </style>
 </head>
-<body>
+<body class="directory-open">
+  <div id="pixel-intro" aria-label="Welcome" role="presentation">
+    <div class="intro-materials" aria-hidden="true">
+      <img class="material-panel" src="pixel-chi-front.png" alt="谷秋池正面像素卡通形象">
+      <div class="material-pixels"></div>
+    </div>
+    <div class="welcome-text">WELCOME</div>
+    <div class="intro-caption">QC / CONTENT · NEWS · STORY</div>
+    <div class="intro-status">LOADING PROFILE / 04</div>
+    <div class="intro-ready">READY</div>
+    <button class="intro-enter" type="button">点击探索 →</button>
+  </div>
+
+  <div id="directory" aria-label="网站目录">
+    <div class="directory-inner">
+      <p class="directory-kicker">QC / SELECT YOUR ROUTE</p>
+      <h2 class="directory-title">选择你的阅读路径</h2>
+      <div class="directory-stage">
+        <img class="directory-character" src="pixel-chi-front.png" alt="谷秋池像素卡通形象">
+        <div class="directory-grid">
+          <button class="directory-item" type="button" data-directory-target="about">
+            <span class="directory-number">01</span>
+            <span class="directory-label">关于我</span>
+          </button>
+          <button class="directory-item" type="button" data-directory-target="experiences">
+            <span class="directory-number">02</span>
+            <span class="directory-label">精选经历</span>
+          </button>
+          <button class="directory-item" type="button" data-directory-target="portfolio">
+            <span class="directory-number">03</span>
+            <span class="directory-label">作品集</span>
+          </button>
+          <button class="directory-item" type="button" data-directory-target="contact">
+            <span class="directory-number">04</span>
+            <span class="directory-label">联系我</span>
+          </button>
+        </div>
+      </div>
+      <p class="directory-hint">CLICK A BLOCK TO ENTER / 点击方块进入</p>
+    </div>
+  </div>
+
   <div class="custom-cursor" aria-hidden="true"></div>
+  <div class="screen-flash" aria-hidden="true"></div>
+  <div class="game-hud" aria-hidden="true">
+    <span class="game-hud-label">LEVEL 01 / 04</span>
+    <span class="game-hud-meter"></span>
+  </div>
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="Back to top">QIUCHI GU</a>
       <nav aria-label="主导航">
         <ul>
+          <li><a href="#directory" data-open-directory>目录</a></li>
           <li><a href="#about">关于我</a></li>
           <li><a href="#experiences">经历</a></li>
           <li><a href="#portfolio">作品集</a></li>
@@ -833,6 +1745,124 @@
   <footer>© 2026 谷秋池 · PERSONAL RESUME</footer>
 
   <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const intro = document.querySelector('#pixel-intro');
+      const directory = document.querySelector('#directory');
+      const introEnter = document.querySelector('.intro-enter');
+      const screenFlash = document.querySelector('.screen-flash');
+      if (!intro) return;
+      window.setTimeout(() => intro.classList.add('is-ready'), 2200);
+
+      const flashScreen = () => {
+        if (!screenFlash) return;
+        screenFlash.classList.remove('is-active');
+        window.requestAnimationFrame(() => screenFlash.classList.add('is-active'));
+        window.setTimeout(() => screenFlash.classList.remove('is-active'), 220);
+      };
+
+      const typeTerminal = (element) => {
+        if (!element || element.dataset.terminalTyped === 'true') return;
+        const text = element.textContent;
+        element.dataset.terminalTyped = 'true';
+        element.textContent = '';
+        let index = 0;
+        const printNext = () => {
+          element.textContent = text.slice(0, index);
+          index += 1;
+          if (index <= text.length) window.setTimeout(printNext, 38);
+        };
+        printNext();
+      };
+
+      typeTerminal(document.querySelector('.intro-caption'));
+      typeTerminal(document.querySelector('.category-tag'));
+
+      const enterDirectory = () => {
+        flashScreen();
+        intro.classList.add('intro-hidden');
+        if (!directory) return;
+        directory.classList.add('is-visible');
+        document.body.classList.add('directory-open');
+      };
+
+      introEnter?.addEventListener('click', enterDirectory);
+
+      document.querySelector('[data-open-directory]')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (!directory) return;
+        flashScreen();
+        directory.classList.add('is-visible');
+        document.body.classList.add('directory-open');
+      });
+
+      const directoryStage = document.querySelector('.directory-stage');
+      const directoryCharacter = document.querySelector('.directory-character');
+      const moveDirectoryCharacter = (item) => {
+        if (!directoryStage || !directoryCharacter) return;
+        const stageBounds = directoryStage.getBoundingClientRect();
+        const itemBounds = item.getBoundingClientRect();
+        const characterWidth = directoryCharacter.getBoundingClientRect().width;
+        const targetLeft = itemBounds.left - stageBounds.left + (itemBounds.width - characterWidth) / 2;
+        directoryCharacter.style.left = `${targetLeft + characterWidth / 2}px`;
+        directoryCharacter.classList.remove('is-hitting');
+        window.requestAnimationFrame(() => directoryCharacter.classList.add('is-hitting'));
+      };
+
+      document.querySelectorAll('[data-directory-target]').forEach((item) => {
+        item.addEventListener('pointerenter', () => moveDirectoryCharacter(item));
+        item.addEventListener('click', () => {
+          const target = document.getElementById(item.dataset.directoryTarget);
+          if (typeof window.setGameLevel === 'function') window.setGameLevel(item.dataset.directoryTarget);
+          moveDirectoryCharacter(item);
+          item.classList.add('is-launching');
+          directory.classList.remove('is-destroying');
+          directory.classList.add('is-destroying');
+          window.setTimeout(() => {
+            directory.classList.remove('is-visible');
+            directory.classList.remove('is-destroying');
+            document.body.classList.remove('directory-open');
+            item.classList.remove('is-launching');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 420);
+        });
+      });
+    });
+
+    (() => {
+      const hud = document.querySelector('.game-hud');
+      const label = document.querySelector('.game-hud-label');
+      const levelMap = { about: 1, experiences: 2, portfolio: 3, contact: 4 };
+
+      const setGameLevel = (sectionId) => {
+        const level = levelMap[sectionId];
+        if (!level || !hud || !label) return;
+        hud.dataset.level = String(level);
+        label.textContent = `LEVEL 0${level} / 04`;
+      };
+
+      window.setGameLevel = setGameLevel;
+      setGameLevel('about');
+
+      document.querySelectorAll('nav a[href^="#"]').forEach((link) => {
+        const sectionId = link.getAttribute('href').slice(1);
+        if (!levelMap[sectionId]) return;
+        link.addEventListener('click', () => setGameLevel(sectionId));
+      });
+
+      if ('IntersectionObserver' in window) {
+        const levelObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setGameLevel(entry.target.id);
+          });
+        }, { threshold: 0.45 });
+
+        Object.keys(levelMap).forEach((sectionId) => {
+          const section = document.getElementById(sectionId);
+          if (section) levelObserver.observe(section);
+        });
+      }
+    })();
+
     const portfolioTabs = document.querySelectorAll(".portfolio-tab");
     const portfolioPanels = document.querySelectorAll(".portfolio-panel");
 
@@ -868,6 +1898,29 @@
       if (event.target === scriptDialog) closeScriptDialog();
     });
     scriptDialog.addEventListener("cancel", closeScriptDialog);
+
+    (() => {
+      const revealTargets = document.querySelectorAll(
+        "main section, .project-card, .wechat-card, .contact-details > *"
+      );
+
+      revealTargets.forEach((element) => element.classList.add("js-pixel-reveal"));
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+        revealTargets.forEach((element) => element.classList.add("is-revealed"));
+        return;
+      }
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-revealed");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+
+      revealTargets.forEach((element) => revealObserver.observe(element));
+    })();
 
     (() => {
       const canUsePointer = window.matchMedia("(pointer: fine)").matches;
@@ -936,7 +1989,7 @@
       };
 
       const hoverTargets = document.querySelectorAll(
-        ".project-card, .wechat-card, .contact-details > *, .portfolio-tab"
+        ".project-card, .wechat-card, .contact-details > *, .portfolio-tab, .directory-item, .intro-enter, [data-open-directory]"
       );
 
       [actionButton, ...hoverTargets].forEach((element) => {
@@ -955,57 +2008,24 @@
 
       const cards = document.querySelectorAll(".project-card, .wechat-card");
       cards.forEach((card) => {
-        if (card.dataset.cardLink) {
-          const openCardLink = () => {
-            if (card.dataset.cardLink.endsWith(".txt")) {
-              openScriptDialog();
-              return;
-            }
-            window.open(card.dataset.cardLink, "_blank", "noopener,noreferrer");
-          };
+        if (!card.dataset.cardLink) return;
+        const openCardLink = () => {
+          if (card.dataset.cardLink.endsWith(".txt")) {
+            openScriptDialog();
+            return;
+          }
+          window.open(card.dataset.cardLink, "_blank", "noopener,noreferrer");
+        };
 
-          card.addEventListener("click", (event) => {
-            if (event.target.closest("a, button")) return;
-            openCardLink();
-          });
-
-          card.addEventListener("keydown", (event) => {
-            if (event.key !== "Enter" && event.key !== " ") return;
-            event.preventDefault();
-            openCardLink();
-          });
-        }
-
-        card.classList.add("tilt-card");
-        let tiltFrame = 0;
-
-        card.addEventListener("pointerenter", () => {
-          card.classList.remove("is-resetting");
-          card.classList.add("is-tilting");
+        card.addEventListener("click", (event) => {
+          if (event.target.closest("a, button")) return;
+          openCardLink();
         });
 
-        card.addEventListener("pointermove", (event) => {
-          const bounds = card.getBoundingClientRect();
-          const x = (event.clientX - bounds.left) / bounds.width;
-          const y = (event.clientY - bounds.top) / bounds.height;
-          const rotateY = (x - 0.5) * 16;
-          const rotateX = (0.5 - y) * 16;
-          const shadowX = Math.round((x - 0.5) * -16);
-          const shadowY = Math.round(12 + y * 10);
-
-          cancelAnimationFrame(tiltFrame);
-          tiltFrame = requestAnimationFrame(() => {
-            card.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(0)`;
-            card.style.boxShadow = `${shadowX}px ${shadowY}px 0 rgb(17 17 17 / 18%)`;
-          });
-        }, { passive: true });
-
-        card.addEventListener("pointerleave", () => {
-          cancelAnimationFrame(tiltFrame);
-          card.classList.remove("is-tilting");
-          card.classList.add("is-resetting");
-          card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0)";
-          card.style.boxShadow = "none";
+        card.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          openCardLink();
         });
       });
 
