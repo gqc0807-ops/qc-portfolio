@@ -1,3080 +1,388 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="谷秋池的个人简历与作品集。">
-  <title>谷秋池 — 内容创作者 & 国际新闻人</title>
+  <title>谷秋池 · PIXEL PORTFOLIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap');
-
     :root {
-      --paper: #f4f3ef;
-      --ink: #111111;
-      --red: #dd3a35;
-      --blue: #2b5494;
-      --yellow: #fef9e7;
-      --gold: #eaa824;
-      --pixel-font: 'Silkscreen', 'Press Start 2P', monospace;
-      --max-width: 1180px;
+      --sky: #5c94fc;
+      --sky-deep: #3165a3;
+      --ink: #111820;
+      --white: #fff;
+      --cloud: #fff;
+      --grass: #50cb28;
+      --grass-dark: #257d20;
+      --soil: #a85e32;
+      --soil-dark: #713d20;
+      --wood: #8a4f2b;
+      --wood-light: #c47a42;
+      --question: #f6c945;
+      --brick: #d94b3d;
+      --blue-panel: #315f9f;
+      --pixel: 'Press Start 2P', monospace;
+      --level: 0;
     }
 
     * { box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; cursor: none; }
+    html { background: var(--sky); }
 
     body {
+      min-width: 320px;
       margin: 0;
-      color: var(--ink);
-      background-color: #f8f7f4;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      cursor: none;
-      position: relative;
-    }
-
-    body::before {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background-image: linear-gradient(rgb(17 17 17 / 3%) 1px, transparent 1px),
-        linear-gradient(90deg, rgb(17 17 17 / 3%) 1px, transparent 1px);
-      background-size: 18px 18px;
-      content: "";
-      pointer-events: none;
-    }
-
-    /* Pixel × Bauhaus opening layer */
-    #pixel-intro {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--paper);
-      pointer-events: auto;
       overflow: hidden;
-      transition: none;
-    }
-
-    .intro-materials {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .intro-materials::before,
-    .intro-materials::after {
-      position: absolute;
-      content: "";
-    }
-
-    .intro-materials::before {
-      top: 12%;
-      right: 9%;
-      width: min(24vw, 300px);
-      height: min(24vw, 300px);
-      border: 16px solid rgb(221 58 53 / 22%);
-      border-radius: 50%;
-      box-shadow: inset 0 0 0 18px rgb(43 84 148 / 8%);
-    }
-
-    .intro-materials::after {
-      right: -4%;
-      bottom: 14%;
-      width: 38%;
-      height: 14px;
-      background: rgb(43 84 148 / 28%);
-      box-shadow: -44px -20px 0 rgb(234 168 36 / 28%), -88px -40px 0 rgb(221 58 53 / 28%);
-      transform: rotate(-8deg);
-    }
-
-    .material-panel {
-      position: absolute;
-      left: 7%;
-      bottom: 13%;
-      width: min(24vw, 300px);
-      height: min(13vw, 160px);
-      border: 8px solid var(--ink);
-      background: rgb(234 168 36 / 20%);
-      clip-path: polygon(0 18%, 82% 0, 100% 82%, 18% 100%);
-    }
-
-    .material-pixels {
-      position: absolute;
-      top: 24%;
-      left: 13%;
-      width: 12px;
-      height: 12px;
-      background: rgb(221 58 53 / 50%);
-      box-shadow: 20px 0 0 rgb(43 84 148 / 50%), 40px 0 0 rgb(234 168 36 / 50%), 0 20px 0 rgb(234 168 36 / 50%), 20px 20px 0 rgb(221 58 53 / 50%), 40px 20px 0 rgb(43 84 148 / 50%);
-    }
-
-    #pixel-intro::before { display: none; }
-
-    #pixel-intro::after {
-      position: absolute;
-      inset: 18px;
-      border: 3px solid var(--ink);
-      content: "";
-      pointer-events: none;
-    }
-
-    .welcome-text {
-      position: relative;
-      z-index: 1;
       color: var(--ink);
-      font-family: 'Press Start 2P', monospace;
-      font-size: clamp(2.8rem, 10vw, 8.5rem);
-      letter-spacing: 0.12em;
-      text-shadow: 4px 4px 0 var(--red);
+      background: var(--sky);
+      font-family: var(--pixel), 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      image-rendering: pixelated;
     }
 
-    .intro-enter {
-      position: relative;
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; font: inherit; }
+
+    .cloud {
+      position: fixed;
       z-index: 1;
-      margin-top: 42px;
-      border: 3px solid var(--ink);
-      padding: 12px 22px;
-      color: var(--ink);
-      background: var(--gold);
-      font: 700 0.9rem var(--pixel-font);
-      cursor: none;
-      visibility: hidden;
-      clip-path: inset(0 100% 0 0);
-      transition: none;
+      width: 88px;
+      height: 22px;
+      background: var(--cloud);
+      box-shadow: 24px 12px 0 var(--cloud), -24px 12px 0 var(--cloud), 48px 22px 0 var(--cloud);
+      pointer-events: none;
+      animation: cloud-drift 28s linear infinite alternate;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
-    #pixel-intro.is-ready .intro-enter { visibility: visible; clip-path: inset(0 0 0 0); }
-    .intro-enter:hover,
-    .intro-enter:focus-visible { color: #fff; background: var(--red); outline: 0; }
+    .cloud-one { top: 112px; left: 12vw; }
+    .cloud-two { top: 212px; left: 68vw; transform: scale(.7) translateZ(0); animation-delay: -12s; }
 
-    .intro-caption {
-      position: relative;
-      z-index: 1;
-      margin-top: 28px;
-      color: var(--gold);
-      font-family: var(--pixel-font);
-      font-size: clamp(0.9rem, 1.8vw, 1.25rem);
-      letter-spacing: 0.22em;
-    }
-
-    .intro-status {
-      position: relative;
-      z-index: 1;
-      width: min(360px, 70vw);
-      margin-top: 32px;
-      color: var(--blue);
-      font: 700 0.72rem var(--pixel-font);
-      letter-spacing: 0.1em;
-      text-align: center;
-    }
-
-    .intro-status::before {
-      display: block;
-      height: 13px;
-      margin-bottom: 10px;
-      border: 3px solid var(--ink);
-      background: repeating-linear-gradient(90deg, var(--red) 0 18px, var(--gold) 18px 36px, var(--blue) 36px 54px);
-      content: "";
-      animation: intro-progress 2.1s steps(7) infinite;
-    }
-
-    .intro-ready {
-      position: relative;
-      z-index: 1;
-      margin-top: 16px;
-      color: var(--red);
-      font: 700 clamp(0.95rem, 2vw, 1.25rem) var(--pixel-font);
-      letter-spacing: 0.16em;
-    }
-
-    @keyframes intro-progress {
-      from { clip-path: inset(0 80% 0 0); }
-      to { clip-path: inset(0 0 0 0); }
-    }
-
-    .site-header,
-    main section,
-    footer {
-      position: relative;
-    }
-
-    .site-header::before,
-    main section::before,
-    footer::before {
-      position: absolute;
+    .hud {
+      position: fixed;
       top: 0;
       left: 0;
-      width: 12px;
-      height: 12px;
-      background: var(--red);
-      content: "";
-      transform: translate(-1px, -1px);
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 58px;
+      padding: 12px clamp(16px, 5vw, 72px);
+      border-bottom: 4px solid var(--white);
+      color: var(--white);
+      background: var(--ink);
+      font-size: clamp(.48rem, .75vw, .68rem);
+      line-height: 1.6;
     }
 
-    .site-header::after {
-      position: absolute;
-      right: 24px;
-      bottom: -5px;
-      width: 42px;
-      height: 8px;
-      background: var(--blue);
-      content: "";
-      box-shadow: -18px 0 0 var(--gold), -36px 0 0 var(--red);
+    .hud-group { display: flex; gap: 10px; align-items: center; white-space: nowrap; }
+    .hud-label { color: var(--question); }
+
+    .site-nav {
+      position: fixed;
+      top: 58px;
+      left: 0;
+      z-index: 35;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px clamp(16px, 5vw, 72px);
+      color: var(--white);
+      background: rgb(49 101 163 / 88%);
+      border-bottom: 3px solid var(--sky-deep);
     }
 
-    .intro-hidden {
-      display: none;
-      visibility: hidden;
-      pointer-events: none !important;
-    }
+    .brand { font-size: clamp(.65rem, 1.2vw, .9rem); text-shadow: 3px 3px 0 var(--sky-deep); }
+    .nav-list { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0; padding: 0; list-style: none; }
+    .nav-list a { padding: 5px 8px; font-size: .55rem; }
+    .nav-list a:hover, .nav-list a:focus-visible { color: var(--question); outline: 3px solid var(--question); outline-offset: 2px; }
 
-    /* Pixel directory layer */
+    #pixel-intro,
     #directory {
       position: fixed;
       inset: 0;
-      z-index: 9998;
+      z-index: 30;
       display: grid;
       place-items: center;
-      padding: 32px;
-      background: var(--paper);
-      display: none;
-      visibility: hidden;
-      pointer-events: none;
-      transition: none;
+      padding: 108px 24px 36px;
+      background: var(--sky);
     }
 
-    #directory::before {
-      position: absolute;
-      inset: 22px;
-      border: 3px solid var(--ink);
-      content: "";
-      pointer-events: none;
-    }
+    #pixel-intro { text-align: center; transition: opacity .25s steps(2), visibility .25s steps(2); }
+    #pixel-intro.is-hidden { visibility: hidden; opacity: 0; pointer-events: none; }
+    #directory { display: none; align-content: center; overflow-y: auto; }
+    #directory.is-visible { display: grid; }
 
-    #directory.is-visible {
-      display: grid;
-      visibility: visible;
-      pointer-events: auto;
-    }
+    .intro-content,
+    .directory-content { position: relative; z-index: 2; width: min(1050px, 100%); }
+    .intro-character { width: min(190px, 32vw); margin: 0 auto 18px; }
+    .intro-kicker, .directory-kicker { margin: 0 0 22px; color: var(--brick); font-size: clamp(.52rem, 1vw, .72rem); letter-spacing: 3px; }
+    .welcome { margin: 0; color: var(--white); font-size: clamp(3rem, 10vw, 8.6rem); line-height: .95; letter-spacing: 2px; text-shadow: 8px 8px 0 var(--sky-deep); }
+    .intro-subtitle { margin: 24px auto 16px; color: var(--ink); font-size: clamp(.5rem, 1vw, .72rem); line-height: 2; }
+    .loading-bar { width: min(450px, 90%); height: 22px; margin: 18px auto; border: 4px solid var(--ink); background: repeating-linear-gradient(90deg, var(--question) 0 24px, var(--brick) 24px 48px, var(--white) 48px 72px); }
+    .ready { margin: 18px 0 26px; color: var(--white); text-shadow: 3px 3px 0 var(--sky-deep); font-size: clamp(.7rem, 1.5vw, 1rem); }
 
-    .directory-inner {
-      position: relative;
-      z-index: 1;
-      width: min(100%, 980px);
-    }
-
-    .directory-stage {
-      position: relative;
-      padding-top: 112px;
-    }
-
-    .directory-character {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      z-index: 3;
-      width: 112px;
-      height: 112px;
-      object-fit: contain;
-      image-rendering: pixelated;
-      pointer-events: none;
-      transform: translateX(-50%);
-      transition: none;
-    }
-
-    .directory-kicker {
-      margin: 0 0 18px;
-      color: var(--red);
-      font-family: var(--pixel-font);
-      font-size: 0.82rem;
-      letter-spacing: 0.12em;
-    }
-
-    .directory-title {
-      max-width: 780px;
-      margin-bottom: 44px;
-      font-family: var(--pixel-font);
-      font-size: clamp(1.4rem, 4vw, 3.6rem);
-      line-height: 1.35;
-      letter-spacing: 0.04em;
-    }
-
-    .directory-title::after {
-      display: block;
-      width: 52px;
-      height: 8px;
-      margin-top: 18px;
-      background: var(--blue);
-      content: "";
-    }
-
-    .directory-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-top: 3px solid var(--ink);
-      border-left: 3px solid var(--ink);
-    }
-
-    .directory-item {
-      position: relative;
-      min-height: 168px;
-      padding: 24px 18px;
-      border-right: 3px solid var(--ink);
-      border-bottom: 3px solid var(--ink);
-      color: var(--ink);
-      background: var(--paper);
-      font: inherit;
-      text-align: left;
-      cursor: none;
-      transition: none;
-    }
-
-    .directory-item::before {
-      position: absolute;
-      top: -3px;
-      left: 18px;
-      width: 26px;
-      height: 20px;
-      border: 3px solid var(--ink);
-      visibility: hidden;
-      background: var(--gold);
-      content: "";
-      transform: none;
-      transition: none;
-    }
-
-    .directory-item:hover,
-    .directory-item:focus-visible {
-      color: #fff;
-      background: var(--red);
-      outline: 0;
-      transform: none;
-    }
-
-    .directory-item:hover::before,
-    .directory-item:focus-visible::before {
-      visibility: visible;
-      background: var(--blue);
-      transform: none;
-    }
-
-    .directory-item.is-launching::before {
-      visibility: visible;
-      background: var(--gold);
-    }
-
-    .directory-item.is-launching {
-      color: #fff;
-      background: var(--red);
-      animation: bounce-block 0.42s steps(4) both;
-    }
-
-    .directory-number {
-      display: block;
-      margin-bottom: 28px;
-      color: var(--blue);
-      font-family: var(--pixel-font);
-      font-size: 0.72rem;
-    }
-
-    .directory-item:hover .directory-number,
-    .directory-item:focus-visible .directory-number { color: var(--gold); }
-
-    .directory-label {
-      display: block;
-      font-size: 1.22rem;
-      font-weight: 900;
-      line-height: 1.3;
-    }
-
-    .directory-hint {
-      margin: 30px 0 0;
-      color: var(--blue);
-      font-family: var(--pixel-font);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-    }
-
-    body.directory-open { overflow: hidden; }
-
-    a, button, .project-card, .wechat-card { cursor: none; }
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: min(calc(100% - 48px), var(--max-width));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      border-bottom: 1.5px solid var(--ink);
-      background: var(--paper);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 72px;
-    }
-
-    .brand {
-      font-size: 1rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-    }
-
-    nav { display: flex; align-items: center; }
-
-    nav ul {
-      display: flex;
-      gap: 26px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    nav a {
-      display: block;
-      border-bottom: 1.5px solid transparent;
-      padding: 5px 0 4px;
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: border-color 0.18s ease, color 0.18s ease;
-    }
-
-    nav a:hover, nav a:focus { border-color: var(--red); color: var(--red); }
-
-    main section { padding: 108px 0; }
-
-    .section-code {
-      margin: 0 0 18px;
-      color: var(--red);
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      font-family: var(--pixel-font);
-      font-size: 0.72rem;
-    }
-
-    h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.13; }
-
-    h1 {
-      max-width: 790px;
-      font-size: clamp(3.4rem, 8.5vw, 7.6rem);
-      font-weight: 800;
-      line-height: 1.25;
-      letter-spacing: -1px;
-    }
-
-    #hero h1 { font-weight: 800 !important; line-height: 1.25 !important; letter-spacing: -1px !important; }
-
-    #hero {
-      isolation: isolate;
-      overflow: hidden;
-      background-image: linear-gradient(90deg, transparent 0 72%, rgb(43 84 148 / 7%) 72% 72.4%, transparent 72.4%);
-    }
-
-    #hero::before {
-      display: none;
-    }
-
-    #hero::after {
-      display: none;
-    }
-
-    #hero h1 span {
+    .pixel-button {
       display: inline-block;
-      white-space: nowrap;
-      color: var(--blue) !important;
-      text-shadow: 5px 5px 0 rgb(221 58 53 / 13%);
-    }
-
-    #hero .hero-text-container { min-width: 0; }
-    #hero .hero-text-container { position: relative; }
-
-    #hero .hero-text-container::before {
-      position: absolute;
-      top: -28px;
-      left: 0;
-      color: var(--blue);
-      content: "PLAY / 01";
-      font: 700 0.72rem var(--pixel-font);
-      letter-spacing: 0.12em;
-    }
-
-    #hero .hero-text-container::after {
-      display: none;
-    }
-
-    #hero .hero-image-container::before {
-      position: absolute;
-      top: 4px;
-      left: calc(50% - 170px);
-      width: 18px;
-      height: 18px;
-      background: var(--red);
-      content: "";
-      animation: bounce-block 1.4s steps(5) infinite alternate;
-    }
-
-    #hero .hero-image-container > div:first-child {
-      transition: none;
-      box-shadow: 8px 8px 0 var(--blue);
-    }
-
-    #hero .hero-image-container > div:first-child::after {
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, transparent 0 8px, rgb(17 17 17 / 7%) 8px 10px);
-      content: "";
-      mix-blend-mode: multiply;
-      pointer-events: none;
-      animation: scanline 2.2s steps(8) infinite;
-    }
-
-    #hero .hero-image-container:hover > div:first-child {
-      box-shadow: 12px 12px 0 var(--red);
-      transform: none;
-    }
-
-    @keyframes scanline {
-      from { background-position: 0 0; }
-      to { background-position: 0 16px; }
-    }
-
-    #hero h1 {
-      max-width: 720px;
-      font-size: clamp(3rem, 5.2vw, 5.4rem) !important;
-      overflow-wrap: normal;
-      word-break: keep-all;
-    }
-
-    .hero-text-container,
-    .hero-image-container { animation: none; }
-
-    h2 {
-      font-size: clamp(2.25rem, 4.5vw, 4.1rem);
-      font-weight: 900;
-      letter-spacing: -0.07em;
-    }
-
-    h3 { font-size: 1.15rem; font-weight: 850; letter-spacing: -0.035em; }
-
-    .bauhaus-btn:hover, .bauhaus-btn:focus {
-      color: var(--ink) !important;
-      background: var(--yellow) !important;
-      transform: none;
-      box-shadow: 5px 5px 0 var(--ink);
-    }
-
-    .bauhaus-btn {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bauhaus-btn::after {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 8px;
-      height: 100%;
-      background: var(--gold);
-      content: "";
-      transform: translateX(100%);
-      transition: none;
-    }
-
-    .bauhaus-btn:hover::after,
-    .bauhaus-btn:focus::after { transform: translateX(0); }
-
-    .about { border-bottom: 2px solid var(--ink); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: minmax(230px, 0.7fr) minmax(0, 1.3fr);
-    }
-
-    .about-title { border-right: 2px solid var(--blue); padding-right: 50px; }
-
-    .about-detail {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-
-    .detail-column { padding: 0 44px; }
-    .detail-column + .detail-column { border-left: 1.5px solid var(--blue); }
-
-    .detail-heading {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 22px;
-      font-size: 0.95rem;
-      font-weight: 800;
-    }
-
-    .detail-heading::before {
-      content: "";
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      flex: 0 0 10px;
-      background: var(--red);
-    }
-
-    .education-list { display: grid; gap: 18px; }
-
-    .education-item {
-      padding-left: 14px;
-      border-left: 5px solid var(--red);
-      font-size: 0.93rem;
-      font-weight: 650;
-    }
-
-    .core-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-
-    .core-tag {
-      border: 1.5px solid var(--ink);
-      border-radius: 0;
-      padding: 6px 9px;
-      background: #f0effb;
-      font-size: 0.78rem;
-      font-weight: 800;
-      line-height: 1.35;
-      text-transform: uppercase;
-    }
-
-    .work { border-bottom: 2px solid var(--ink); }
-
-    .work-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 32px;
-      margin-bottom: 42px;
-    }
-
-    .work-heading-note {
-      margin: 0;
-      color: var(--blue);
-      font-size: 0.85rem;
-      font-weight: 750;
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .project-card {
-      display: flex;
-      min-height: 300px;
-      flex-direction: column;
-      border: 1.5px solid var(--ink);
-      border-radius: 0;
-      padding: 26px;
-      background: transparent;
-      transition: none;
-    }
-
-    .project-card:hover {
-      background: var(--yellow);
-      transform: none;
-      box-shadow: 6px 6px 0 var(--ink);
-    }
-
-    .project-card::before,
-    .wechat-card::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 4px;
-      background: var(--red);
-      content: "";
-      transition: width 0.3s steps(6);
-    }
-
-    .project-card:hover::before,
-    .wechat-card:hover::before { width: 100%; }
-
-    .project-card,
-    .wechat-card {
-      overflow: hidden;
-      box-shadow: 4px 4px 0 rgb(17 17 17 / 15%);
-    }
-
-    .project-marker {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 38px;
-      color: var(--red);
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      font-family: var(--pixel-font);
-      font-size: 0.65rem;
-    }
-
-    .project-card p {
-      margin: 16px 0 26px;
-      font-size: 0.9rem;
-    }
-
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; }
-
-    .tag {
-      border: 1.5px solid var(--blue);
-      padding: 4px 8px;
-      color: var(--blue);
-      font-weight: 800;
-      font-family: var(--pixel-font);
-      font-size: 0.63rem;
-    }
-
-    .portfolio { border-bottom: 2px solid var(--ink); }
-
-    .portfolio-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 32px;
-      margin-bottom: 42px;
-    }
-
-    .portfolio-heading p { margin: 0; color: var(--blue); font-size: 0.85rem; font-weight: 750; }
-
-    .portfolio-heading .section-code,
-    .work-heading .section-code {
-      margin-bottom: 32px;
-    }
-
-    .portfolio-heading h2,
-    .work-heading h2 {
-      letter-spacing: -0.045em;
-    }
-
-    .portfolio-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      margin-bottom: 28px;
-      border-bottom: 2px solid var(--ink);
-    }
-
-    .portfolio-tab {
-      border: 0;
-      border-top: 1.5px solid var(--blue);
-      border-right: 1.5px solid var(--blue);
-      border-radius: 0;
-      padding: 11px 16px;
-      color: var(--ink);
-      background: transparent;
+      border: 4px solid var(--ink);
+      padding: 15px 24px;
+      color: var(--white);
+      background: var(--wood);
+      box-shadow: 4px 4px 0 var(--ink);
+      text-shadow: 2px 2px 0 var(--soil-dark);
       cursor: pointer;
-      font: inherit;
-      font-size: 0.82rem;
-      font-weight: 800;
-      transition: background 0.18s ease, color 0.18s ease;
+      transform: translateZ(0);
+      will-change: transform;
+      transition: transform .12s steps(2), box-shadow .12s steps(2), background-color .12s steps(2);
     }
 
-    .portfolio-tab:first-child { border-left: 1.5px solid var(--blue); }
-    .portfolio-tab:hover, .portfolio-tab:focus { color: var(--red); }
-    .portfolio-tab.is-active { color: #fff; background: var(--ink); }
+    .pixel-button:hover, .pixel-button:focus-visible { background: var(--wood-light); outline: 0; transform: translate(2px, 2px) translateZ(0); box-shadow: 2px 2px 0 var(--ink); }
+    .pixel-button:active { transform: translate(4px, 4px) translateZ(0); box-shadow: 0 0 0 var(--ink); }
 
-    .portfolio-panel[hidden] { display: none; }
+    .directory-title { margin: 0 0 54px; color: var(--white); font-size: clamp(1.45rem, 4vw, 3.2rem); line-height: 1.3; text-shadow: 5px 5px 0 var(--sky-deep); }
+    .directory-stage { position: relative; padding-bottom: 88px; }
+    .directory-character { position: absolute; bottom: 0; left: 50%; z-index: 3; width: 106px; transform: translateX(-50%); }
+    .directory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
-    .wechat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .wechat-card {
-      display: flex;
-      min-height: 310px;
-      flex-direction: column;
+    .level-button {
       position: relative;
-      border: 1.5px solid var(--ink);
-      background: transparent;
-      transition: none;
-    }
-
-    .wechat-card:hover { background: var(--yellow); transform: none; box-shadow: 6px 6px 0 var(--ink); }
-
-    .wechat-cover {
-      display: flex;
-      height: 180px;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 1.5px solid var(--ink);
-      overflow: hidden;
-      background: #fff;
-      color: #078f4b;
-      font-size: 0.74rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-    }
-
-    .wechat-cover img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .wechat-card-content { display: flex; min-height: 128px; flex-direction: column; padding: 22px; }
-    .wechat-card h3 { font-size: 1.05rem; }
-
-    .english-news-card {
-      width: min(100%, 560px);
-      min-height: 0;
-      background: #fff;
-    }
-
-    .english-news-card .english-cover {
-      height: 190px;
-      border-bottom: 1.5px solid var(--ink);
-      background: var(--paper);
-    }
-
-    .english-news-card .wechat-card-content {
-      min-height: 170px;
-      padding: 26px;
-    }
-
-    /* Interaction layer: lightweight magnetic cursor and card tilt */
-    @media (pointer: fine) {
-      body.has-custom-cursor,
-      body.has-custom-cursor a,
-      body.has-custom-cursor button {
-        cursor: none;
-      }
-
-      .custom-cursor {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 10001;
-        width: 10px;
-        height: 10px;
-        border: 0;
-        border-radius: 50%;
-        background: #111111;
-        mix-blend-mode: normal;
-        pointer-events: none;
-        visibility: hidden;
-        transform: translate3d(-50%, -50%, 0);
-        transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
-        will-change: transform, width, height;
-      }
-
-      .custom-cursor.is-visible { visibility: visible; }
-      .custom-cursor.is-dialog-cursor-hidden { visibility: hidden !important; }
-
-      .custom-cursor.is-hovering {
-        width: 36px;
-        height: 36px;
-        background-color: rgb(158 197 232 / 78%);
-        mix-blend-mode: normal;
-      }
-
-      .custom-cursor.is-button-hover {
-        width: 36px;
-        height: 36px;
-        background-color: rgb(158 197 232 / 78%);
-        mix-blend-mode: normal;
-      }
-
-      #pixel-intro ~ .custom-cursor { z-index: 10001; }
-
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .custom-cursor { display: none; }
-    }
-
-    .wechat-footer { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-top: auto; }
-
-    .wechat-tag {
-      border: 1.5px solid #07c160;
-      padding: 4px 8px;
-      color: #078f4b;
-      font-weight: 850;
-      font-family: var(--pixel-font);
-      font-size: 0.64rem;
-    }
-
-    .article-link {
-      display: grid;
-      width: 34px;
-      height: 34px;
-      place-items: center;
-      border: 1.5px solid var(--ink);
+      min-height: 184px;
+      border: 5px solid var(--ink);
+      padding: 42px 22px 20px;
       color: var(--ink);
-      font-size: 1.2rem;
-      font-weight: 850;
-      transition: background 0.18s ease, color 0.18s ease;
+      background: var(--question);
+      box-shadow: 7px 7px 0 var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transform: translateZ(0);
+      will-change: transform;
+      transition: transform .14s steps(2), box-shadow .14s steps(2), background-color .14s steps(2);
     }
 
-    .article-link:hover, .article-link:focus { color: #fff; background: var(--red); }
+    .level-button:nth-child(2) { background: var(--brick); color: var(--white); }
+    .level-button:nth-child(3) { background: var(--blue-panel); color: var(--white); }
+    .level-button:nth-child(4) { background: var(--wood-light); color: var(--white); }
+    .level-button::before { position: absolute; top: -28px; left: 50%; width: 48px; height: 28px; border: 5px solid var(--ink); background: inherit; content: '?'; font-size: .7rem; line-height: 28px; text-align: center; transform: translateX(-50%); }
+    .level-button:hover, .level-button:focus-visible { outline: 0; transform: translateY(-6px) translateZ(0); box-shadow: 9px 13px 0 var(--ink); }
+    .level-number { display: block; margin-bottom: 34px; color: var(--question); font-size: .7rem; }
+    .level-label { display: block; font-size: clamp(.8rem, 1.5vw, 1.1rem); line-height: 1.7; }
+    .directory-hint { margin: 30px 0 0; color: var(--white); font-size: .55rem; text-align: center; }
 
-    .portfolio-tab.is-active,
-    .portfolio-tab:hover,
-    .portfolio-tab:focus,
-    .core-tag:hover,
-    .tag:hover {
-      background-image: repeating-linear-gradient(90deg, transparent 0 5px, rgb(221 58 53 / 12%) 5px 7px);
-    }
-
-    .js-pixel-reveal {
-      clip-path: inset(0 100% 0 0);
-      animation: none;
-    }
-
-    .js-pixel-reveal.is-revealed { clip-path: inset(0 0 0 0); }
-
-    /* Portfolio refinement: spacious editorial cards with image-led hierarchy */
-    #portfolio .wechat-grid {
-      gap: 3rem;
-    }
-
-    #portfolio .wechat-card {
-      min-height: 0;
-      border: 0;
-      background: transparent;
-      padding: 0;
-      transition: none;
-    }
-
-    #portfolio .wechat-card:hover {
-      background: transparent;
-      transform: none;
-    }
-
-    #portfolio .wechat-cover,
-    #portfolio .english-news-card .bauhaus-art-container {
-      margin-bottom: 1.5rem;
-      border: 0;
-      background-color: #eaeaea;
-    }
-
-    #portfolio .wechat-cover img {
-      transition: none;
-    }
-
-    #portfolio .wechat-card:hover .wechat-cover img {
-      transform: none;
-    }
-
-    #portfolio .wechat-card-content {
-      min-height: 0;
-      padding: 0;
-    }
-
-    #portfolio .wechat-card h3 {
-      margin-bottom: 0.8rem;
-      color: #1a1a1a;
-      font-size: 1.35rem;
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    #portfolio .wechat-footer {
-      margin-top: 1rem;
-    }
-
-    #portfolio .wechat-tag {
-      border: 1px solid rgb(0 0 0 / 10%);
-      padding: 3px 8px;
-      border-radius: 2px;
-      color: #888;
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    #portfolio .article-link {
-      width: auto;
-      height: auto;
-      border: 0;
-      background: transparent;
-      color: #1a1a1a;
-      transition: none;
-    }
-
-    #portfolio .wechat-card:hover .article-link {
-      transform: none;
-    }
-
-    #english-script-dialog {
-      cursor: none;
-      z-index: 1000;
-      width: min(920px, calc(100% - 32px));
-      height: min(80vh, 760px);
-      padding: 0;
-      border: 2px solid var(--ink);
-      background: var(--paper);
-    }
-
-    #english-script-dialog::backdrop { background: rgb(17 17 17 / 60%); }
-
-    .script-dialog-header {
+    #world {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      border-bottom: 1.5px solid var(--ink);
-      padding: 16px 20px;
+      width: 500vw;
+      min-height: 100vh;
+      transform: translate3d(calc(var(--level) * -100vw), 0, 0);
+      transition: transform .72s cubic-bezier(.22, 1, .36, 1);
+      will-change: transform;
     }
 
-    .script-dialog-header h2 { font-size: 1.1rem; letter-spacing: 0; }
-
-    .script-dialog-close {
-      cursor: none;
-      border: 1.5px solid var(--ink);
-      padding: 5px 10px;
-      color: var(--ink);
-      background: transparent;
-      font: inherit;
-      font-size: 0.78rem;
-      font-weight: 800;
+    .level {
+      position: relative;
+      flex: 0 0 100vw;
+      width: 100vw;
+      min-height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 148px clamp(24px, 7vw, 110px) 112px;
+      background: var(--sky);
     }
 
-    .script-dialog-body { height: calc(100% - 66px); padding: 22px; }
-    .script-dialog-body iframe { width: 100%; height: 100%; border: 1px solid var(--blue); background: #fff; cursor: none; }
-
-    #portfolio .wechat-card[data-card-link]:focus-visible {
-      outline: 2px solid var(--red);
-      outline-offset: 6px;
-    }
-
-    .coming-soon { max-width: 480px; margin: 0; color: var(--blue); font-size: 1.05rem; font-weight: 750; }
-
-    .contact { text-align: center; }
-
-    .contact .section-code { margin-bottom: 12px; }
-    .contact h2 { margin-bottom: 20px; }
-
-    .contact-text { margin: 0 0 35px; font-size: 1.08rem; }
-
-    .contact-details {
-      display: inline-flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      border-top: 2px solid var(--blue);
-      border-bottom: 2px solid var(--blue);
-      padding: 13px 0;
-      font-size: 0.88rem;
-      font-weight: 750;
-    }
-
-    .contact-details > * { padding: 0 19px; }
-    .contact-details > * + * { border-left: 1.5px solid var(--blue); }
-    .contact-details a:hover { color: var(--red); }
-
-    footer {
-      border-top: 2px solid var(--blue);
-      padding: 22px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    /* Game-like HUD: restrained, persistent, and aligned to the existing grid. */
-    .game-hud {
-      position: fixed;
-      right: 22px;
-      bottom: 18px;
-      z-index: 19;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border: 2px solid var(--ink);
-      padding: 7px 10px;
-      color: var(--ink);
-      background: var(--paper);
-      font: 700 0.62rem var(--pixel-font);
-      letter-spacing: 0.08em;
+    .level::after,
+    #pixel-intro::after,
+    #directory::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      height: 72px;
+      border-top: 12px solid var(--grass);
+      background: repeating-linear-gradient(90deg, var(--soil) 0 36px, var(--soil-dark) 36px 40px);
+      content: '';
       pointer-events: none;
     }
 
-    .game-hud-meter {
-      display: block;
-      width: 84px;
-      height: 10px;
-      border: 2px solid var(--ink);
-      background: linear-gradient(90deg, var(--red) 0 14px, transparent 14px 18px, transparent 18px 32px, transparent 32px 36px, transparent 36px 50px, transparent 50px 54px, transparent 54px 68px, transparent 68px 72px);
-    }
+    .level-content { position: relative; z-index: 2; width: min(1180px, 100%); margin: 0 auto; }
+    .level-code { display: inline-block; margin: 0 0 18px; color: var(--question); font-size: .58rem; line-height: 1.5; text-shadow: 2px 2px 0 var(--ink); }
+    .level h2 { margin: 0 0 24px; color: var(--white); font-size: clamp(1.5rem, 4vw, 3.4rem); line-height: 1.25; text-shadow: 5px 5px 0 var(--sky-deep); }
+    .level-lead { max-width: 760px; margin: 0 0 30px; color: var(--ink); font-size: .7rem; line-height: 2.1; }
 
-    .game-hud[data-level="2"] .game-hud-meter {
-      background: linear-gradient(90deg, var(--red) 0 14px, transparent 14px 18px, var(--gold) 18px 32px, transparent 32px 36px, transparent 36px 50px, transparent 50px 54px, transparent 54px 68px, transparent 68px 72px);
-    }
+    .hero-level { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 390px); align-items: center; gap: clamp(36px, 8vw, 120px); }
+    .hero-level h1 { margin: 0 0 28px; color: var(--white); font-size: clamp(1.8rem, 5vw, 4.5rem); line-height: 1.25; text-shadow: 6px 6px 0 var(--sky-deep); }
+    .hero-level h1 span { display: block; color: var(--question); font-size: .42em; line-height: 1.8; text-shadow: 3px 3px 0 var(--ink); }
+    .hero-copy p { max-width: 660px; margin: 0 0 28px; color: var(--ink); font-size: .72rem; line-height: 2.1; }
+    .avatar-wrap { position: relative; width: min(360px, 70vw); margin: 0 auto; }
+    .avatar-wrap::after { position: absolute; top: 14px; left: 14px; z-index: -1; width: 100%; height: 100%; background: var(--question); content: ''; }
+    .avatar-wrap img { display: block; width: 100%; aspect-ratio: 1; border: 6px solid var(--ink); object-fit: cover; background: var(--white); }
 
-    .game-hud[data-level="3"] .game-hud-meter {
-      background: linear-gradient(90deg, var(--red) 0 14px, transparent 14px 18px, var(--gold) 18px 32px, transparent 32px 36px, var(--blue) 36px 50px, transparent 50px 54px, transparent 54px 68px, transparent 68px 72px);
-    }
+    .two-column { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; }
+    .panel { border: 5px solid var(--ink); padding: 24px; background: var(--white); box-shadow: 7px 7px 0 var(--ink); }
+    .panel-title { margin: 0 0 18px; color: var(--brick); font-size: .68rem; line-height: 1.7; }
+    .education-item { padding: 16px 0; border-top: 3px solid var(--ink); font-size: .65rem; line-height: 1.9; }
+    .about-paragraph { margin: 24px 0 0; color: var(--ink); font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 1rem; line-height: 2; }
+    .core-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .core-tag, .tag { display: inline-block; border: 3px solid var(--ink); padding: 9px 11px; color: var(--ink); background: var(--question); font-size: .55rem; line-height: 1.5; }
 
-    .game-hud[data-level="4"] .game-hud-meter {
-      background: linear-gradient(90deg, var(--red) 0 14px, transparent 14px 18px, var(--gold) 18px 32px, transparent 32px 36px, var(--blue) 36px 50px, transparent 50px 54px, var(--ink) 54px 68px, transparent 68px 72px);
-    }
+    .section-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .section-note { margin: 0; color: var(--ink); font-size: .58rem; line-height: 1.8; text-align: right; }
+    .card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .project-card, .wechat-card { border: 5px solid var(--ink); background: var(--white); box-shadow: 7px 7px 0 var(--ink); transform: translateZ(0); will-change: transform; transition: transform .14s steps(2), box-shadow .14s steps(2); }
+    .project-card:hover, .project-card:focus-within, .wechat-card:hover, .wechat-card:focus-within { transform: translateY(-5px) translateZ(0); box-shadow: 10px 12px 0 var(--ink); }
+    .project-card { padding: 22px; }
+    .project-number { display: flex; justify-content: space-between; margin-bottom: 32px; color: var(--brick); font-size: .55rem; }
+    .project-card h3, .wechat-card h3 { margin: 0 0 16px; color: var(--ink); font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 1.12rem; line-height: 1.55; }
+    .project-card p { margin: 0 0 22px; color: var(--ink); font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: .92rem; line-height: 1.9; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
-    @media (max-width: 800px) {
-      .container { width: min(calc(100% - 32px), var(--max-width)); }
-      main section { padding: 80px 0; }
-      #hero { flex-direction: column; align-items: flex-start !important; min-height: auto !important; padding-top: 96px !important; padding-bottom: 80px !important; }
-      .hero-image-container { align-self: center; }
-      .about-grid, .about-detail { grid-template-columns: 1fr; }
-      .about-title { border-right: 0; border-bottom: 2px solid var(--blue); margin-bottom: 40px; padding: 0 0 35px; }
-      .detail-column { padding: 0; }
-      .detail-column + .detail-column { border-left: 0; border-top: 1.5px solid var(--blue); margin-top: 38px; padding-top: 36px; }
+    .portfolio-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+    .portfolio-tab { border: 4px solid var(--ink); padding: 12px 14px; background: var(--question); cursor: pointer; transform: translateZ(0); will-change: transform; transition: transform .12s steps(2), box-shadow .12s steps(2), background-color .12s steps(2); }
+    .portfolio-tab:hover, .portfolio-tab:focus-visible, .portfolio-tab.is-active { color: var(--white); background: var(--brick); outline: 0; box-shadow: 4px 4px 0 var(--ink); transform: translateY(-2px) translateZ(0); }
+    .wechat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .wechat-card { overflow: hidden; cursor: pointer; }
+    .wechat-cover { aspect-ratio: 1.55; overflow: hidden; border-bottom: 5px solid var(--ink); background: var(--question); }
+    .wechat-cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .2s steps(2); }
+    .wechat-card:hover .wechat-cover img { transform: scale(1.04) translateZ(0); }
+    .wechat-content { min-height: 138px; padding: 18px; }
+    .wechat-card h3 { font-size: .92rem; }
+    .wechat-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 18px; }
+    .wechat-tag { display: inline-block; border: 3px solid var(--ink); padding: 7px 8px; color: var(--ink); background: var(--question); font-size: .47rem; line-height: 1.5; }
+    .article-link { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border: 3px solid var(--ink); color: var(--white); background: var(--brick); font-size: .75rem; }
+    .english-news-card { max-width: 560px; }
+    .english-cover { position: relative; display: grid; place-items: center; height: 220px; border-bottom: 5px solid var(--ink); background: var(--blue-panel); overflow: hidden; }
+    .english-cover::before { width: 92px; height: 92px; border: 5px solid var(--ink); background: var(--question); content: ''; box-shadow: 34px 25px 0 var(--brick); transform: translateZ(0); }
+    .english-cover::after { position: absolute; width: 4px; height: 150%; background: var(--white); content: ''; transform: rotate(45deg); }
+
+    .contact-card { max-width: 730px; border: 5px solid var(--ink); background: var(--white); box-shadow: 7px 7px 0 var(--ink); }
+    .contact-card a, .contact-card span { display: block; padding: 20px 24px; border-bottom: 3px solid var(--ink); color: var(--ink); font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 1rem; }
+    .contact-card > :last-child { border-bottom: 0; }
+    .contact-card a:hover, .contact-card a:focus-visible { color: var(--white); background: var(--brick); outline: 0; }
+
+    dialog { width: min(920px, calc(100% - 32px)); height: min(780px, calc(100% - 32px)); padding: 0; border: 5px solid var(--ink); background: var(--white); box-shadow: 10px 10px 0 var(--ink); }
+    dialog::backdrop { background: rgb(17 24 32 / 75%); }
+    .dialog-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; color: var(--white); background: var(--ink); }
+    .dialog-head h2 { margin: 0; font-size: .72rem; }
+    .dialog-close { border: 3px solid var(--white); padding: 7px 10px; color: var(--white); background: transparent; cursor: pointer; }
+    .dialog-body, .dialog-body iframe { width: 100%; height: calc(100% - 58px); border: 0; }
+
+    @keyframes cloud-drift { from { transform: translate3d(-22px, 0, 0); } to { transform: translate3d(28px, 8px, 0); } }
+
+    @media (max-width: 860px) {
+      .hud { min-height: 50px; }
+      .hud-group:nth-child(1) strong { max-width: 80px; overflow: hidden; text-overflow: ellipsis; }
+      .site-nav { top: 50px; }
+      .nav-list { gap: 4px; }
+      .nav-list a { padding: 4px; font-size: .45rem; }
+      .level { padding-top: 130px; }
+      .hero-level, .two-column { grid-template-columns: 1fr; }
+      .hero-level { align-content: start; }
+      .hero-image { order: -1; }
       .wechat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
-    @media (max-width: 560px) {
-      #directory { padding: 22px; }
-      #directory::before { inset: 12px; }
-      .game-hud { right: 12px; bottom: 12px; padding: 6px 8px; font-size: 0.5rem; }
-      .game-hud-meter { width: 48px; }
-      .directory-title { margin-bottom: 30px; font-size: 1.5rem; }
-      .directory-stage { padding-top: 94px; }
-      .directory-character { width: 90px; height: 90px; }
-      .directory-grid { grid-template-columns: repeat(2, 1fr); }
-      .directory-item { min-height: 140px; padding: 18px 12px; }
-      .directory-label { font-size: 1rem; }
-      .directory-number { margin-bottom: 20px; font-size: 0.68rem; }
-      .nav { align-items: flex-start; flex-direction: column; gap: 10px; padding: 15px 0; }
-      nav ul { gap: 18px; flex-wrap: wrap; }
-      nav a { padding: 3px 0; }
-      #hero { gap: 44px !important; padding-right: 8% !important; padding-left: 8% !important; }
-      #hero h1 { font-size: clamp(2.7rem, 13vw, 3.5rem) !important; }
-      .hero-image-container > div { width: min(280px, calc(100vw - 80px)) !important; height: min(280px, calc(100vw - 80px)) !important; }
-      h1 { font-size: 3.2rem; }
-      .work-heading { align-items: start; flex-direction: column; }
-      .project-grid { grid-template-columns: 1fr; }
-      .portfolio-heading { align-items: start; flex-direction: column; }
-      .portfolio-tabs { display: grid; grid-template-columns: 1fr; }
-      .portfolio-tab, .portfolio-tab:first-child { border: 1.5px solid var(--blue); border-bottom: 0; text-align: left; }
-      .portfolio-tab:last-child { border-bottom: 1.5px solid var(--blue); }
-      .wechat-grid { grid-template-columns: 1fr; }
-      .contact-details { display: flex; flex-direction: column; }
-      .contact-details > * + * { border-top: 1.5px solid var(--blue); border-left: 0; margin-top: 8px; padding-top: 8px; }
+    @media (max-width: 620px) {
+      body { overflow: auto; }
+      .hud { position: absolute; }
+      .site-nav { position: absolute; }
+      .hud-group { gap: 5px; font-size: .4rem; }
+      .nav-list { display: none; }
+      #pixel-intro, #directory { position: absolute; min-height: 100vh; }
+      .directory-grid, .card-grid, .wechat-grid { grid-template-columns: 1fr; }
+      .directory-title { margin-bottom: 38px; }
+      .level { min-height: 100vh; padding: 118px 20px 100px; }
+      .welcome { font-size: clamp(2.3rem, 15vw, 5rem); }
+      .section-header { display: block; }
+      .section-note { margin-top: 12px; text-align: left; }
+      .level-button { min-height: 126px; }
+      .level-number { margin-bottom: 16px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-      .js-pixel-reveal { clip-path: none; }
-    }
-
-    /* Opening screen: original pixel platform-game treatment */
-    #pixel-intro {
-      justify-content: flex-start;
-      background: #62b8f5;
-      color: #fff;
-      image-rendering: pixelated;
-    }
-
-    #pixel-intro::after {
-      inset: 12px;
-      border: 4px solid #17324d;
-    }
-
-    #pixel-intro .intro-materials::before {
-      top: 14%;
-      right: 9%;
-      width: 170px;
-      height: 56px;
-      border: 0;
-      border-radius: 0;
-      background: rgb(255 255 255 / 88%);
-      box-shadow: 28px -18px 0 rgb(255 255 255 / 88%), 56px 0 0 rgb(255 255 255 / 88%), 84px 14px 0 rgb(255 255 255 / 88%), 112px 0 0 rgb(255 255 255 / 88%);
-      animation: cloud-drift 8s steps(10) infinite alternate;
-    }
-
-    #pixel-intro .intro-materials::after {
-      right: auto;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 92px;
-      background:
-        repeating-linear-gradient(90deg, transparent 0 24px, rgb(75 45 31 / 22%) 24px 29px, transparent 29px 52px),
-        linear-gradient(#5ca94c 0 18px, #93603f 18px 100%);
-      box-shadow: inset 0 12px 0 #34783d;
-      transform: none;
-      animation: ground-scroll 2.4s steps(8) infinite;
-    }
-
-    #pixel-intro .material-panel {
-      left: 8%;
-      bottom: 20%;
-      width: 132px;
-      height: 132px;
-      border: 0;
-      background: transparent;
-      clip-path: none;
-      box-shadow: none;
-      object-fit: contain;
-      image-rendering: pixelated;
-    }
-
-    #pixel-intro .material-pixels {
-      top: 29%;
-      left: 24%;
-      width: 18px;
-      height: 18px;
-      background: #f6c84f;
-      box-shadow: 30px 0 0 #f6c84f, 60px 0 0 #f6c84f;
-    }
-
-    #pixel-intro .welcome-text {
-      margin-top: 17vh;
-      color: #fff;
-      font-size: clamp(2.6rem, 10vw, 8.5rem);
-      letter-spacing: 0.08em;
-      text-shadow: 8px 8px 0 #17324d;
-    }
-
-    #pixel-intro .intro-caption {
-      color: #17324d;
-      font-weight: 700;
-      text-shadow: 2px 2px 0 rgb(255 255 255 / 45%);
-    }
-
-    #pixel-intro .intro-status { color: #17324d; }
-
-    #pixel-intro .intro-status::before {
-      border-color: #17324d;
-      background: repeating-linear-gradient(90deg, #f6c84f 0 18px, #db4a3b 18px 36px, #fff 36px 54px);
-    }
-
-    #pixel-intro .intro-ready {
-      color: #fff;
-      text-shadow: 3px 3px 0 #17324d;
-    }
-
-    #pixel-intro .intro-enter {
-      border-color: #17324d;
-      color: #17324d;
-      background: #f6c84f;
-      box-shadow: 6px 6px 0 #17324d;
-    }
-
-    #pixel-intro .intro-enter:hover,
-    #pixel-intro .intro-enter:focus-visible { color: #fff; background: #db4a3b; }
-
-    @keyframes cloud-drift {
-      from { transform: translateX(0); }
-      to { transform: translateX(-70px); }
-    }
-
-    @keyframes ground-scroll {
-      from { background-position: 0 0; }
-      to { background-position: -112px 0; }
-    }
-
-    /* Motion system: pixel-native, non-PPT interactions */
-    #pixel-intro,
-    #directory,
-    .project-card,
-    .wechat-card,
-    .portfolio-tab,
-    .bauhaus-btn,
-    .contact-details > * { transition: none !important; }
-
-    #pixel-intro,
-    #directory,
-    .project-card,
-    .wechat-card,
-    .portfolio-tab,
-    .bauhaus-btn,
-    .contact-details > * {
-      animation-timing-function: steps(6, jump-none);
-    }
-
-    #pixel-intro::before {
-      display: block;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, #17324d 0 1px, transparent 1px 6px);
-      content: "";
-      mix-blend-mode: multiply;
-      pointer-events: none;
-      animation: crt-scan 1.8s steps(12) infinite;
-    }
-
-    #pixel-intro.intro-hidden {
-      display: none !important;
-    }
-
-    #pixel-intro:not(.is-ready) .intro-enter {
-      visibility: hidden;
-      clip-path: inset(0 100% 0 0);
-      transform: none;
-    }
-
-    #pixel-intro.is-ready .intro-enter {
-      visibility: visible;
-      clip-path: inset(0 0 0 0);
-      transform: none;
-      animation: pixel-build 0.42s steps(6) both;
-    }
-
-    #directory { display: none; }
-    #directory.is-visible { display: grid; animation: mosaic-reveal 0.45s steps(7) both; }
-    #directory.is-destroying { animation: pixel-destroy 0.32s steps(6) both; }
-
-    .directory-item,
-    .directory-item:hover,
-    .directory-item:focus-visible,
-    .directory-item.is-launching { transform: none !important; }
-
-    .directory-item:hover,
-    .directory-item:focus-visible { box-shadow: 6px 6px 0 var(--ink); animation: block-slide 0.28s steps(4) both; }
-
-    .directory-item.is-launching { animation: bounce-block 0.42s steps(5) both !important; }
-
-    .directory-character,
-    .directory-character.is-hitting { transform: translateX(-50%) !important; }
-
-    .directory-character { animation: none !important; transition: none !important; }
-
-    .directory-character.is-hitting { animation: bounce-block 0.42s steps(5) both !important; }
-
-    .directory-item.is-launching::before { animation: bounce-block 0.42s steps(5) both !important; }
-
-    .js-pixel-reveal {
-      transform: none !important;
-      clip-path: inset(0 0 0 0);
-      animation: none;
-    }
-
-    .js-pixel-reveal.is-revealed { animation: pixel-build 0.52s steps(8) both; }
-
-    .project-card:hover,
-    .wechat-card:hover,
-    #portfolio .wechat-card:hover { transform: none !important; animation: block-slide 0.28s steps(4) both; }
-
-    .project-card,
-    .wechat-card {
-      background-image: linear-gradient(90deg, var(--yellow) 0 50%, transparent 50% 100%);
-      background-position: 100% 0;
-      background-size: 200% 100%;
-    }
-
-    #portfolio .wechat-card { background-color: transparent; }
-
-    .project-card:hover .project-marker,
-    .wechat-card:hover .wechat-footer { animation: glitch-split 0.42s steps(3) both; }
-
-    .project-card:hover img,
-    .wechat-card:hover img,
-    #portfolio .wechat-card:hover .wechat-cover img,
-    .article-link:hover,
-    .article-link:focus,
-    #portfolio .wechat-card:hover .article-link { transform: none !important; }
-
-    #hero { background-position: 0 0; animation: camera-pan 5s steps(10) infinite alternate; }
-    #hero-title { animation: glitch-split 3s steps(6) infinite; }
-    .hero-text-container { animation: pixel-build 0.55s steps(8) both !important; }
-    .hero-image-container { animation: mosaic-reveal 0.7s steps(8) both !important; }
-    #hero .hero-image-container > div:first-child,
-    #hero .hero-image-container:hover > div:first-child { transform: none !important; animation: mosaic-reveal 0.7s steps(8) both; }
-
-    .bauhaus-btn::after {
-      left: 0 !important;
-      right: auto !important;
-      width: 0 !important;
-      transform: none !important;
-      animation: none;
-    }
-
-    .bauhaus-btn:hover::after,
-    .bauhaus-btn:focus::after { width: 100% !important; animation: block-slide 0.3s steps(6) both; }
-
-    .bauhaus-btn,
-    .bauhaus-btn:hover,
-    .bauhaus-btn:focus { transform: none !important; }
-
-    #pixel-intro .material-panel { animation: bounce-block 1.4s steps(5) infinite alternate; }
-    #pixel-intro .material-pixels { animation: block-slide 1.1s steps(5) infinite alternate; }
-    #pixel-intro .welcome-text { animation: pixel-build 0.58s steps(8) both, glitch-split 3s steps(6) infinite; }
-    #pixel-intro .intro-ready { animation: crt-scan 1.1s steps(6) infinite; }
-
-    .game-hud { animation: crt-scan 3s steps(8) infinite; }
-
-    .screen-flash {
-      position: fixed;
-      inset: 0;
-      z-index: 10002;
-      visibility: hidden;
-      background: #fff;
-      pointer-events: none;
-    }
-
-    .screen-flash.is-active { visibility: visible; animation: screen-flash 0.18s steps(2) both; }
-
-    @keyframes pixel-build {
-      0% { clip-path: inset(0 100% 75% 0); }
-      35% { clip-path: inset(0 48% 38% 0); }
-      70% { clip-path: inset(0 14% 8% 0); }
-      100% { clip-path: inset(0 0 0 0); }
-    }
-
-    @keyframes pixel-destroy {
-      0% { clip-path: inset(0 0 0 0); }
-      35% { clip-path: inset(0 0 0 34%); }
-      70% { clip-path: inset(0 42% 0 68%); }
-      100% { clip-path: inset(0 100% 100% 100%); }
-    }
-
-    @keyframes mosaic-reveal {
-      0% { clip-path: polygon(0 0, 18% 0, 18% 18%, 38% 18%, 38% 0, 58% 0, 58% 18%, 78% 18%, 78% 0, 100% 0, 100% 100%, 0 100%); }
-      45% { clip-path: polygon(0 0, 38% 0, 38% 28%, 72% 28%, 72% 0, 100% 0, 100% 100%, 0 100%); }
-      100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-    }
-
-    @keyframes block-slide {
-      0% { background-position: -100% 0; }
-      100% { background-position: 0 0; }
-    }
-
-    @keyframes bounce-block {
-      0% { margin-top: 0; }
-      35% { margin-top: 16px; }
-      65% { margin-top: -18px; }
-      100% { margin-top: 0; }
-    }
-
-    @keyframes crt-scan {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 12px; }
-    }
-
-    @keyframes camera-pan {
-      from { background-position: 0 0; }
-      to { background-position: 28px 0; }
-    }
-
-    @keyframes glitch-split {
-      0%, 100% { text-shadow: 0 0 transparent; }
-      35% { text-shadow: -3px 0 #db4a3b, 3px 0 #3a83bd; }
-      70% { text-shadow: 3px 0 #db4a3b, -3px 0 #3a83bd; }
-    }
-
-    @keyframes screen-flash {
-      0%, 65% { visibility: visible; }
-      100% { visibility: hidden; }
-    }
-
-    /* Continuous pixel-world upgrade: every section is a playable level. */
-    :root {
-      --sky: #62b8f5;
-      --grass: #5ca94c;
-      --soil: #93603f;
-      --brick: #c9673e;
-      --coin: #f6c84f;
-      --pipe: #3c8d48;
-      --level-shadow: 7px 7px 0 #17324d;
-    }
-
-    body {
-      background-color: var(--paper);
-      background-image:
-        linear-gradient(rgba(17, 17, 17, .055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(17, 17, 17, .055) 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-
-    body::after {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background: linear-gradient(180deg, rgba(98,184,245,.08), transparent 34%, rgba(92,169,76,.05));
-      content: "";
-      pointer-events: none;
-    }
-
-    .world-route {
-      position: fixed;
-      top: 50%;
-      right: 18px;
-      z-index: 18;
-      display: grid;
-      gap: 12px;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    .world-route::before {
-      position: absolute;
-      top: 8px;
-      bottom: 8px;
-      left: 50%;
-      width: 3px;
-      background: repeating-linear-gradient(180deg, var(--ink) 0 8px, transparent 8px 14px);
-      content: "";
-      transform: translateX(-50%);
-    }
-
-    .world-route-marker {
-      position: relative;
-      z-index: 1;
-      display: block;
-      width: 14px;
-      height: 14px;
-      border: 2px solid var(--ink);
-      background: var(--paper);
-      transition: none;
-    }
-
-    .world-route-marker.is-active {
-      background: var(--red);
-      box-shadow: 3px 3px 0 var(--ink);
-      animation: coin-pulse .55s steps(3) both;
-    }
-
-    .world-route-marker.is-cleared { background: var(--coin); }
-
-    main section {
-      isolation: isolate;
-      overflow: hidden;
-      scroll-margin-top: 88px;
-    }
-
-    main section::after {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 12px;
-      border-top: 3px solid var(--ink);
-      background:
-        repeating-linear-gradient(90deg, var(--grass) 0 34px, var(--soil) 34px 68px),
-        repeating-linear-gradient(90deg, transparent 0 17px, rgba(17,17,17,.18) 17px 20px, transparent 20px 34px);
-      background-blend-mode: multiply;
-      content: "";
-      pointer-events: none;
-    }
-
-    #hero {
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.45), transparent 42%),
-        repeating-linear-gradient(0deg, transparent 0 42px, rgba(43,84,148,.08) 42px 44px);
-    }
-
-    #hero::before { z-index: 0; }
-    #hero > * { position: relative; z-index: 1; }
-
-    #hero .hero-text-container::before {
-      display: block;
-      width: 44px;
-      height: 18px;
-      margin-bottom: 16px;
-      border: 3px solid var(--ink);
-      background: var(--coin);
-      box-shadow: 5px 5px 0 var(--ink);
-      content: "?";
-      color: var(--ink);
-      font: 800 .7rem/13px var(--pixel-font);
-      text-align: center;
-    }
-
-    #hero .hero-image-container::before {
-      position: absolute;
-      top: -18px;
-      right: 15%;
-      width: 22px;
-      height: 22px;
-      border: 3px solid var(--ink);
-      background: var(--coin);
-      content: "";
-      box-shadow: 4px 4px 0 var(--ink);
-      animation: coin-float 1.5s steps(3) infinite alternate;
-    }
-
-    .directory-inner::before {
-      position: absolute;
-      top: -34px;
-      left: 0;
-      width: 100%;
-      height: 16px;
-      background: repeating-linear-gradient(90deg, var(--brick) 0 52px, var(--ink) 52px 55px);
-      box-shadow: 0 7px 0 var(--ink);
-      content: "";
-    }
-
-    .directory-grid { gap: 12px; border: 0; }
-
-    .directory-item {
-      min-height: 180px;
-      border: 3px solid var(--ink);
-      background: var(--coin);
-      box-shadow: var(--level-shadow);
-      overflow: visible;
-    }
-
-    .directory-item:nth-child(2) { background: var(--red); color: #fff; }
-    .directory-item:nth-child(3) { background: var(--blue); color: #fff; }
-    .directory-item:nth-child(4) { background: var(--brick); color: #fff; }
-
-    .directory-item::before {
-      top: -24px;
-      left: 50%;
-      width: 42px;
-      height: 22px;
-      border: 3px solid var(--ink);
-      visibility: visible;
-      background: var(--coin);
-      content: "?";
-      color: var(--ink);
-      font: 800 .7rem/17px var(--pixel-font);
-      text-align: center;
-      transform: translateX(-50%);
-    }
-
-    .directory-item:nth-child(2)::before { background: var(--red); }
-    .directory-item:nth-child(3)::before { background: var(--blue); }
-    .directory-item:nth-child(4)::before { background: var(--brick); }
-
-    .directory-item:hover,
-    .directory-item:focus-visible {
-      color: var(--ink);
-      background: var(--coin);
-      box-shadow: 7px 12px 0 var(--ink);
-      animation: question-hit .4s steps(4) both;
-    }
-
-    .directory-item:nth-child(2):hover,
-    .directory-item:nth-child(2):focus-visible { background: var(--red); color: #fff; }
-    .directory-item:nth-child(3):hover,
-    .directory-item:nth-child(3):focus-visible { background: var(--blue); color: #fff; }
-    .directory-item:nth-child(4):hover,
-    .directory-item:nth-child(4):focus-visible { background: var(--brick); color: #fff; }
-
-    .directory-number { color: var(--ink); }
-    .directory-item:nth-child(n+2) .directory-number { color: var(--coin); }
-
-    .section-code {
-      display: inline-block;
-      padding: 5px 8px;
-      border: 2px solid var(--ink);
-      background: var(--coin);
-      box-shadow: 4px 4px 0 var(--ink);
-    }
-
-    .work-heading-note,
-    .portfolio-heading > p { position: relative; padding: 8px 12px; border: 2px solid var(--ink); background: #fff; box-shadow: 4px 4px 0 var(--blue); }
-
-    .project-card,
-    .wechat-card {
-      position: relative;
-      border: 3px solid var(--ink) !important;
-      background: var(--paper) !important;
-      box-shadow: 7px 7px 0 var(--blue);
-      overflow: visible;
-    }
-
-    .project-card::after,
-    .wechat-card::after {
-      position: absolute;
-      top: -10px;
-      right: 16px;
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--ink);
-      background: var(--coin);
-      content: "";
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-
-    .project-card:hover,
-    .wechat-card:hover { box-shadow: 10px 12px 0 var(--ink) !important; }
-
-    .project-marker { background: var(--red); color: #fff; border-color: var(--ink); }
-    .tags .tag,
-    .wechat-tag { border: 2px solid var(--ink); background: var(--coin); color: var(--ink); }
-
-    .portfolio-tabs { position: relative; padding-top: 22px; }
-    .portfolio-tabs::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 12px;
-      background: repeating-linear-gradient(90deg, var(--brick) 0 52px, var(--ink) 52px 55px);
-      content: "";
-    }
-
-    .portfolio-tab { border: 2px solid var(--ink) !important; background: var(--coin); box-shadow: 4px 4px 0 var(--ink); }
-    .portfolio-tab.is-active { color: #fff; background: var(--red); }
-    .wechat-cover { border-bottom: 3px solid var(--ink); }
-
-    .contact-details { border: 3px solid var(--ink); box-shadow: 7px 7px 0 var(--blue); background: var(--coin); }
-    .contact-details > * { padding: 14px 20px; }
-
-    footer { background: var(--soil); color: #fff; border-color: var(--ink); }
-
-    @keyframes question-hit {
-      0%, 100% { margin-top: 0; }
-      38% { margin-top: 10px; }
-      68% { margin-top: -8px; }
-    }
-
-    @keyframes coin-pulse {
-      0% { transform: scale(.6); }
-      60% { transform: scale(1.25); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes coin-float {
-      from { transform: translateY(6px); }
-      to { transform: translateY(-6px); }
-    }
-
-    @media (max-width: 800px) {
-      .world-route { right: 8px; gap: 8px; }
-      .world-route-marker { width: 11px; height: 11px; }
-      .directory-grid { gap: 8px; }
-      .directory-item { box-shadow: 4px 4px 0 var(--ink); }
-      main section::after { height: 9px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .world-route-marker.is-active,
-      #hero .hero-image-container::before { animation: none; }
-    }
-
-    /* Directory composition: the character stands below the floating blocks. */
-    #directory .directory-stage {
-      padding-top: 0;
-      padding-bottom: 136px;
-    }
-
-    #directory .directory-character {
-      top: calc(100% - 118px);
-    }
-
-    #directory .directory-hint {
-      margin-top: 0;
-    }
-
-    @media (max-width: 560px) {
-      #directory .directory-stage {
-        padding-top: 0;
-        padding-bottom: 108px;
-      }
-
-      #directory .directory-character {
-        top: calc(100% - 94px);
-      }
-    }
-
-    /* Mario-style directory: leave a real landing gap between the two rows. */
-    html,
-    body {
-      background-color: var(--sky);
-      background-image: none !important;
-    }
-
-    body::before,
-    body::after {
-      display: none !important;
-    }
-
-    .site-header {
-      background: var(--sky);
-      border-color: #17324d;
-    }
-
-    #directory {
-      overflow-y: auto;
-      overflow-x: hidden;
-      background: var(--sky);
-    }
-
-    #directory::before { border-color: #17324d; }
-
-    main#top > section {
-      background-color: var(--sky);
-    }
-
-    #hero {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      min-height: calc(100vh - 72px) !important;
-      padding: clamp(64px, 9vw, 120px) clamp(28px, 8vw, 120px) 96px !important;
-      gap: clamp(30px, 6vw, 72px) !important;
-      background-color: var(--sky) !important;
-      background-image: none !important;
-    }
-
-    #hero .hero-text-container {
-      flex: 1 1 0 !important;
-      max-width: 56% !important;
-      min-width: 0 !important;
-    }
-
-    #hero .hero-image-container {
-      flex: 0 0 clamp(260px, 31vw, 360px) !important;
-      width: clamp(260px, 31vw, 360px) !important;
-      max-width: 40% !important;
-      align-self: center !important;
-    }
-
-    #hero .hero-image-container > div:first-child {
-      width: 100% !important;
-      height: auto !important;
-      aspect-ratio: 1;
-    }
-
-    #hero .hero-image-container > div:first-child img {
-      width: 100% !important;
-      height: 100% !important;
-    }
-
-    #hero .hero-image-container > div[aria-hidden="true"] {
-      width: 100% !important;
-      height: 100% !important;
-      border-color: #17324d !important;
-      background-color: var(--coin) !important;
-      box-shadow: 8px 8px 0 #17324d;
-    }
-
-    #hero .hero-text-container::before,
-    #hero .hero-text-container::after,
-    #hero .hero-image-container::before {
-      display: none !important;
-    }
-
-    #hero h1,
-    #hero h1 span { color: #17324d !important; text-shadow: 4px 4px 0 rgb(255 255 255 / 38%); }
-
-    #hero .category-tag { color: #17324d !important; }
-
-    #directory .directory-inner::before {
-      display: none;
-    }
-
-    #directory .directory-inner {
-      width: min(940px, calc(100vw - 64px));
-      margin-inline: auto;
-    }
-
-    #directory .directory-title {
-      max-width: 100%;
-      word-break: keep-all;
-      overflow-wrap: normal;
-    }
-
-    #directory .directory-stage {
-      padding: 0;
-    }
-
-    #directory .directory-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      row-gap: 132px;
-    }
-
-    #directory .directory-item {
-      min-height: 148px;
-    }
-
-    #directory .directory-hint {
-      position: relative;
-      z-index: 2;
-      margin-top: 52px;
-    }
-
-    #directory .directory-character {
-      top: 50%;
-      z-index: 4;
-      transform: translate(-50%, -50%) !important;
-    }
-
-    /* The page is one horizontal world: Hero → Level 01 → Level 04. */
-    html,
-    body {
-      overflow-x: hidden;
-    }
-
-    main#top {
-      --world-index: 0;
-      display: flex;
-      flex-wrap: nowrap;
-      width: 500vw;
-      max-width: none;
-      margin: 0;
-      transform: translateX(calc(var(--world-index) * -100vw));
-      transition: transform .82s cubic-bezier(.22, 1, .36, 1);
-      will-change: transform;
-    }
-
-    main#top > section {
-      flex: 0 0 100vw;
-      width: 100vw;
-      min-height: calc(100vh - 72px);
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    main#top > section::-webkit-scrollbar { width: 10px; }
-    main#top > section::-webkit-scrollbar-thumb { background: var(--red); border: 2px solid var(--ink); }
-
-    .custom-cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10001;
-      display: block !important;
-      width: 32px !important;
-      height: 32px !important;
-      border: 2px solid #111 !important;
-      border-radius: 0 !important;
-      background: #f4f4f0 !important;
-      mix-blend-mode: normal !important;
-      transition: width .12s steps(2), height .12s steps(2), transform .12s steps(2), opacity .15s ease !important;
-      pointer-events: none;
-      visibility: hidden;
-      will-change: transform;
-    }
-
-    body.has-custom-cursor .custom-cursor.is-visible {
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-
-    .custom-cursor::before {
-      position: absolute;
-      inset: 2px;
-      border: 1px solid rgb(17 17 17 / 28%);
-      background-color: #f4f4f0;
-      background-image:
-        linear-gradient(90deg, transparent 0 47%, #efad4a 47% 53%, transparent 53% 100%),
-        linear-gradient(0deg, transparent 0 47%, #efad4a 47% 53%, transparent 53% 100%),
-        repeating-linear-gradient(90deg, rgb(17 17 17 / 10%) 0 1px, transparent 1px 7px),
-        repeating-linear-gradient(0deg, rgb(17 17 17 / 10%) 0 1px, transparent 1px 7px);
-      content: "";
-      image-rendering: pixelated;
-    }
-
-    .custom-cursor::after {
-      position: absolute;
-      top: 9px;
-      left: 9px;
-      width: 6px;
-      height: 6px;
-      background: #111;
-      box-shadow: 7px 0 0 #111, 0 7px 0 #111, 7px 7px 0 #111, 14px 7px 0 #111, 7px 14px 0 #111;
-      content: "";
-      image-rendering: pixelated;
-    }
-
-    .custom-cursor.is-hovering,
-    .custom-cursor.is-button-hover { width: 42px !important; height: 42px !important; }
-
-    .custom-cursor.is-hovering::before,
-    .custom-cursor.is-button-hover::before {
-      background-color: #fff;
-      background-image:
-        linear-gradient(90deg, transparent 0 47%, #efad4a 47% 53%, transparent 53% 100%),
-        linear-gradient(0deg, transparent 0 47%, #efad4a 47% 53%, transparent 53% 100%),
-        repeating-linear-gradient(90deg, rgb(17 17 17 / 16%) 0 1px, transparent 1px 8px),
-        repeating-linear-gradient(0deg, rgb(17 17 17 / 16%) 0 1px, transparent 1px 8px);
-    }
-
-    @media (max-width: 560px) {
-      #directory .directory-grid { row-gap: 96px; }
-      main#top > section { min-height: calc(100vh - 132px); }
-      #hero {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: center !important;
-        min-height: calc(100vh - 132px) !important;
-      }
-      #hero .hero-text-container,
-      #hero .hero-image-container {
-        max-width: 100% !important;
-        width: 100% !important;
-      }
-      #hero .hero-image-container { flex-basis: auto !important; align-self: center !important; }
-      #hero .hero-image-container > div:first-child,
-      #hero .hero-image-container > div[aria-hidden="true"] { width: min(280px, 76vw) !important; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      main#top { transition: none; }
-    }
-
-    /* Reference adaptation from nintendowebtemplate: Press Start 2P HUD + NES-style hard edges. */
-    .mario-status-bar {
-      position: fixed;
-      top: 14px;
-      left: 50%;
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      min-width: min(430px, calc(100vw - 40px));
-      justify-content: space-between;
-      padding: 8px 14px 9px;
-      border: 3px solid #111;
-      color: #fff;
-      background: #17324d;
-      box-shadow: 5px 5px 0 #111;
-      font-family: var(--pixel-font);
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-
-    .mario-status-bar > div {
-      display: grid;
-      gap: 5px;
-      min-width: 74px;
-    }
-
-    .mario-status-bar > div + div {
-      border-left: 2px solid rgb(255 255 255 / 30%);
-      padding-left: 18px;
-    }
-
-    .mario-status-player { min-width: 130px !important; }
-
-    .mario-status-label {
-      color: var(--coin);
-      font-size: .5rem;
-      letter-spacing: .08em;
-    }
-
-    .mario-status-bar strong {
-      color: #fff;
-      font-size: .67rem;
-      letter-spacing: .04em;
-      white-space: nowrap;
-    }
-
-    .mario-wood-sign {
-      position: relative;
-      isolation: isolate;
-      display: inline-block;
-      border: 4px solid #17324d !important;
-      color: #fff !important;
-      background: #9b5b36 !important;
-      box-shadow: 6px 6px 0 #17324d, inset 0 0 0 3px #c27b4d, inset 0 -7px 0 rgb(73 39 24 / 32%);
-      font-family: var(--pixel-font) !important;
-      font-size: .72rem !important;
-      letter-spacing: .03em;
-      text-shadow: 2px 2px 0 #5a3220;
-      transform: translate(0, 0);
-      transition: transform .16s steps(2), background-color .16s steps(2), box-shadow .16s steps(2) !important;
-    }
-
-    .mario-wood-sign::before {
-      position: absolute;
-      inset: 9px 14px;
-      z-index: -1;
-      border-top: 2px solid rgb(82 42 25 / 55%);
-      border-bottom: 2px solid rgb(215 139 83 / 45%);
-      content: "";
-      pointer-events: none;
-    }
-
-    .mario-wood-sign::after {
-      position: absolute;
-      right: -8px;
-      bottom: -8px;
-      width: 10px;
-      height: 10px;
-      border-right: 3px solid #17324d;
-      border-bottom: 3px solid #17324d;
-      background: #9b5b36;
-      content: "";
-      transform: none;
-      pointer-events: none;
-    }
-
-    .mario-wood-sign:hover,
-    .mario-wood-sign:focus-visible {
-      color: #fff !important;
-      background: #b86e41 !important;
-      box-shadow: 4px 9px 0 #17324d, inset 0 0 0 3px #d8945e, inset 0 -7px 0 rgb(73 39 24 / 32%);
-      transform: translateY(-3px) !important;
-      outline: 0;
-    }
-
-    .intro-enter.mario-wood-sign { padding: 14px 22px; }
-    .bauhaus-btn.mario-wood-sign { padding: 15px 24px !important; }
-
-    @media (max-width: 560px) {
-      .mario-status-bar {
-        top: 8px;
-        gap: 10px;
-        min-width: 0;
-        width: calc(100vw - 28px);
-        padding: 7px 8px;
-      }
-
-      .mario-status-bar > div + div { padding-left: 8px; }
-      .mario-status-player { min-width: 0 !important; }
-      .mario-status-label { font-size: .42rem; }
-      .mario-status-bar strong { font-size: .52rem; }
-      .mario-wood-sign { font-size: .58rem !important; }
-    }
-
-    /* =====================================================================
-       FULL SUPER MARIO 8-BIT THEME
-       ===================================================================== */
-    :root {
-      --mario-sky: #5c94fc;
-      --mario-blue: #17324d;
-      --mario-cloud: #fff;
-      --mario-grass: #00a800;
-      --mario-grass-dark: #006c00;
-      --mario-soil: #b86b32;
-      --mario-soil-dark: #713d20;
-      --mario-brick: #c84c24;
-      --mario-question: #f8c843;
-      --mario-white: #fff;
-    }
-
-    *,
-    *::before,
-    *::after { border-radius: 0 !important; }
-
-    html,
-    body {
-      color: var(--mario-blue) !important;
-      background: var(--mario-sky) !important;
-      background-image: none !important;
-      font-family: var(--pixel-font), 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
-    }
-
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-      image-rendering: pixelated;
-    }
-
-    body::before {
-      position: fixed;
-      top: 72px;
-      right: 7vw;
-      z-index: -1;
-      display: block !important;
-      width: 122px;
-      height: 28px;
-      background: var(--mario-cloud);
-      box-shadow:
-        -28px 12px 0 var(--mario-cloud),
-        28px 12px 0 var(--mario-cloud),
-        56px 20px 0 var(--mario-cloud),
-        -56px 20px 0 var(--mario-cloud),
-        0 24px 0 var(--mario-cloud);
-      content: "";
-      pointer-events: none;
-    }
-
-    body::after {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 40;
-      display: block !important;
-      height: 64px;
-      border-top: 8px solid var(--mario-grass-dark);
-      background:
-        repeating-linear-gradient(90deg, var(--mario-grass) 0 30px, var(--mario-grass-dark) 30px 36px),
-        repeating-linear-gradient(90deg, transparent 0 18px, var(--mario-soil-dark) 18px 22px, transparent 22px 36px);
-      background-blend-mode: multiply;
-      box-shadow: inset 0 18px 0 #62d42e, inset 0 -26px 0 var(--mario-soil), inset 0 -30px 0 var(--mario-soil-dark);
-      content: "";
-      pointer-events: none;
-    }
-
-    .site-header {
-      background: var(--mario-sky) !important;
-      border-bottom: 4px solid var(--mario-blue) !important;
-    }
-
-    .site-header::after { display: none; }
-
-    .brand,
-    nav a,
-    .section-code,
-    .category-tag,
-    .directory-kicker,
-    .directory-hint,
-    .project-marker,
-    .game-hud,
-    .mario-status-bar,
-    .mario-wood-sign,
-    .portfolio-tab,
-    .tag,
-    .wechat-tag,
-    .article-link {
-      font-family: var(--pixel-font), monospace !important;
-    }
-
-    .mario-status-bar {
-      top: 10px;
-      border: 4px solid #000 !important;
-      background: #000 !important;
-      box-shadow: 6px 6px 0 var(--mario-blue) !important;
-    }
-
-    .mario-status-label::after { content: ":"; }
-
-    .game-hud {
-      right: 18px;
-      bottom: 78px;
-      border: 4px solid #000 !important;
-      color: #fff !important;
-      background: #000 !important;
-      box-shadow: 5px 5px 0 var(--mario-blue);
-    }
-
-    .game-hud-meter {
-      border-color: #fff !important;
-      background: repeating-linear-gradient(90deg, var(--mario-brick) 0 12px, #000 12px 16px) !important;
-    }
-
-    #pixel-intro,
-    #directory,
-    main#top > section,
-    footer {
-      background-color: var(--mario-sky) !important;
-      color: var(--mario-blue) !important;
-    }
-
-    #pixel-intro {
-      background-image: none !important;
-    }
-
-    #pixel-intro::after,
-    #directory::before {
-      border-color: var(--mario-blue) !important;
-    }
-
-    #pixel-intro .intro-materials::before {
-      top: 13%;
-      right: 12%;
-      width: 96px;
-      height: 24px;
-      border: 0;
-      border-radius: 0 !important;
-      background: var(--mario-cloud);
-      box-shadow: 24px 12px 0 var(--mario-cloud), -24px 12px 0 var(--mario-cloud), 48px 22px 0 var(--mario-cloud);
-    }
-
-    .welcome-text {
-      color: #fff !important;
-      font-family: 'Press Start 2P', var(--pixel-font), monospace !important;
-      text-shadow: 8px 8px 0 var(--mario-blue) !important;
-    }
-
-    .intro-caption,
-    .intro-status,
-    .intro-ready { color: var(--mario-blue) !important; }
-
-    .intro-ready { text-shadow: 3px 3px 0 #fff !important; }
-
-    .intro-status::before {
-      border-color: var(--mario-blue) !important;
-      background: repeating-linear-gradient(90deg, var(--mario-question) 0 18px, var(--mario-brick) 18px 36px, #fff 36px 54px) !important;
-    }
-
-    .mario-wood-sign,
-    .intro-enter.mario-wood-sign,
-    .bauhaus-btn.mario-wood-sign {
-      border: 4px solid var(--mario-soil-dark) !important;
-      color: #fff !important;
-      background: var(--mario-soil) !important;
-      box-shadow: 7px 7px 0 var(--mario-soil-dark), inset 0 0 0 3px #db8a45, inset 0 -8px 0 #8b4925 !important;
-      text-shadow: 2px 2px 0 var(--mario-soil-dark) !important;
-    }
-
-    .mario-wood-sign::before {
-      border-color: rgb(75 38 19 / 70%) !important;
-    }
-
-    .mario-wood-sign::after {
-      border-color: var(--mario-soil-dark) !important;
-      background: var(--mario-soil) !important;
-    }
-
-    .mario-wood-sign:hover,
-    .mario-wood-sign:focus-visible {
-      background: #d27a38 !important;
-      box-shadow: 4px 10px 0 var(--mario-soil-dark), inset 0 0 0 3px #efaa5f, inset 0 -8px 0 #8b4925 !important;
-    }
-
-    #hero {
-      background-color: var(--mario-sky) !important;
-      background-image: none !important;
-    }
-
-    #hero h1,
-    #hero h1 span,
-    #hero .category-tag { color: #fff !important; text-shadow: 5px 5px 0 var(--mario-blue) !important; }
-
-    #hero .hero-image-container > div:first-child {
-      border: 6px solid var(--mario-blue) !important;
-      background: #fff !important;
-      box-shadow: 10px 10px 0 var(--mario-blue) !important;
-    }
-
-    #hero .hero-image-container > div[aria-hidden="true"] {
-      border: 0 !important;
-      background: var(--mario-question) !important;
-      box-shadow: 8px 8px 0 var(--mario-blue) !important;
-    }
-
-    main section::before { display: none !important; }
-
-    main section::after {
-      height: 64px !important;
-      border-top: 8px solid var(--mario-grass-dark) !important;
-      background:
-        repeating-linear-gradient(90deg, var(--mario-grass) 0 30px, var(--mario-grass-dark) 30px 36px),
-        repeating-linear-gradient(90deg, transparent 0 18px, var(--mario-soil-dark) 18px 22px, transparent 22px 36px) !important;
-      background-blend-mode: multiply;
-      box-shadow: inset 0 18px 0 #62d42e, inset 0 -26px 0 var(--mario-soil), inset 0 -30px 0 var(--mario-soil-dark);
-    }
-
-    #directory .directory-inner { width: min(940px, calc(100vw - 64px)); }
-    #directory .directory-item {
-      border: 5px solid var(--mario-blue) !important;
-      color: var(--mario-blue) !important;
-      background: var(--mario-question) !important;
-      box-shadow: 8px 8px 0 var(--mario-blue) !important;
-      font-family: var(--pixel-font), 'PingFang SC', sans-serif !important;
-    }
-
-    #directory .directory-item:nth-child(n) { background: var(--mario-question) !important; }
-    #directory .directory-item::before {
-      border: 5px solid var(--mario-blue) !important;
-      background: var(--mario-question) !important;
-      color: var(--mario-blue) !important;
-    }
-
-    #directory .directory-item:hover,
-    #directory .directory-item:focus-visible {
-      color: #fff !important;
-      background: var(--mario-brick) !important;
-      box-shadow: 10px 12px 0 var(--mario-blue) !important;
-    }
-
-    #directory .directory-item:hover::before,
-    #directory .directory-item:focus-visible::before { background: var(--mario-brick) !important; color: #fff !important; }
-
-    .section-code {
-      border: 0 !important;
-      color: var(--mario-question) !important;
-      background: var(--mario-blue) !important;
-      box-shadow: 4px 4px 0 #000 !important;
-    }
-
-    .about,
-    .work,
-    .portfolio,
-    .contact { border-color: var(--mario-blue) !important; }
-
-    .about-title,
-    .detail-column + .detail-column { border-color: var(--mario-blue) !important; }
-
-    .detail-heading,
-    .education-item,
-    .detail-column,
-    .about-detail,
-    .work-heading,
-    .portfolio-heading,
-    .contact-text,
-    .contact h2,
-    .work-heading h2,
-    .portfolio-heading h2,
-    .about-title h2 { color: #fff !important; text-shadow: 4px 4px 0 var(--mario-blue); }
-
-    .core-tag,
-    .work-heading-note,
-    .portfolio-heading > p {
-      border: 3px solid var(--mario-blue) !important;
-      color: var(--mario-blue) !important;
-      background: var(--mario-question) !important;
-      box-shadow: 4px 4px 0 var(--mario-blue) !important;
-    }
-
-    .project-card,
-    .wechat-card,
-    .contact-details {
-      border: 5px solid var(--mario-blue) !important;
-      color: #fff !important;
-      background: #202020 !important;
-      box-shadow: 8px 8px 0 #000 !important;
-    }
-
-    .project-card::after,
-    .wechat-card::after { border: 3px solid var(--mario-blue); background: var(--mario-question); box-shadow: 3px 3px 0 #000; }
-
-    .project-card h3,
-    .project-card p,
-    .wechat-card h3 { color: #fff !important; text-shadow: 2px 2px 0 #000; }
-
-    .project-marker {
-      border: 3px solid var(--mario-blue) !important;
-      color: var(--mario-blue) !important;
-      background: var(--mario-question) !important;
-    }
-
-    .tags .tag,
-    .wechat-tag {
-      border: 3px solid var(--mario-blue) !important;
-      color: var(--mario-blue) !important;
-      background: var(--mario-question) !important;
-    }
-
-    .wechat-cover {
-      border-bottom: 5px solid var(--mario-blue) !important;
-      background: #111 !important;
-    }
-
-    .portfolio-tabs::before { display: none; }
-
-    .portfolio-tab {
-      border: 4px solid var(--mario-blue) !important;
-      color: var(--mario-blue) !important;
-      background: var(--mario-question) !important;
-      box-shadow: 5px 5px 0 var(--mario-blue) !important;
-    }
-
-    .portfolio-tab.is-active,
-    .portfolio-tab:hover,
-    .portfolio-tab:focus-visible {
-      color: #fff !important;
-      background: var(--mario-brick) !important;
-    }
-
-    .contact-details {
-      background: #000 !important;
-      border-color: #fff !important;
-      box-shadow: 8px 8px 0 var(--mario-blue) !important;
-    }
-
-    .contact-details > * { color: #fff !important; border-color: #fff !important; }
-    .contact-details a:hover { color: var(--mario-question) !important; }
-
-    footer {
-      min-height: 100px;
-      border-top: 0 !important;
-      color: #fff !important;
-      background: var(--mario-soil) !important;
-      font-family: var(--pixel-font), monospace !important;
-    }
-
-    @media (max-width: 560px) {
-      body::before { top: 132px; right: 12vw; transform: scale(.7); transform-origin: top right; }
-      body::after,
-      main section::after { height: 48px !important; }
-      .game-hud { bottom: 60px; }
-    }
-
-    /* Final reference pass: classic nintendowebtemplate / Innovation proportions. */
-    html,
-    body {
-      cursor: auto !important;
-      color: #333 !important;
-      background: #efefef !important;
-      background-image: none !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-      image-rendering: auto;
-    }
-
-    a,
-    button,
-    .project-card,
-    .wechat-card,
-    .portfolio-tab,
-    .contact-details > * {
-      cursor: pointer !important;
-    }
-
-    .custom-cursor { display: none !important; }
-
-    body::before,
-    body::after { display: none !important; }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      height: 80px;
-      border-bottom: 1px solid #2b5780 !important;
-      background: linear-gradient(#6b94b4 0%, #316594 100%) !important;
-      box-shadow: none !important;
-    }
-
-    .site-header .nav {
-      width: min(950px, calc(100% - 32px));
-      min-height: 80px;
-      margin: 0 auto;
-    }
-
-    .brand {
-      padding: 0 !important;
-      color: #fff !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-      font-size: 35px !important;
-      font-weight: 800 !important;
-      letter-spacing: 0 !important;
-      text-shadow: 1px 1px 0 rgb(0 0 0 / 40%);
-    }
-
-    nav ul { gap: 10px !important; }
-    nav a {
-      border: 0 !important;
-      padding: 5px 15px !important;
-      color: #eee !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-      font-size: 13px !important;
-      font-weight: 700 !important;
-      letter-spacing: 0 !important;
-      text-shadow: 1px 1px 0 rgb(0 0 0 / 30%);
-      text-transform: uppercase;
-    }
-
-    nav a:hover,
-    nav a:focus-visible {
-      color: #fff !important;
-      background: rgb(255 255 255 / 20%) !important;
-      outline: 0;
-    }
-
-    .mario-status-bar {
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      z-index: 21;
-      min-width: auto;
-      width: auto;
-      padding: 5px 9px;
-      border: 1px solid rgb(255 255 255 / 45%) !important;
-      color: #fff;
-      background: rgb(0 0 0 / 24%) !important;
-      box-shadow: none !important;
-      opacity: .92;
-      transform: translateX(-50%) scale(.72);
-      transform-origin: top center;
-    }
-
-    .mario-status-label,
-    .mario-status-bar strong { font-family: 'Press Start 2P', monospace !important; }
-
-    main#top {
-      display: block;
-      width: auto;
-      margin: 0 auto;
-      transform: none !important;
-      transition: none !important;
-    }
-
-    main#top > section {
-      display: block;
-      width: min(950px, calc(100% - 32px));
-      min-height: 0;
-      margin: 0 auto;
-      padding: 52px 40px 70px !important;
-      overflow: visible;
-      background: #fff !important;
-      border-right: 1px solid #e4e4e4;
-      border-bottom: 1px solid #c8c8c8;
-      border-left: 1px solid #e4e4e4;
-      box-shadow: 2px 1px 10px rgb(0 0 0 / 7%);
-    }
-
-    main#top > section::after { display: none !important; }
-
-    #hero {
-      min-height: 520px !important;
-      padding: 70px 40px !important;
-      background: #fff !important;
-    }
-
-    #hero h1,
-    #hero h1 span,
-    #hero .category-tag { color: #275176 !important; text-shadow: none !important; }
-
-    #hero h1 {
-      font-family: Arial, Helvetica, sans-serif !important;
-      font-size: clamp(3rem, 6vw, 5.1rem) !important;
-      letter-spacing: -.04em !important;
-    }
-
-    #hero .hero-image-container > div:first-child {
-      border: 1px solid #c8c8c8 !important;
-      box-shadow: 2px 1px 10px rgb(0 0 0 / 12%) !important;
-    }
-
-    #hero .hero-image-container > div[aria-hidden="true"] {
-      border: 0 !important;
-      background: #dbe7f0 !important;
-      box-shadow: none !important;
-    }
-
-    .section-code {
-      border: 0 !important;
-      padding: 0 !important;
-      color: #666 !important;
-      background: transparent !important;
-      box-shadow: none !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-      font-size: 11px !important;
-      letter-spacing: 0 !important;
-    }
-
-    main h2,
-    main h3,
-    .about-title h2,
-    .work-heading h2,
-    .portfolio-heading h2,
-    .contact h2 {
-      color: #275176 !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-      letter-spacing: 0 !important;
-      text-shadow: none !important;
-    }
-
-    main h2 { font-size: 37px !important; }
-    main h3 { font-size: 25px !important; }
-
-    .about,
-    .work,
-    .portfolio,
-    .contact { border-color: #c8c8c8 !important; }
-
-    .about-grid,
-    .about-detail { border-color: #e4e4e4 !important; }
-    .about-title,
-    .detail-column + .detail-column { border-color: #e4e4e4 !important; }
-
-    .detail-heading,
-    .education-item,
-    .detail-column,
-    .about-detail,
-    .work-heading,
-    .portfolio-heading,
-    .contact-text,
-    .contact h2,
-    .work-heading h2,
-    .portfolio-heading h2,
-    .about-title h2 { color: #333 !important; text-shadow: none !important; }
-
-    .core-tag,
-    .work-heading-note,
-    .portfolio-heading > p {
-      border: 1px solid #ccc !important;
-      color: #555 !important;
-      background: #f6f6f6 !important;
-      box-shadow: none !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-    }
-
-    .project-card,
-    .wechat-card,
-    .contact-details {
-      border: 1px solid #c8c8c8 !important;
-      color: #333 !important;
-      background: #fff !important;
-      box-shadow: 2px 1px 10px rgb(0 0 0 / 7%) !important;
-    }
-
-    .project-card::after,
-    .wechat-card::after { display: none; }
-
-    .project-card h3,
-    .project-card p,
-    .wechat-card h3 { color: #333 !important; text-shadow: none !important; }
-
-    .project-marker {
-      border: 0 !important;
-      color: #275176 !important;
-      background: transparent !important;
-      font-family: 'Press Start 2P', monospace !important;
-    }
-
-    .tags .tag,
-    .wechat-tag {
-      border: 1px solid #ccc !important;
-      color: #078f4b !important;
-      background: #fff !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-    }
-
-    .wechat-cover { border-bottom: 1px solid #c8c8c8 !important; }
-
-    .portfolio-tabs { padding-top: 0; }
-    .portfolio-tab {
-      border: 1px solid #ccc !important;
-      color: #275176 !important;
-      background: #f6f6f6 !important;
-      box-shadow: none !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-    }
-
-    .portfolio-tab.is-active,
-    .portfolio-tab:hover,
-    .portfolio-tab:focus-visible {
-      color: #fff !important;
-      background: #316594 !important;
-    }
-
-    .contact-details {
-      border: 1px solid #c8c8c8 !important;
-      background: #fff !important;
-      box-shadow: 2px 1px 10px rgb(0 0 0 / 7%) !important;
-    }
-
-    .contact-details > * { color: #555 !important; border-color: #ddd !important; }
-
-    .mario-wood-sign,
-    .intro-enter.mario-wood-sign,
-    .bauhaus-btn.mario-wood-sign {
-      border: 0 !important;
-      color: #fff !important;
-      background: #6f422b !important;
-      box-shadow: 3px 3px 0 #3c2418 !important;
-      font-family: 'Press Start 2P', monospace !important;
-      text-shadow: 1px 1px 0 #3c2418 !important;
-    }
-
-    .mario-wood-sign::before,
-    .mario-wood-sign::after { display: none; }
-
-    footer {
-      width: min(950px, calc(100% - 32px));
-      min-height: 0;
-      margin: 0 auto;
-      padding: 20px 40px;
-      border: 0 !important;
-      color: #888 !important;
-      background: #efefef !important;
-      box-shadow: none;
-      font-family: Arial, Helvetica, sans-serif !important;
-    }
-
-    .game-hud,
-    .world-route { display: none !important; }
-
-    @media (max-width: 800px) {
-      .site-header { height: auto; }
-      .site-header .nav { min-height: 76px; }
-      .mario-status-bar { display: none; }
-      main#top > section { width: calc(100% - 24px); padding: 42px 24px 60px !important; }
-      #hero { min-height: 680px !important; padding: 56px 24px !important; }
-      footer { width: calc(100% - 24px); padding: 18px 24px; }
-    }
-
-    /* Rollback to the previous full-screen Mario version. */
-    html,
-    body {
-      cursor: none !important;
-      color: var(--mario-blue) !important;
-      background: var(--mario-sky) !important;
-      font-family: var(--pixel-font), 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
-      image-rendering: pixelated;
-    }
-
-    a,
-    button,
-    .project-card,
-    .wechat-card,
-    .portfolio-tab,
-    .contact-details > * { cursor: none !important; }
-
-    body::before {
-      position: fixed;
-      top: 72px;
-      right: 7vw;
-      z-index: -1;
-      display: block !important;
-      width: 122px;
-      height: 28px;
-      background: #fff;
-      box-shadow: -28px 12px 0 #fff, 28px 12px 0 #fff, 56px 20px 0 #fff, -56px 20px 0 #fff, 0 24px 0 #fff;
-      content: "";
-      pointer-events: none;
-    }
-
-    body::after {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 40;
-      display: block !important;
-      height: 64px;
-      border-top: 8px solid var(--mario-grass-dark);
-      background: repeating-linear-gradient(90deg, var(--mario-grass) 0 30px, var(--mario-grass-dark) 30px 36px);
-      box-shadow: inset 0 18px 0 #62d42e, inset 0 -26px 0 var(--mario-soil), inset 0 -30px 0 var(--mario-soil-dark);
-      content: "";
-      pointer-events: none;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      height: 80px;
-      border-bottom: 4px solid var(--mario-blue) !important;
-      background: var(--mario-sky) !important;
-    }
-
-    .site-header .nav { width: min(1180px, calc(100% - 48px)); min-height: 80px; }
-    .brand { color: #fff !important; font-family: var(--pixel-font), monospace !important; font-size: 1rem !important; text-shadow: 3px 3px 0 var(--mario-blue); }
-    nav a { color: #fff !important; font-family: var(--pixel-font), monospace !important; font-size: .63rem !important; text-shadow: 2px 2px 0 var(--mario-blue); }
-    nav a:hover, nav a:focus-visible { color: var(--mario-question) !important; background: transparent !important; }
-
-    .mario-status-bar {
-      position: fixed;
-      top: 10px;
-      z-index: 10000;
-      min-width: min(430px, calc(100vw - 40px));
-      padding: 8px 14px 9px;
-      border: 4px solid #000 !important;
-      color: #fff;
-      background: #000 !important;
-      box-shadow: 6px 6px 0 var(--mario-blue) !important;
-      transform: translateX(-50%);
-    }
-
-    main#top {
-      display: flex;
-      flex-wrap: nowrap;
-      width: 500vw;
-      max-width: none;
-      margin: 0;
-      transform: translateX(calc(var(--world-index) * -100vw)) !important;
-      transition: transform .82s cubic-bezier(.22, 1, .36, 1) !important;
-    }
-
-    main#top > section {
-      display: block;
-      flex: 0 0 100vw;
-      width: 100vw;
-      min-height: calc(100vh - 80px);
-      margin: 0;
-      padding: 108px 8% 76px !important;
-      overflow: hidden;
-      background: var(--mario-sky) !important;
-      border: 0 !important;
-      box-shadow: none !important;
-    }
-
-    main section::before { display: none !important; }
-    main section::after {
-      display: block !important;
-      height: 64px !important;
-      border-top: 8px solid var(--mario-grass-dark) !important;
-      background: repeating-linear-gradient(90deg, var(--mario-grass) 0 30px, var(--mario-grass-dark) 30px 36px) !important;
-      box-shadow: inset 0 18px 0 #62d42e, inset 0 -26px 0 var(--mario-soil), inset 0 -30px 0 var(--mario-soil-dark);
-    }
-
-    #hero {
-      display: flex !important;
-      min-height: calc(100vh - 80px) !important;
-      padding: 90px 8% 100px !important;
-      background: var(--mario-sky) !important;
-    }
-
-    #hero h1,
-    #hero h1 span,
-    #hero .category-tag { color: #fff !important; text-shadow: 5px 5px 0 var(--mario-blue) !important; font-family: var(--pixel-font), 'PingFang SC', sans-serif !important; }
-
-    #hero .hero-image-container > div:first-child { border: 6px solid var(--mario-blue) !important; background: #fff !important; box-shadow: 10px 10px 0 var(--mario-blue) !important; }
-    #hero .hero-image-container > div[aria-hidden="true"] { border: 0 !important; background: var(--mario-question) !important; box-shadow: 8px 8px 0 var(--mario-blue) !important; }
-
-    main h2,
-    main h3,
-    .about-title h2,
-    .work-heading h2,
-    .portfolio-heading h2,
-    .contact h2 { color: #fff !important; font-family: var(--pixel-font), 'PingFang SC', sans-serif !important; letter-spacing: 0 !important; text-shadow: 4px 4px 0 var(--mario-blue) !important; }
-
-    .section-code { color: var(--mario-question) !important; background: var(--mario-blue) !important; box-shadow: 4px 4px 0 #000 !important; font-family: var(--pixel-font) !important; }
-    .detail-heading, .education-item, .detail-column, .about-detail, .work-heading, .portfolio-heading, .contact-text { color: #fff !important; text-shadow: 2px 2px 0 var(--mario-blue); }
-
-    .core-tag, .work-heading-note, .portfolio-heading > p { border: 3px solid var(--mario-blue) !important; color: var(--mario-blue) !important; background: var(--mario-question) !important; box-shadow: 4px 4px 0 var(--mario-blue) !important; }
-
-    .project-card,
-    .wechat-card,
-    .contact-details { border: 5px solid var(--mario-blue) !important; color: #fff !important; background: #202020 !important; box-shadow: 8px 8px 0 #000 !important; }
-    .project-card h3, .project-card p, .wechat-card h3 { color: #fff !important; text-shadow: 2px 2px 0 #000 !important; }
-    .project-marker { color: var(--mario-blue) !important; background: var(--mario-question) !important; border: 3px solid var(--mario-blue) !important; }
-    .tags .tag, .wechat-tag { border: 3px solid var(--mario-blue) !important; color: var(--mario-blue) !important; background: var(--mario-question) !important; }
-    .wechat-cover { border-bottom: 5px solid var(--mario-blue) !important; background: #111 !important; }
-    .portfolio-tab { border: 4px solid var(--mario-blue) !important; color: var(--mario-blue) !important; background: var(--mario-question) !important; box-shadow: 5px 5px 0 var(--mario-blue) !important; }
-    .portfolio-tab.is-active, .portfolio-tab:hover, .portfolio-tab:focus-visible { color: #fff !important; background: var(--mario-brick) !important; }
-    .contact-details { background: #000 !important; border-color: #fff !important; }
-    .contact-details > * { color: #fff !important; border-color: #fff !important; }
-
-    #directory { background: var(--mario-sky) !important; }
-    #directory .directory-item { border: 5px solid var(--mario-blue) !important; color: var(--mario-blue) !important; background: var(--mario-question) !important; box-shadow: 8px 8px 0 var(--mario-blue) !important; }
-    #directory .directory-item::before { border: 5px solid var(--mario-blue) !important; background: var(--mario-question) !important; color: var(--mario-blue) !important; }
-    #directory .directory-item:hover, #directory .directory-item:focus-visible { color: #fff !important; background: var(--mario-brick) !important; }
-    #directory .directory-item:hover::before, #directory .directory-item:focus-visible::before { background: var(--mario-brick) !important; color: #fff !important; }
-
-    footer { width: auto; min-height: 100px; margin: 0; border: 0 !important; color: #fff !important; background: var(--mario-soil) !important; font-family: var(--pixel-font) !important; }
-    .game-hud { display: flex !important; bottom: 78px; }
-    .world-route { display: grid !important; }
-
-    .custom-cursor {
-      position: fixed !important;
-      display: block !important;
-      width: 32px !important;
-      height: 32px !important;
-      border: 2px solid #111 !important;
-      background: #f4f4f0 !important;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    body.has-custom-cursor .custom-cursor.is-visible { visibility: visible !important; }
-    .custom-cursor::before { inset: 2px; border: 1px solid rgb(17 17 17 / 28%); background-color: #f4f4f0; background-image: linear-gradient(90deg, transparent 0 47%, #efad4a 47% 53%, transparent 53% 100%), linear-gradient(0deg, transparent 0 47%, #efad4a 47% 53%, transparent 53% 100%), repeating-linear-gradient(90deg, rgb(17 17 17 / 10%) 0 1px, transparent 1px 7px), repeating-linear-gradient(0deg, rgb(17 17 17 / 10%) 0 1px, transparent 1px 7px); content: ""; }
-    .custom-cursor::after { top: 9px; left: 9px; width: 6px; height: 6px; background: #111; box-shadow: 7px 0 0 #111, 0 7px 0 #111, 7px 7px 0 #111, 14px 7px 0 #111, 7px 14px 0 #111; content: ""; }
-
-    @media (max-width: 800px) {
-      main#top > section { width: 100vw; padding: 80px 8% 70px !important; }
-      #hero { min-height: calc(100vh - 80px) !important; padding: 80px 8% !important; }
-      .mario-status-bar { min-width: 0; width: calc(100vw - 32px); transform: translateX(-50%) scale(.7); }
+      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
     }
   </style>
 </head>
-<body class="directory-open">
-  <div id="pixel-intro" aria-label="Welcome" role="presentation">
-    <div class="intro-materials" aria-hidden="true">
-      <img class="material-panel" src="pixel-chi-front.png" alt="谷秋池正面像素卡通形象">
-      <div class="material-pixels"></div>
-    </div>
-    <div class="welcome-text">WELCOME</div>
-    <div class="intro-caption">QC / CONTENT · NEWS · STORY</div>
-    <div class="intro-status">LOADING PROFILE / 04</div>
-    <div class="intro-ready">READY</div>
-    <button class="intro-enter mario-wood-sign" type="button">点击探索 →</button>
+<body>
+  <div class="cloud cloud-one" aria-hidden="true"></div>
+  <div class="cloud cloud-two" aria-hidden="true"></div>
+
+  <div class="hud" aria-label="游戏状态栏">
+    <div class="hud-group"><span class="hud-label">MARIO:</span><strong>QIUCHI GU</strong></div>
+    <div class="hud-group"><span class="hud-label">WORLD:</span><strong data-world>1-1</strong></div>
+    <div class="hud-group"><span class="hud-label">TIME:</span><strong data-time>300</strong></div>
   </div>
 
-  <div id="directory" aria-label="网站目录">
-    <div class="directory-inner">
+  <header class="site-nav">
+    <a class="brand" href="#top" data-level="0">QIUCHI GU</a>
+    <nav aria-label="主导航">
+      <ul class="nav-list">
+        <li><a href="#about" data-level="1">关于我</a></li>
+        <li><a href="#experiences" data-level="2">精选经历</a></li>
+        <li><a href="#portfolio" data-level="3">作品集</a></li>
+        <li><a href="#contact" data-level="4">联系我</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="pixel-intro" aria-label="欢迎页面">
+    <div class="intro-content">
+      <img class="intro-character" src="pixel-chi-front.png" alt="谷秋池像素人物">
+      <p class="intro-kicker">QC / CONTENT · NEWS · STORY</p>
+      <h1 class="welcome">WELCOME</h1>
+      <p class="intro-subtitle">LOADING PROFILE / 04</p>
+      <div class="loading-bar" aria-hidden="true"></div>
+      <p class="ready">READY</p>
+      <button class="pixel-button" type="button" data-enter>点击探索 →</button>
+    </div>
+  </section>
+
+  <section id="directory" aria-label="网站目录">
+    <div class="directory-content">
       <p class="directory-kicker">QC / SELECT YOUR ROUTE</p>
-      <h2 class="directory-title">选择你的阅读路径</h2>
+      <h1 class="directory-title">选择你的阅读路径</h1>
       <div class="directory-stage">
-        <img class="directory-character" src="pixel-chi-front.png" alt="谷秋池像素卡通形象">
         <div class="directory-grid">
-          <button class="directory-item" type="button" data-directory-target="about">
-            <span class="directory-number">01</span>
-            <span class="directory-label">关于我</span>
-          </button>
-          <button class="directory-item" type="button" data-directory-target="experiences">
-            <span class="directory-number">02</span>
-            <span class="directory-label">精选经历</span>
-          </button>
-          <button class="directory-item" type="button" data-directory-target="portfolio">
-            <span class="directory-number">03</span>
-            <span class="directory-label">作品集</span>
-          </button>
-          <button class="directory-item" type="button" data-directory-target="contact">
-            <span class="directory-number">04</span>
-            <span class="directory-label">联系我</span>
-          </button>
+          <button class="level-button" type="button" data-level="1"><span class="level-number">01</span><span class="level-label">关于我</span></button>
+          <button class="level-button" type="button" data-level="2"><span class="level-number">02</span><span class="level-label">精选经历</span></button>
+          <button class="level-button" type="button" data-level="3"><span class="level-number">03</span><span class="level-label">作品集</span></button>
+          <button class="level-button" type="button" data-level="4"><span class="level-number">04</span><span class="level-label">联系我</span></button>
         </div>
+        <img class="directory-character" src="pixel-chi-front.png" alt="谷秋池像素人物">
       </div>
       <p class="directory-hint">CLICK A BLOCK TO ENTER / 点击方块进入</p>
     </div>
-  </div>
+  </section>
 
-  <div class="custom-cursor" aria-hidden="true"></div>
-  <div class="screen-flash" aria-hidden="true"></div>
-  <div class="mario-status-bar" aria-label="游戏状态">
-    <div class="mario-status-player">
-      <span class="mario-status-label">MARIO</span>
-      <strong>QIUCHI GU</strong>
-    </div>
-    <div>
-      <span class="mario-status-label">WORLD</span>
-      <strong data-world-status>1-1</strong>
-    </div>
-    <div>
-      <span class="mario-status-label">TIME</span>
-      <strong data-time-status>300</strong>
-    </div>
-  </div>
-  <div class="game-hud" aria-hidden="true">
-    <span class="game-hud-label">LEVEL 01 / 04</span>
-    <span class="game-hud-meter"></span>
-  </div>
-  <div class="world-route" aria-hidden="true">
-    <span class="world-route-marker is-active"></span>
-    <span class="world-route-marker"></span>
-    <span class="world-route-marker"></span>
-    <span class="world-route-marker"></span>
-  </div>
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="#top" aria-label="Back to top">QIUCHI GU</a>
-      <nav aria-label="主导航">
-        <ul>
-          <li><a href="#directory" data-open-directory>目录</a></li>
-          <li><a href="#about">关于我</a></li>
-          <li><a href="#experiences">经历</a></li>
-          <li><a href="#portfolio">作品集</a></li>
-          <li><a href="#contact">联系我</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="top">
-    <section id="hero" style="display: flex; align-items: center; justify-content: space-between; padding: 120px 8% 80px 8%; gap: 60px; min-height: 80vh; border-bottom: 2px solid #111111;">
-      <div class="hero-text-container" style="flex: 1.2; display: flex; flex-direction: column; align-items: flex-start;">
-        <span class="category-tag" style="font-size: 0.85rem; font-weight: 700; color: #DD3A35; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">00 / PERSONAL PROFILE</span>
-        <h1 id="hero-title" style="font-size: 3.5rem; line-height: 1.25; font-weight: 800; color: #111111; margin: 15px 0 35px 0;">你好，<br>我是谷秋池。<br><span style="color: #DD3A35; font-size: 0.6em; letter-spacing: -0.04em;">跨媒介叙事与内容运营</span></h1>
-        <a href="#portfolio" class="bauhaus-btn mario-wood-sign" style="display: inline-block; padding: 14px 28px; background-color: #DD3A35; color: #FFFFFF; font-weight: 700; text-decoration: none; border: 2px solid #111111; font-size: 1rem; transition: all 0.2s ease; cursor: pointer;">探索我的作品 →</a>
+  <main id="world">
+    <section class="level hero-level" id="top" aria-labelledby="hero-title">
+      <div class="level-content hero-copy">
+        <p class="level-code">WORLD 1-1 / PERSONAL PROFILE</p>
+        <h1 id="hero-title">你好，我是谷秋池<span>跨媒介叙事与内容运营</span></h1>
+        <p>连接严谨出版沉淀与国际新闻视野，探索数字媒体传播的无限可能。</p>
+        <a class="pixel-button" href="#portfolio" data-level="3">探索我的作品 →</a>
       </div>
-      <div class="hero-image-container" style="flex: 0.8; display: flex; justify-content: center; position: relative;">
-        <div style="position: relative; width: 300px; height: 300px; border: 2px solid #111111; background-color: #F4F3EF; overflow: hidden; z-index: 2;">
-          <img src="avatar.png" alt="谷秋池" style="width: 100%; height: 100%; object-fit: cover; object-position: 45% center;">
-        </div>
-        <div aria-hidden="true" style="position: absolute; width: 300px; height: 300px; border: 2px solid #111111; background-color: #EAA824; top: 12px; left: calc(50% - 138px); z-index: 1;"></div>
+      <div class="hero-image">
+        <div class="avatar-wrap"><img src="avatar.png" alt="谷秋池照片" style="object-position:45% center"></div>
       </div>
     </section>
 
-    <section id="about" class="about" aria-labelledby="about-title">
-      <div class="container about-grid">
-        <div class="about-title">
-          <p class="section-code">01 / ABOUT</p>
-          <h2 id="about-title">关于我</h2>
-        </div>
-        <div class="about-detail">
-          <div class="detail-column">
-            <p class="detail-heading">教育背景</p>
-            <div class="education-list">
-              <div class="education-item">格拉斯哥大学 · 媒体传播与国际新闻硕士</div>
-              <div class="education-item">北京印刷学院 · 编辑出版学学士</div>
-            </div>
+    <section class="level" id="about" aria-labelledby="about-title">
+      <div class="level-content">
+        <p class="level-code">WORLD 1-2 / ABOUT</p>
+        <h2 id="about-title">关于我</h2>
+        <div class="two-column">
+          <div class="panel">
+            <p class="panel-title">教育背景</p>
+            <div class="education-item">格拉斯哥大学 · 媒体传播与国际新闻硕士</div>
+            <div class="education-item">北京印刷学院 · 编辑出版学学士</div>
           </div>
-          <div class="detail-column">
-            <p class="detail-heading">核心标签</p>
+          <div class="panel">
+            <p class="panel-title">核心标签</p>
             <div class="core-tags">
               <span class="core-tag"># 跨文化新闻视野</span>
               <span class="core-tag"># 创意多媒体策划</span>
@@ -3084,551 +392,145 @@
             </div>
           </div>
         </div>
+        <p class="about-paragraph">硕士毕业于格拉斯哥大学媒体传播与国际新闻专业，本科深耕编辑出版学。我热衷于在故事叙述、受众研究与数字化运营的交汇处寻找创意。我既拥有畅销书市场数据分析的理性严谨，又具备多媒体内容策划与校园矩阵运营的敏捷实践，对前沿人工智能工具保持高度敏锐，期待与你共同探索媒体传播的未来。</p>
       </div>
     </section>
 
-    <section id="experiences" class="work" aria-labelledby="work-title">
-      <div class="container">
-        <div class="work-heading">
-          <div>
-            <p class="section-code">02 / SELECTED WORK</p>
-            <h2 id="work-title">精选经历</h2>
-          </div>
-          <p class="work-heading-note">内容 · 新闻 · 研究 · 领导力</p>
+    <section class="level" id="experiences" aria-labelledby="experiences-title">
+      <div class="level-content">
+        <div class="section-header">
+          <div><p class="level-code">WORLD 1-3 / SELECTED WORK</p><h2 id="experiences-title">精选经历</h2></div>
+          <p class="section-note">内容 · 新闻 · 研究 · 领导力</p>
         </div>
-
-        <div class="project-grid">
-          <article class="project-card">
-            <div class="project-marker"><span>01</span><span>CONTENT</span></div>
-            <h3>搜狐新闻 | 内容运营</h3>
-            <p>负责国内外热点新闻内容编辑与发布，日均处理20+篇稿件。独立策划并制作新闻音频内容2000+条，优化多场景用户消费体验。</p>
-            <div class="tags"><span class="tag">热点运营</span><span class="tag">多媒体策划</span></div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-marker"><span>02</span><span>JOURNALISM</span></div>
-            <h3>苏格兰国际学生签证 | 视频新闻采写</h3>
-            <p>深入研究苏格兰签证政策提案，完成多位受访者采访提纲及中英双语新闻稿撰写，参与视频拍摄与后期制作。</p>
-            <div class="tags"><span class="tag">双语采访</span><span class="tag">视频拍摄</span></div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-marker"><span>03</span><span>RESEARCH</span></div>
-            <h3>近十年畅销书出版研究 | 市场数据调研</h3>
-            <p>利用 Excel 收集并分析近十年畅销书市场数据，从题材内容定位等维度进行多变量分析，总结影响传播效果的关键因子。</p>
-            <div class="tags"><span class="tag">数据分析</span><span class="tag">市场洞察</span></div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-marker"><span>04</span><span>LEADERSHIP</span></div>
-            <h3>北印大学生记者团 | 副团长</h3>
-            <p>统筹学校官方公众号与微博内容运营，管理20+人团队。围绕重要节点策划专题内容，累计原创推文25篇，总阅读量达10w+。</p>
-            <div class="tags"><span class="tag">团队统筹</span><span class="tag">10w+阅读</span></div>
-          </article>
+        <div class="card-grid">
+          <article class="project-card"><div class="project-number"><span>01</span><span>CONTENT</span></div><h3>搜狐新闻 | 内容运营</h3><p>负责国内外热点新闻内容编辑与发布，日均处理20+篇稿件。独立策划并制作新闻音频内容2000+条，优化多场景用户消费体验。</p><div class="tags"><span class="tag">热点运营</span><span class="tag">多媒体策划</span></div></article>
+          <article class="project-card"><div class="project-number"><span>02</span><span>JOURNALISM</span></div><h3>苏格兰国际学生签证 | 视频新闻采写</h3><p>深入研究苏格兰签证政策提案，完成多位受访者采访提纲及中英双语新闻稿撰写，参与视频拍摄与后期制作。</p><div class="tags"><span class="tag">双语采访</span><span class="tag">视频拍摄</span></div></article>
+          <article class="project-card"><div class="project-number"><span>03</span><span>RESEARCH</span></div><h3>近十年畅销书出版研究 | 市场数据调研</h3><p>利用 Excel 收集并分析近十年畅销书市场数据，从题材内容定位等维度进行多变量分析，总结影响传播效果的关键因子。</p><div class="tags"><span class="tag">数据分析</span><span class="tag">市场洞察</span></div></article>
+          <article class="project-card"><div class="project-number"><span>04</span><span>LEADERSHIP</span></div><h3>北印大学生记者团 | 副团长</h3><p>统筹学校官方公众号与微博内容运营，管理20+人团队。围绕重要节点策划专题内容，累计原创推文25篇，总阅读量达10w+。</p><div class="tags"><span class="tag">团队统筹</span><span class="tag">10w+阅读</span></div></article>
         </div>
       </div>
     </section>
 
-    <section id="portfolio" class="portfolio" aria-labelledby="portfolio-title">
-      <div class="container">
-        <div class="portfolio-heading">
-          <div>
-            <p class="section-code">03 / PORTFOLIO</p>
-            <h2 id="portfolio-title">作品集</h2>
-          </div>
-          <p>公众号创作 · 英语新闻稿</p>
-        </div>
-
+    <section class="level" id="portfolio" aria-labelledby="portfolio-title">
+      <div class="level-content">
+        <div class="section-header"><div><p class="level-code">WORLD 1-4 / PORTFOLIO</p><h2 id="portfolio-title">作品集</h2></div><p class="section-note">公众号创作 · 英语新闻稿</p></div>
         <div class="portfolio-tabs" role="tablist" aria-label="作品分类">
-          <button class="portfolio-tab is-active" id="tab-layout" role="tab" type="button" aria-selected="true" aria-controls="panel-layout" data-target="panel-layout">公众号排版作品</button>
-          <button class="portfolio-tab" id="tab-copy" role="tab" type="button" aria-selected="false" aria-controls="panel-copy" data-target="panel-copy">公众号文案作品</button>
-          <button class="portfolio-tab" id="tab-english" role="tab" type="button" aria-selected="false" aria-controls="panel-english" data-target="panel-english">英语新闻稿</button>
+          <button class="portfolio-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="layout-panel" data-tab="layout-panel">公众号排版作品</button>
+          <button class="portfolio-tab" type="button" role="tab" aria-selected="false" aria-controls="copy-panel" data-tab="copy-panel">公众号文案作品</button>
+          <button class="portfolio-tab" type="button" role="tab" aria-selected="false" aria-controls="english-panel" data-tab="english-panel">英语新闻稿</button>
         </div>
 
-        <div id="panel-layout" class="portfolio-panel" role="tabpanel" aria-labelledby="tab-layout">
+        <div id="layout-panel" class="portfolio-panel" role="tabpanel">
           <div class="wechat-grid">
-            <article class="wechat-card" data-card-link="https://mp.weixin.qq.com/s/rIVnXR2iV_pAaTgQpRxgMQ" role="link" tabindex="0" aria-label="打开《一呼一吸，一起体验印苑气味之旅》">
-              <div class="wechat-cover"><img src="portfolio-cover-01.png" alt="《一呼一吸，一起体验印苑气味之旅》封面"></div>
-              <div class="wechat-card-content">
-                <h3>一呼一吸，一起体验印苑气味之旅</h3>
-                <div class="wechat-footer">
-                  <span class="wechat-tag">微信 · 概念转译 / 沉浸式场景叙事</span>
-                  <a class="article-link" href="https://mp.weixin.qq.com/s/rIVnXR2iV_pAaTgQpRxgMQ" target="_blank" rel="noopener noreferrer" aria-label="打开《一呼一吸，一起体验印苑气味之旅》">↗</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="wechat-card" data-card-link="https://mp.weixin.qq.com/s/bwHC9gNIjEIzw1ipyrdRUw" role="link" tabindex="0" aria-label="打开《快来拆开北印专属“盲盒”收获惊喜吧！》">
-              <div class="wechat-cover"><img src="portfolio-cover-02.png" alt="《快来拆开北印专属“盲盒”收获惊喜吧！》封面"></div>
-              <div class="wechat-card-content">
-                <h3>快来拆开北印专属“盲盒”收获惊喜吧！</h3>
-                <div class="wechat-footer">
-                  <span class="wechat-tag">微信 · SVG 交互 / 游戏化叙事</span>
-                  <a class="article-link" href="https://mp.weixin.qq.com/s/bwHC9gNIjEIzw1ipyrdRUw" target="_blank" rel="noopener noreferrer" aria-label="打开《快来拆开北印专属“盲盒”收获惊喜吧！》">↗</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="wechat-card" data-card-link="https://mp.weixin.qq.com/s/igxQ2fm5vIqt0HdtZA-CEw" role="link" tabindex="0" aria-label="打开《送你北印专属学院风月饼 月圆人团圆》">
-              <div class="wechat-cover"><img src="portfolio-cover-03.png" alt="《送你北印专属学院风月饼 月圆人团圆》封面"></div>
-              <div class="wechat-card-content">
-                <h3>送你北印专属学院风月饼 月圆人团圆</h3>
-                <div class="wechat-footer">
-                  <span class="wechat-tag">微信 · 校园 IP 衍生 / 节日限定策划</span>
-                  <a class="article-link" href="https://mp.weixin.qq.com/s/igxQ2fm5vIqt0HdtZA-CEw" target="_blank" rel="noopener noreferrer" aria-label="打开《送你北印专属学院风月饼 月圆人团圆》">↗</a>
-                </div>
-              </div>
-            </article>
+            <article class="wechat-card" data-link="https://mp.weixin.qq.com/s/rIVnXR2iV_pAaTgQpRxgMQ" tabindex="0"><div class="wechat-cover"><img src="portfolio-cover-01.png" alt="一呼一吸，一起体验印苑气味之旅封面"></div><div class="wechat-content"><h3>一呼一吸，一起体验印苑气味之旅</h3><div class="wechat-footer"><span class="wechat-tag">微信 · 概念转译 / 沉浸式场景叙事</span><a class="article-link" href="https://mp.weixin.qq.com/s/rIVnXR2iV_pAaTgQpRxgMQ" target="_blank" rel="noopener">↗</a></div></div></article>
+            <article class="wechat-card" data-link="https://mp.weixin.qq.com/s/bwHC9gNIjEIzw1ipyrdRUw" tabindex="0"><div class="wechat-cover"><img src="portfolio-cover-02.png" alt="快来拆开北印专属盲盒收获惊喜吧封面"></div><div class="wechat-content"><h3>快来拆开北印专属“盲盒”收获惊喜吧！</h3><div class="wechat-footer"><span class="wechat-tag">微信 · SVG 交互 / 游戏化叙事</span><a class="article-link" href="https://mp.weixin.qq.com/s/bwHC9gNIjEIzw1ipyrdRUw" target="_blank" rel="noopener">↗</a></div></div></article>
+            <article class="wechat-card" data-link="https://mp.weixin.qq.com/s/igxQ2fm5vIqt0HdtZA-CEw" tabindex="0"><div class="wechat-cover"><img src="portfolio-cover-03.png" alt="送你北印专属学院风月饼封面"></div><div class="wechat-content"><h3>送你北印专属学院风月饼 月圆人团圆</h3><div class="wechat-footer"><span class="wechat-tag">微信 · 校园 IP 衍生 / 节日限定策划</span><a class="article-link" href="https://mp.weixin.qq.com/s/igxQ2fm5vIqt0HdtZA-CEw" target="_blank" rel="noopener">↗</a></div></div></article>
           </div>
         </div>
 
-        <div id="panel-copy" class="portfolio-panel" role="tabpanel" aria-labelledby="tab-copy" hidden>
-          <div class="wechat-grid">
-            <article class="wechat-card" data-card-link="https://mp.weixin.qq.com/s/d2hCXsn8Tu13Lk8I7r4lYA" role="link" tabindex="0" aria-label="打开《印苑四时时装秀重磅来袭》">
-              <div class="wechat-cover"><img src="portfolio-cover-04.png" alt="《印苑四时时装秀重磅来袭》封面"></div>
-              <div class="wechat-card-content">
-                <h3>印苑四时时装秀重磅来袭</h3>
-                <div class="wechat-footer">
-                  <span class="wechat-tag">微信 · 概念策展文案 / 主题文字叙事</span>
-                  <a class="article-link" href="https://mp.weixin.qq.com/s/d2hCXsn8Tu13Lk8I7r4lYA" target="_blank" rel="noopener noreferrer" aria-label="打开《印苑四时时装秀重磅来袭》">↗</a>
-                </div>
-              </div>
-            </article>
-          </div>
+        <div id="copy-panel" class="portfolio-panel" role="tabpanel" hidden>
+          <div class="wechat-grid"><article class="wechat-card" data-link="https://mp.weixin.qq.com/s/d2hCXsn8Tu13Lk8I7r4lYA" tabindex="0"><div class="wechat-cover"><img src="portfolio-cover-04.png" alt="印苑四时时装秀重磅来袭封面"></div><div class="wechat-content"><h3>印苑四时时装秀重磅来袭</h3><div class="wechat-footer"><span class="wechat-tag">微信 · 概念策展文案 / 主题文字叙事</span><a class="article-link" href="https://mp.weixin.qq.com/s/d2hCXsn8Tu13Lk8I7r4lYA" target="_blank" rel="noopener">↗</a></div></div></article></div>
         </div>
 
-        <div id="panel-english" class="portfolio-panel" role="tabpanel" aria-labelledby="tab-english" hidden>
-          <article class="wechat-card english-news-card" data-card-link="scotland-student-visa-news-script.txt" role="link" tabindex="0" aria-label="查看英语新闻稿全文">
-            <div class="bauhaus-art-container" role="img" aria-label="英语新闻稿 Bauhaus 风格封面占位" style="position: relative; width: 100%; height: 220px; background-color: #F4F3EF; border-bottom: 2px solid #111111; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-              <div aria-hidden="true" style="position: absolute; width: 100px; height: 100px; background-color: #EAA824; border: 2px solid #111111; z-index: 1;"></div>
-              <div aria-hidden="true" style="position: absolute; width: 70px; height: 70px; background-color: #DD3A35; border: 2px solid #111111; border-radius: 50%; z-index: 2; transform: translate(20px, 20px);"></div>
-              <div aria-hidden="true" style="position: absolute; top: -50%; left: 0; width: 2px; height: 200%; background-color: #111111; transform: rotate(45deg); z-index: 3;"></div>
-            </div>
-            <div class="wechat-card-content">
-              <h3>
-                <span style="display:block; font-size:1.2rem; font-weight:800; color:#111111; margin-bottom:6px;">【英语采写】苏格兰拟放宽国际学生签证——但他们真的能留下来吗？</span>
-                <span style="display:block; font-size:0.95rem; font-weight:normal; color:#555555; line-height:1.4;">Scotland Wants to Extend International Student Visas—But Can They Really Stay?</span>
-              </h3>
-              <div class="wechat-footer">
-                <span class="wechat-tag">英语采写 · 视频新闻脚本</span>
-                <a class="article-link" href="#english-script-dialog" data-open-script aria-label="查看英语新闻稿全文">↗</a>
-              </div>
-            </div>
-          </article>
+        <div id="english-panel" class="portfolio-panel" role="tabpanel" hidden>
+          <article class="wechat-card english-news-card" data-script tabindex="0"><div class="english-cover" role="img" aria-label="英语新闻稿像素封面"></div><div class="wechat-content"><h3>【英语采写】苏格兰拟放宽国际学生签证——但他们真的能留下来吗？<br><small>Scotland Wants to Extend International Student Visas—But Can They Really Stay?</small></h3><div class="wechat-footer"><span class="wechat-tag">英语采写 · 视频新闻脚本</span><button class="article-link" type="button" data-script-open>↗</button></div></div></article>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="contact" aria-labelledby="contact-title">
-      <div class="container">
-        <p class="section-code">04 / CONTACT</p>
+    <section class="level" id="contact" aria-labelledby="contact-title">
+      <div class="level-content">
+        <p class="level-code">WORLD 2-1 / CONTACT</p>
         <h2 id="contact-title">联系我</h2>
-        <p class="contact-text">期待与你一起创造有价值的内容。</p>
-        <div class="contact-details">
-          <a href="mailto:18810805329@163.com">邮箱：18810805329@163.com</a>
-          <span>所在地：北京</span>
-          <a href="tel:+8618810805329">手机：18810805329</a>
-        </div>
+        <p class="level-lead">期待与你一起创造有价值的内容。</p>
+        <div class="contact-card"><a href="mailto:18810805329@163.com">邮箱：18810805329@163.com</a><span>所在地：北京</span><a href="tel:+8618810805329">手机：18810805329</a></div>
       </div>
     </section>
   </main>
 
-  <dialog id="english-script-dialog" aria-labelledby="script-dialog-title">
-    <div class="script-dialog-header">
-      <h2 id="script-dialog-title">英语新闻稿全文</h2>
-      <button class="script-dialog-close" type="button">关闭</button>
-    </div>
-    <div class="script-dialog-body">
-      <iframe src="english-news-script.html" title="英语新闻稿全文"></iframe>
-    </div>
+  <dialog id="script-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head"><h2 id="dialog-title">英语新闻稿全文</h2><button class="dialog-close" type="button" data-dialog-close>关闭</button></div>
+    <div class="dialog-body"><iframe src="english-news-script.html" title="英语新闻稿全文"></iframe></div>
   </dialog>
 
-  <footer>© 2026 谷秋池 · PERSONAL RESUME</footer>
-
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
+    (() => {
+      const world = document.querySelector('#world');
       const intro = document.querySelector('#pixel-intro');
       const directory = document.querySelector('#directory');
-      const introEnter = document.querySelector('.intro-enter');
-      const screenFlash = document.querySelector('.screen-flash');
-      if (!intro) return;
-      window.setTimeout(() => intro.classList.add('is-ready'), 2200);
-
-      const flashScreen = () => {
-        if (!screenFlash) return;
-        screenFlash.classList.remove('is-active');
-        window.requestAnimationFrame(() => screenFlash.classList.add('is-active'));
-        window.setTimeout(() => screenFlash.classList.remove('is-active'), 220);
-      };
-
-      const typeTerminal = (element) => {
-        if (!element || element.dataset.terminalTyped === 'true') return;
-        const text = element.textContent;
-        element.dataset.terminalTyped = 'true';
-        element.textContent = '';
-        let index = 0;
-        const printNext = () => {
-          element.textContent = text.slice(0, index);
-          index += 1;
-          if (index <= text.length) window.setTimeout(printNext, 38);
-        };
-        printNext();
-      };
-
-      typeTerminal(document.querySelector('.intro-caption'));
-      typeTerminal(document.querySelector('.category-tag'));
-
-      const enterDirectory = () => {
-        flashScreen();
-        intro.classList.add('intro-hidden');
-        if (!directory) return;
-        directory.classList.add('is-visible');
-        document.body.classList.add('directory-open');
-      };
-
-      introEnter?.addEventListener('click', enterDirectory);
-
-      document.querySelector('[data-open-directory]')?.addEventListener('click', (event) => {
-        event.preventDefault();
-        if (!directory) return;
-        flashScreen();
-        directory.classList.add('is-visible');
-        document.body.classList.add('directory-open');
-      });
-
-      const directoryStage = document.querySelector('.directory-stage');
-      const directoryCharacter = document.querySelector('.directory-character');
-      const moveDirectoryCharacter = (item) => {
-        if (!directoryStage || !directoryCharacter) return;
-        const stageBounds = directoryStage.getBoundingClientRect();
-        const itemBounds = item.getBoundingClientRect();
-        const characterWidth = directoryCharacter.getBoundingClientRect().width;
-        const targetLeft = itemBounds.left - stageBounds.left + (itemBounds.width - characterWidth) / 2;
-        directoryCharacter.style.left = `${targetLeft + characterWidth / 2}px`;
-        directoryCharacter.classList.remove('is-hitting');
-        window.requestAnimationFrame(() => directoryCharacter.classList.add('is-hitting'));
-      };
-
-      document.querySelectorAll('[data-directory-target]').forEach((item) => {
-        item.addEventListener('pointerenter', () => moveDirectoryCharacter(item));
-        item.addEventListener('click', () => {
-          const target = document.getElementById(item.dataset.directoryTarget);
-          if (typeof window.setGameLevel === 'function') window.setGameLevel(item.dataset.directoryTarget);
-          moveDirectoryCharacter(item);
-          item.classList.add('is-launching');
-          directory.classList.remove('is-destroying');
-          directory.classList.add('is-destroying');
-          window.setTimeout(() => {
-            directory.classList.remove('is-visible');
-            directory.classList.remove('is-destroying');
-            document.body.classList.remove('directory-open');
-            item.classList.remove('is-launching');
-            if (target && typeof window.goToSection === 'function') {
-              window.goToSection(target.id);
-            }
-          }, 420);
-        });
-      });
-    });
-
-    (() => {
-      const hud = document.querySelector('.game-hud');
-      const label = document.querySelector('.game-hud-label');
-      const routeMarkers = [...document.querySelectorAll('.world-route-marker')];
-      const world = document.querySelector('main#top');
-      const worldStatus = document.querySelector('[data-world-status]');
-      const timeStatus = document.querySelector('[data-time-status]');
-      const levelMap = { about: 1, experiences: 2, portfolio: 3, contact: 4 };
-      const sectionMap = { hero: 0, ...levelMap };
-      const worldMap = { hero: '1-1', about: '1-2', experiences: '1-3', portfolio: '1-4', contact: '2-1' };
-      let currentIndex = 0;
+      const worldLabel = document.querySelector('[data-world]');
+      const timeLabel = document.querySelector('[data-time]');
+      const sectionNames = ['hero', 'about', 'experiences', 'portfolio', 'contact'];
+      const worldNames = ['1-1', '1-2', '1-3', '1-4', '2-1'];
+      let currentLevel = 0;
       let remainingTime = 300;
 
-      const updateMarioStatus = (sectionId, resetTimer = false) => {
-        if (worldStatus) worldStatus.textContent = worldMap[sectionId] || '1-1';
-        if (resetTimer) remainingTime = 300;
-        if (timeStatus) timeStatus.textContent = String(remainingTime).padStart(3, '0');
-      };
-
-      window.setInterval(() => {
-        if (document.body.classList.contains('directory-open') || document.querySelector('#pixel-intro:not(.intro-hidden)')) return;
-        remainingTime = remainingTime > 0 ? remainingTime - 1 : 300;
-        if (timeStatus) timeStatus.textContent = String(remainingTime).padStart(3, '0');
-      }, 1000);
-
-      const setGameLevel = (sectionId) => {
-        const level = levelMap[sectionId];
-        if (!level || !hud || !label) return;
-        hud.dataset.level = String(level);
-        label.textContent = `LEVEL 0${level} / 04`;
-        document.body.dataset.level = String(level);
-        routeMarkers.forEach((marker, index) => {
-          marker.classList.toggle('is-active', index === level - 1);
-          marker.classList.toggle('is-cleared', index < level - 1);
-        });
-        Object.keys(levelMap).forEach((id) => {
-          document.getElementById(id)?.classList.toggle('is-current-level', id === sectionId);
-        });
-      };
-
-      const goToSection = (sectionId) => {
-        const nextIndex = sectionMap[sectionId];
-        if (typeof nextIndex !== 'number' || !world) return;
-        if (getComputedStyle(world).display === 'block') {
-          document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          currentIndex = nextIndex;
-          updateMarioStatus(sectionId, true);
-          if (sectionId !== 'hero') setGameLevel(sectionId);
-          window.history.replaceState(null, '', `#${sectionId === 'hero' ? 'top' : sectionId}`);
-          return;
+      const goToLevel = (level, showWorld = true) => {
+        currentLevel = Math.max(0, Math.min(4, Number(level)));
+        world.style.setProperty('--level', currentLevel);
+        worldLabel.textContent = worldNames[currentLevel];
+        remainingTime = 300;
+        timeLabel.textContent = '300';
+        if (showWorld) {
+          intro.classList.add('is-hidden');
+          directory.classList.remove('is-visible');
         }
-        currentIndex = nextIndex;
-        world.style.setProperty('--world-index', String(nextIndex));
-        document.body.dataset.world = String(nextIndex);
-        updateMarioStatus(sectionId, true);
-        if (sectionId !== 'hero') setGameLevel(sectionId);
-        window.history.replaceState(null, '', `#${sectionId === 'hero' ? 'top' : sectionId}`);
+        const id = sectionNames[currentLevel];
+        history.replaceState(null, '', currentLevel === 0 ? '#top' : `#${id}`);
       };
 
-      window.setGameLevel = setGameLevel;
-      window.goToSection = goToSection;
-      setGameLevel('about');
-      updateMarioStatus('hero', true);
-
-      document.querySelectorAll('a[href^="#"]').forEach((link) => {
-        if (link.hasAttribute('data-open-directory') || link.hasAttribute('data-open-script')) return;
-        const sectionId = link.getAttribute('href').slice(1);
-        const normalizedId = sectionId === 'top' ? 'hero' : sectionId;
-        if (typeof sectionMap[normalizedId] !== 'number') return;
-        link.addEventListener('click', (event) => {
+      document.querySelector('[data-enter]').addEventListener('click', () => directory.classList.add('is-visible'));
+      document.querySelectorAll('[data-level]').forEach((item) => {
+        item.addEventListener('click', (event) => {
           event.preventDefault();
-          goToSection(normalizedId);
+          goToLevel(item.dataset.level);
         });
       });
 
-      const initialHash = window.location.hash.slice(1);
-      goToSection(sectionMap[initialHash] === undefined ? 'hero' : initialHash);
-
-      let wheelLock = false;
       window.addEventListener('wheel', (event) => {
-        if (!world || getComputedStyle(world).display === 'block') return;
-        if (document.body.classList.contains('directory-open') || event.ctrlKey || wheelLock) return;
+        if (directory.classList.contains('is-visible') || !intro.classList.contains('is-hidden')) return;
         const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
-        if (Math.abs(delta) < 18) return;
+        if (Math.abs(delta) < 16) return;
         event.preventDefault();
-        const next = Math.max(0, Math.min(4, currentIndex + (delta > 0 ? 1 : -1)));
-        if (next === currentIndex) return;
-        wheelLock = true;
-        goToSection(Object.keys(sectionMap).find((id) => sectionMap[id] === next));
-        window.setTimeout(() => { wheelLock = false; }, 760);
+        goToLevel(currentLevel + (delta > 0 ? 1 : -1));
       }, { passive: false });
 
       window.addEventListener('keydown', (event) => {
-        if (!world || getComputedStyle(world).display === 'block') return;
-        if (document.body.classList.contains('directory-open')) return;
-        const direction = event.key === 'ArrowRight' || event.key === 'PageDown' ? 1 : event.key === 'ArrowLeft' || event.key === 'PageUp' ? -1 : 0;
-        if (!direction) return;
+        if (!intro.classList.contains('is-hidden') || directory.classList.contains('is-visible')) return;
+        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft' && event.key !== 'PageDown' && event.key !== 'PageUp') return;
         event.preventDefault();
-        const next = Math.max(0, Math.min(4, currentIndex + direction));
-        goToSection(Object.keys(sectionMap).find((id) => sectionMap[id] === next));
-      });
-    })();
-
-    const portfolioTabs = document.querySelectorAll(".portfolio-tab");
-    const portfolioPanels = document.querySelectorAll(".portfolio-panel");
-
-    portfolioTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        portfolioTabs.forEach((item) => {
-          const active = item === tab;
-          item.classList.toggle("is-active", active);
-          item.setAttribute("aria-selected", active);
-        });
-
-        portfolioPanels.forEach((panel) => {
-          panel.hidden = panel.id !== tab.dataset.target;
-        });
-      });
-    });
-
-    const scriptDialog = document.querySelector("#english-script-dialog");
-    const scriptCloseButton = scriptDialog.querySelector(".script-dialog-close");
-    const closeScriptDialog = () => {
-      if (scriptDialog.open) scriptDialog.close();
-      if (typeof window.restoreCustomCursor === "function") window.restoreCustomCursor();
-    };
-    const openScriptDialog = (event) => {
-      if (event) event.preventDefault();
-      scriptDialog.showModal();
-      if (typeof window.mountCustomCursorInDialog === "function") window.mountCustomCursorInDialog();
-    };
-
-    document.querySelector("[data-open-script]").addEventListener("click", openScriptDialog);
-    scriptCloseButton.addEventListener("click", closeScriptDialog);
-    scriptDialog.addEventListener("click", (event) => {
-      if (event.target === scriptDialog) closeScriptDialog();
-    });
-    scriptDialog.addEventListener("cancel", closeScriptDialog);
-
-    (() => {
-      const revealTargets = document.querySelectorAll(
-        "main section, .project-card, .wechat-card, .contact-details > *"
-      );
-
-      revealTargets.forEach((element) => element.classList.add("js-pixel-reveal"));
-
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-        revealTargets.forEach((element) => element.classList.add("is-revealed"));
-        return;
-      }
-
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-revealed");
-          observer.unobserve(entry.target);
-        });
-      }, { threshold: 0.12 });
-
-      revealTargets.forEach((element) => revealObserver.observe(element));
-    })();
-
-    (() => {
-      const cards = document.querySelectorAll(".project-card, .wechat-card");
-      cards.forEach((card) => {
-        if (!card.dataset.cardLink) return;
-        const openCardLink = () => {
-          if (card.dataset.cardLink.endsWith(".txt")) {
-            openScriptDialog();
-            return;
-          }
-          window.open(card.dataset.cardLink, "_blank", "noopener,noreferrer");
-        };
-
-        card.addEventListener("click", (event) => {
-          if (event.target.closest("a, button")) return;
-          openCardLink();
-        });
-
-        card.addEventListener("keydown", (event) => {
-          if (event.key !== "Enter" && event.key !== " ") return;
-          event.preventDefault();
-          openCardLink();
-        });
-      });
-    })();
-
-    (() => {
-      /* Restored: lightweight pixel-grid pointer from the previous Mario version. */
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reducedMotion) return;
-
-      document.body.classList.add("has-custom-cursor");
-
-      const cursor = document.querySelector(".custom-cursor");
-      const actionButton = document.querySelector(".bauhaus-btn");
-      if (!cursor) return;
-      cursor.classList.add("is-visible");
-
-      const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-      const cursorPosition = { x: pointer.x, y: pointer.y };
-      let animationFrame = 0;
-      let magneticTarget = null;
-      const frame = document.querySelector("#english-script-dialog iframe");
-
-      const updatePointer = (x, y) => {
-        pointer.x = x;
-        pointer.y = y;
-        cursor.classList.add("is-visible");
-      };
-
-      const lerp = (start, end, amount) => start + (end - start) * amount;
-
-      const renderCursor = () => {
-        const targetX = magneticTarget
-          ? magneticTarget.getBoundingClientRect().left + magneticTarget.offsetWidth / 2
-          : pointer.x;
-        const targetY = magneticTarget
-          ? magneticTarget.getBoundingClientRect().top + magneticTarget.offsetHeight / 2
-          : pointer.y;
-        cursorPosition.x = lerp(cursorPosition.x, targetX, magneticTarget ? 0.18 : 0.12);
-        cursorPosition.y = lerp(cursorPosition.y, targetY, magneticTarget ? 0.18 : 0.12);
-        cursor.style.transform = `translate3d(${cursorPosition.x}px, ${cursorPosition.y}px, 0) translate(-50%, -50%)`;
-        animationFrame = requestAnimationFrame(renderCursor);
-      };
-
-      window.addEventListener("pointermove", (event) => {
-        updatePointer(event.clientX, event.clientY);
-      }, { passive: true });
-
-      window.addEventListener("pointerleave", () => cursor.classList.remove("is-visible"));
-
-      scriptDialog.addEventListener("pointermove", (event) => {
-        updatePointer(event.clientX, event.clientY);
-      }, { passive: true });
-
-      window.addEventListener("message", (event) => {
-        if (event.source !== frame.contentWindow || event.data?.type !== "english-news-cursor-move") return;
-        const bounds = frame.getBoundingClientRect();
-        updatePointer(bounds.left + event.data.x, bounds.top + event.data.y);
+        goToLevel(currentLevel + (event.key === 'ArrowRight' || event.key === 'PageDown' ? 1 : -1));
       });
 
-      window.mountCustomCursorInDialog = () => {
-        scriptDialog.appendChild(cursor);
-        magneticTarget = null;
-        cursor.classList.remove("is-hovering", "is-button-hover");
-        cursor.classList.add("is-visible");
-      };
+      setInterval(() => {
+        if (!intro.classList.contains('is-hidden') || directory.classList.contains('is-visible')) return;
+        remainingTime = remainingTime > 0 ? remainingTime - 1 : 300;
+        timeLabel.textContent = String(remainingTime).padStart(3, '0');
+      }, 1000);
 
-      window.restoreCustomCursor = () => {
-        document.body.appendChild(cursor);
-        magneticTarget = null;
-        cursor.classList.remove("is-hovering", "is-button-hover", "is-dialog-cursor-hidden");
-      };
-
-      const hoverTargets = document.querySelectorAll(
-        ".project-card, .wechat-card, .contact-details > *, .portfolio-tab, .directory-item, .intro-enter, [data-open-directory]"
-      );
-
-      [actionButton, ...hoverTargets].forEach((element) => {
-        if (!element) return;
-        element.addEventListener("pointerenter", () => {
-          magneticTarget = element;
-          cursor.classList.add("is-hovering");
-          cursor.classList.toggle("is-button-hover", element === actionButton);
-        });
-
-        element.addEventListener("pointerleave", () => {
-          magneticTarget = null;
-          cursor.classList.remove("is-hovering", "is-button-hover");
+      document.querySelectorAll('.portfolio-tab').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.portfolio-tab').forEach((item) => item.classList.toggle('is-active', item === tab));
+          document.querySelectorAll('.portfolio-panel').forEach((panel) => { panel.hidden = panel.id !== tab.dataset.tab; });
         });
       });
 
-      const cards = document.querySelectorAll(".project-card, .wechat-card");
-      cards.forEach((card) => {
-        if (!card.dataset.cardLink) return;
-        const openCardLink = () => {
-          if (card.dataset.cardLink.endsWith(".txt")) {
-            openScriptDialog();
-            return;
-          }
-          window.open(card.dataset.cardLink, "_blank", "noopener,noreferrer");
-        };
-
-        card.addEventListener("click", (event) => {
-          if (event.target.closest("a, button")) return;
-          openCardLink();
-        });
-
-        card.addEventListener("keydown", (event) => {
-          if (event.key !== "Enter" && event.key !== " ") return;
-          event.preventDefault();
-          openCardLink();
-        });
+      document.querySelectorAll('.wechat-card[data-link]').forEach((card) => {
+        const open = () => window.open(card.dataset.link, '_blank', 'noopener,noreferrer');
+        card.addEventListener('click', (event) => { if (!event.target.closest('a, button')) open(); });
+        card.addEventListener('keydown', (event) => { if ((event.key === 'Enter' || event.key === ' ') && !event.target.closest('a, button')) { event.preventDefault(); open(); } });
       });
 
-      renderCursor();
-      window.addEventListener("pagehide", () => cancelAnimationFrame(animationFrame), { once: true });
+      const dialog = document.querySelector('#script-dialog');
+      const openDialog = (event) => { if (event) event.stopPropagation(); dialog.showModal(); };
+      document.querySelector('[data-script]').addEventListener('click', openDialog);
+      document.querySelector('[data-script-open]').addEventListener('click', openDialog);
+      document.querySelector('[data-dialog-close]').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+
+      const initial = window.location.hash.slice(1);
+      const initialLevel = sectionNames.indexOf(initial === 'top' ? 'hero' : initial);
+      if (initialLevel > 0) goToLevel(initialLevel);
     })();
   </script>
 </body>
